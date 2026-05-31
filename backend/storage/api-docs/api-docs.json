@@ -1,0 +1,1859 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Freelance CI API",
+        "description": "API REST de la plateforme Freelance CI — connexion freelances, clients et entrepreneurs en Côte d'Ivoire. Paiements via Genius Pay (Mobile Money, Carte), authentification Supabase JWT.",
+        "contact": {
+            "name": "Freelance CI",
+            "email": "contact@freelance-ci.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "0.6.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Serveur de développement local"
+        },
+        {
+            "url": "https://api.freelance-ci.com/api",
+            "description": "Serveur de production"
+        }
+    ],
+    "paths": {
+        "/admin/dashboard": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get admin dashboard stats",
+                "operationId": "4faa4d17579606dd7357185b917f0c50",
+                "responses": {
+                    "200": {
+                        "description": "Dashboard statistics"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/users": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List all users (admin)",
+                "operationId": "0c3da1c25572511425f831ce3e86b849",
+                "responses": {
+                    "200": {
+                        "description": "List of users"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/users/{id}/status": {
+            "put": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update user status (admin)",
+                "operationId": "a7b0321c7740432dde2200e04c638bcd",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User status updated"
+                    },
+                    "400": {
+                        "description": "Unable to update user status"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/verifications": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List pending verifications (admin)",
+                "operationId": "f678e7e65ea6fe90b97d15a9d639ca49",
+                "responses": {
+                    "200": {
+                        "description": "List of pending verifications"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/verifications/{id}/approve": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Approve a verification (admin)",
+                "operationId": "c17dc43dcd6eae4b87ec66b8007ff7b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Verification ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Verification approved"
+                    },
+                    "400": {
+                        "description": "Unable to approve verification"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/verifications/{id}/reject": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Reject a verification (admin)",
+                "operationId": "f33cc481bdd95e43cb692dbfe8912f49",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Verification ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Verification rejected"
+                    },
+                    "400": {
+                        "description": "Unable to reject verification"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/reports": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List reports (admin)",
+                "operationId": "cd786d12a77981504ffe75ffe8c56d3f",
+                "responses": {
+                    "200": {
+                        "description": "List of reports"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/reports/{id}": {
+            "put": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Resolve a report (admin)",
+                "operationId": "9f967fc9aa796923206f2ff6f5d38d14",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Report ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Report resolved"
+                    },
+                    "400": {
+                        "description": "Unable to resolve report"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/disputes": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "List disputes (admin)",
+                "operationId": "dce6326fa43d011c8449c7066ecacc5b",
+                "responses": {
+                    "200": {
+                        "description": "List of disputes"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/disputes/{id}": {
+            "put": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Resolve a dispute (admin)",
+                "operationId": "4db1334518c6044d1dcac3de5a1b1816",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Dispute ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dispute resolved"
+                    },
+                    "400": {
+                        "description": "Unable to resolve dispute"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/payments": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Monitor all payments (admin)",
+                "operationId": "a08fe8e7525e56cf1dd2b7bfb383e580",
+                "responses": {
+                    "200": {
+                        "description": "List of payments"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/settings": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Get platform settings (admin)",
+                "operationId": "d58d2e36b6a0decaba337aa92d60e687",
+                "responses": {
+                    "200": {
+                        "description": "Platform settings"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/admin/settings/{key}": {
+            "put": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "Update a platform setting (admin)",
+                "operationId": "0946531cb4c29baf1f2ad16d48dd78e8",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "path",
+                        "description": "Setting key",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Setting updated"
+                    },
+                    "400": {
+                        "description": "Unable to update setting"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a new user",
+                "operationId": "8f20688904ee49d0d8739eeb08faf0b1",
+                "responses": {
+                    "201": {
+                        "description": "Registration successful"
+                    },
+                    "400": {
+                        "description": "Registration failed"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login with Supabase JWT",
+                "operationId": "985cd5203e2d0a820e113f2f4fdb2847",
+                "responses": {
+                    "200": {
+                        "description": "Login successful"
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/auth/social/{provider}": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authenticate with social provider",
+                "operationId": "23efb6626413b3de7da5236ddb5d9282",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "description": "Social provider (google, github, etc.)",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Social authentication successful"
+                    },
+                    "400": {
+                        "description": "Social authentication failed"
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Get current authenticated user",
+                "operationId": "e339e0e74860c0647fd1d41bbbbc13b2",
+                "responses": {
+                    "200": {
+                        "description": "Current user data"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "List all categories",
+                "operationId": "2eb9088f8a869db09d83eaa9c605312f",
+                "responses": {
+                    "200": {
+                        "description": "List of categories"
+                    }
+                }
+            }
+        },
+        "/categories/{id}/skills": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "List skills for a category",
+                "operationId": "916cd3e29395346dca5f99f6a7b1e194",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Category ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of skills"
+                    },
+                    "404": {
+                        "description": "Category not found"
+                    }
+                }
+            }
+        },
+        "/contracts": {
+            "get": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "List contracts for authenticated user",
+                "operationId": "15b84237bedc304e000f7463da52d1b0",
+                "responses": {
+                    "200": {
+                        "description": "List of contracts"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{id}": {
+            "get": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Get a contract by ID",
+                "operationId": "f8ae5702eae4a16fab71bc1a0c29ea1f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contract detail"
+                    },
+                    "404": {
+                        "description": "Contract not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{id}/sign": {
+            "post": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Sign a contract",
+                "operationId": "d34b12d85207b3f54f447fddc0f48e51",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contract signed"
+                    },
+                    "400": {
+                        "description": "Unable to sign contract"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{id}/milestones": {
+            "post": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Add a milestone to a contract",
+                "operationId": "f19d867d61ae6adcda260a3501fd022a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Milestone added"
+                    },
+                    "400": {
+                        "description": "Unable to add milestone"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{contract}/milestones/{milestone}": {
+            "put": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Update a milestone",
+                "operationId": "81aa8e896d9d505694b8fbb0786702b4",
+                "parameters": [
+                    {
+                        "name": "contract",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    },
+                    {
+                        "name": "milestone",
+                        "in": "path",
+                        "description": "Milestone ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Milestone updated"
+                    },
+                    "400": {
+                        "description": "Unable to update milestone"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{contract}/milestones/{milestone}/deliver": {
+            "post": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Mark a milestone as delivered",
+                "operationId": "775cd7a43f7e17b97bd8cb4d12837b1f",
+                "parameters": [
+                    {
+                        "name": "contract",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    },
+                    {
+                        "name": "milestone",
+                        "in": "path",
+                        "description": "Milestone ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Milestone marked as delivered"
+                    },
+                    "400": {
+                        "description": "Unable to mark milestone as delivered"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{contract}/milestones/{milestone}/validate": {
+            "post": {
+                "tags": [
+                    "Contracts"
+                ],
+                "summary": "Validate a delivered milestone",
+                "operationId": "6ff71060dc12342f123f4e543dafa8c8",
+                "parameters": [
+                    {
+                        "name": "contract",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    },
+                    {
+                        "name": "milestone",
+                        "in": "path",
+                        "description": "Milestone ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Milestone validated"
+                    },
+                    "400": {
+                        "description": "Unable to validate milestone"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/conversations": {
+            "get": {
+                "tags": [
+                    "Messaging"
+                ],
+                "summary": "List conversations",
+                "operationId": "c10c3e037375c6efa976401915a0c520",
+                "responses": {
+                    "200": {
+                        "description": "List of conversations"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Messaging"
+                ],
+                "summary": "Start a new conversation",
+                "operationId": "29de88d8a5357277440ff24e5e90c5d5",
+                "responses": {
+                    "201": {
+                        "description": "Conversation started"
+                    },
+                    "400": {
+                        "description": "Unable to start conversation"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/conversations/{id}": {
+            "get": {
+                "tags": [
+                    "Messaging"
+                ],
+                "summary": "Get messages in a conversation",
+                "operationId": "c5e67a86c4b6bef31dd5a86f369097b0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of messages"
+                    },
+                    "404": {
+                        "description": "Conversation not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/conversations/{id}/messages": {
+            "post": {
+                "tags": [
+                    "Messaging"
+                ],
+                "summary": "Send a message in a conversation",
+                "operationId": "5161c9d805678a37410e65095aa797b3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Message sent"
+                    },
+                    "400": {
+                        "description": "Unable to send message"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/messages/{id}/read": {
+            "put": {
+                "tags": [
+                    "Messaging"
+                ],
+                "summary": "Mark a message as read",
+                "operationId": "aceb84f91836dc9ae418ce3fda875726",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Message ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message marked as read"
+                    },
+                    "404": {
+                        "description": "Message not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/notifications": {
+            "get": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "List notifications",
+                "operationId": "a48dc613f9c4d7d3414d6dcf848889c8",
+                "responses": {
+                    "200": {
+                        "description": "List of notifications"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/notifications/{id}/read": {
+            "put": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Mark a notification as read",
+                "operationId": "afa99d8e697f26ab2485fa2e6b14fd67",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Notification ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notification marked as read"
+                    },
+                    "404": {
+                        "description": "Notification not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/notifications/read-all": {
+            "put": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Mark all notifications as read",
+                "operationId": "a7c2b86d12af3c12e493034717fd88e6",
+                "responses": {
+                    "200": {
+                        "description": "All notifications marked as read"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/notifications/{id}": {
+            "delete": {
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "Delete a notification",
+                "operationId": "94ed2627ee4f75b8bb2f6ca589b8c745",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Notification ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Notification deleted"
+                    },
+                    "404": {
+                        "description": "Notification not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/payments/initiate": {
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Initiate a payment via Genius Pay",
+                "operationId": "7a7fc156251d0ce749da21b59b328fe9",
+                "responses": {
+                    "200": {
+                        "description": "Payment initiated"
+                    },
+                    "400": {
+                        "description": "Unable to initiate payment"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/payments/{id}/confirm": {
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Confirm a payment",
+                "operationId": "e074045ec7ffdc40f80b8e3ac3f474fe",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Payment ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Payment confirmed"
+                    },
+                    "400": {
+                        "description": "Unable to confirm payment"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/payments/{id}": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Get payment details",
+                "operationId": "1331884e82b60a4649bf370b22a043d7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Payment ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Payment detail"
+                    },
+                    "404": {
+                        "description": "Payment not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/payments": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "List payments for authenticated user",
+                "operationId": "d42af22098bc46725c8075794e61e560",
+                "responses": {
+                    "200": {
+                        "description": "List of payments"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/webhooks/genius-pay": {
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Genius Pay webhook callback",
+                "operationId": "28a7e50f724e2e92077365780febe507",
+                "responses": {
+                    "200": {
+                        "description": "Webhook processed"
+                    },
+                    "400": {
+                        "description": "Webhook processing failed"
+                    }
+                }
+            }
+        },
+        "/profiles/me": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Get full profile of authenticated user",
+                "operationId": "b040627dcb01bb847e0d0ce99d46437c",
+                "responses": {
+                    "200": {
+                        "description": "Full profile data"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Update common profile fields",
+                "operationId": "0ee285d88c4170c59ae1eb04439f84ff",
+                "responses": {
+                    "200": {
+                        "description": "Profile updated"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/profiles/client": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Get client profile",
+                "operationId": "81e3666942457b11e146467d21606846",
+                "responses": {
+                    "200": {
+                        "description": "Client profile data"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Update client profile",
+                "operationId": "cd1ad7ca53d8cb6db4ca8e89a440660a",
+                "responses": {
+                    "200": {
+                        "description": "Client profile updated"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/profiles/freelance": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Get freelance profile",
+                "operationId": "95c38aeb1ca12b17f14255c6257b47e9",
+                "responses": {
+                    "200": {
+                        "description": "Freelance profile data"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Update freelance profile",
+                "operationId": "7c8b9cfafe9f1632d75f457d8185d356",
+                "responses": {
+                    "200": {
+                        "description": "Freelance profile updated"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/profiles/freelance/skills": {
+            "post": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Add a skill to freelance profile",
+                "operationId": "5a56f667aa61fd1bb1442793b142b456",
+                "responses": {
+                    "200": {
+                        "description": "Skill added"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/profiles/freelance/skills/{skill}": {
+            "delete": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Remove a skill from freelance profile",
+                "operationId": "bdd5e4688af91c4f3203fec26fc65164",
+                "parameters": [
+                    {
+                        "name": "skill",
+                        "in": "path",
+                        "description": "Skill ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Skill removed"
+                    },
+                    "404": {
+                        "description": "Skill not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/profiles/freelance/portfolio": {
+            "post": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Add a portfolio item",
+                "operationId": "f06ddf8981ea1b22cdde94d509dc84a8",
+                "responses": {
+                    "201": {
+                        "description": "Portfolio item added"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/profiles/freelance/portfolio/{item}": {
+            "delete": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Remove a portfolio item",
+                "operationId": "065c55f84f060e137eba8072cf5f46f0",
+                "parameters": [
+                    {
+                        "name": "item",
+                        "in": "path",
+                        "description": "Portfolio item ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Portfolio item removed"
+                    },
+                    "404": {
+                        "description": "Portfolio item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/freelances": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "List all freelances (public)",
+                "operationId": "b1d6f414e251aefe7fd876bbd0a33bf8",
+                "responses": {
+                    "200": {
+                        "description": "List of freelances"
+                    }
+                }
+            }
+        },
+        "/freelances/{id}": {
+            "get": {
+                "tags": [
+                    "Profiles"
+                ],
+                "summary": "Get freelance detail (public)",
+                "operationId": "14754de67dc9fbee9ed3d96dcbe800bf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Freelance user ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Freelance detail"
+                    },
+                    "404": {
+                        "description": "Freelance not found"
+                    }
+                }
+            }
+        },
+        "/projects": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "List all projects (public)",
+                "operationId": "d8bc32b45579a2263ca77907248c9002",
+                "responses": {
+                    "200": {
+                        "description": "List of projects"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Create a new project",
+                "operationId": "d14ce90da851ad8044ec318a766df32e",
+                "responses": {
+                    "201": {
+                        "description": "Project created"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/projects/{id}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get project detail (public)",
+                "operationId": "83c87bebdc302e4ae4afcefcf319d08c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project detail"
+                    },
+                    "404": {
+                        "description": "Project not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Update a project",
+                "operationId": "62d247065d872bb3694822fd1a77b76e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project updated"
+                    },
+                    "404": {
+                        "description": "Project not found or unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Delete a project",
+                "operationId": "0e1ef9693d0bf640ec8a8027909a5902",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Project deleted"
+                    },
+                    "404": {
+                        "description": "Project not found or unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/projects/{id}/files": {
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Add a file to a project",
+                "operationId": "0004c04c6267bf9202e63d2b004436de",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "File added"
+                    },
+                    "404": {
+                        "description": "Project not found or unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/projects/{project}/files/{file}": {
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Remove a file from a project",
+                "operationId": "c14288a77566a1db6097455928892ce7",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    },
+                    {
+                        "name": "file",
+                        "in": "path",
+                        "description": "File ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File removed"
+                    },
+                    "404": {
+                        "description": "File not found or unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/projects/{project}/quotes": {
+            "get": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "List quotes for a project",
+                "operationId": "c3fff716684df2606d318a45ecd46d8a",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of quotes"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Submit a quote for a project",
+                "operationId": "b7e91c34149e5a57575ce7d0f354a508",
+                "parameters": [
+                    {
+                        "name": "project",
+                        "in": "path",
+                        "description": "Project ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Quote submitted"
+                    },
+                    "400": {
+                        "description": "Unable to create quote"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/quotes/{id}": {
+            "get": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Get a quote by ID",
+                "operationId": "451bbe89f2be1f8ddfa73d76dbb0f227",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Quote ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quote detail"
+                    },
+                    "404": {
+                        "description": "Quote not found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Update a quote",
+                "operationId": "a308c86572f538405c2da9a796ab1a59",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Quote ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quote updated"
+                    },
+                    "400": {
+                        "description": "Quote not found or cannot be updated"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Withdraw a quote",
+                "operationId": "e0083f49ae2de0d7945c879c337475b6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Quote ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quote withdrawn"
+                    },
+                    "404": {
+                        "description": "Quote not found or unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/quotes/{id}/accept": {
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Accept a quote and create a contract",
+                "operationId": "083497648db9203dcf9b4251b9453663",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Quote ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quote accepted, contract created"
+                    },
+                    "400": {
+                        "description": "Unable to accept quote"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/quotes/{id}/refuse": {
+            "post": {
+                "tags": [
+                    "Quotes"
+                ],
+                "summary": "Refuse a quote",
+                "operationId": "369d5e1b20c6efab51471a6e02768cdf",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Quote ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Quote refused"
+                    },
+                    "400": {
+                        "description": "Unable to refuse quote"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/contracts/{contract}/review": {
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Create a review for a contract",
+                "operationId": "a9b9d60f5687bac282251c4b9bcf49f4",
+                "parameters": [
+                    {
+                        "name": "contract",
+                        "in": "path",
+                        "description": "Contract ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Review submitted"
+                    },
+                    "400": {
+                        "description": "Unable to create review"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/freelances/{freelance}/reviews": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "List reviews for a freelance",
+                "operationId": "84cdc863a5f248e01e868a11bbbf2087",
+                "parameters": [
+                    {
+                        "name": "freelance",
+                        "in": "path",
+                        "description": "Freelance user ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of reviews"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/reviews/{review}/reply": {
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Reply to a review",
+                "operationId": "cabbc2999b329b1e1c656af4ebfc2539",
+                "parameters": [
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "description": "Review ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Reply submitted"
+                    },
+                    "400": {
+                        "description": "Unable to reply to review"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/wallet": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Get wallet balance and details",
+                "operationId": "8ee5bd19dd9c24173d6ce91bb13bd4d7",
+                "responses": {
+                    "200": {
+                        "description": "Wallet details"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/wallet/transactions": {
+            "get": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "List wallet transactions",
+                "operationId": "5e2c9cdea89aefecf496b42a822ca7e3",
+                "responses": {
+                    "200": {
+                        "description": "List of transactions"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        },
+        "/wallet/withdraw": {
+            "post": {
+                "tags": [
+                    "Wallet"
+                ],
+                "summary": "Request a withdrawal",
+                "operationId": "e060901cfe9a07ca71e084ef4883fe0c",
+                "responses": {
+                    "200": {
+                        "description": "Withdrawal requested"
+                    },
+                    "400": {
+                        "description": "Unable to process withdrawal"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerToken": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerToken": {
+                "type": "http",
+                "description": "JWT Supabase — coller le token reçu après connexion",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Admin",
+            "description": "Administration (rôle admin requis)"
+        },
+        {
+            "name": "Auth",
+            "description": "Authentification Supabase JWT"
+        },
+        {
+            "name": "Categories",
+            "description": "Catégories et compétences"
+        },
+        {
+            "name": "Contracts",
+            "description": "Gestion des contrats et jalons"
+        },
+        {
+            "name": "Messaging",
+            "description": "Messagerie et conversations"
+        },
+        {
+            "name": "Notifications",
+            "description": "Gestion des notifications"
+        },
+        {
+            "name": "Payments",
+            "description": "Paiements via Genius Pay"
+        },
+        {
+            "name": "Profiles",
+            "description": "Gestion des profils utilisateur"
+        },
+        {
+            "name": "Projects",
+            "description": "Gestion des projets"
+        },
+        {
+            "name": "Quotes",
+            "description": "Soumission et gestion des devis"
+        },
+        {
+            "name": "Reviews",
+            "description": "Avis et évaluations"
+        },
+        {
+            "name": "Wallet",
+            "description": "Gestion du portefeuille"
+        }
+    ],
+    "security": [
+        {
+            "BearerToken": []
+        }
+    ]
+}
