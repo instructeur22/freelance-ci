@@ -3,12 +3,67 @@ namespace App\Services;
 
 use App\Enums\ProjectStatus;
 use App\Models\Project;
+use App\Models\ProjectFile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProjectService
 {
+    public function list(): LengthAwarePaginator
+    {
+        return $this->getProjects([]);
+    }
+
+    public function create(User $client, array $data): Project
+    {
+        return $this->createProject($client, $data);
+    }
+
+    public function update(User $client, string $id, array $data): ?Project
+    {
+        try {
+            return $this->updateProject($client, $id, $data);
+        } catch (\Exception) {
+            return null;
+        }
+    }
+
+    public function delete(User $client, string $id): bool
+    {
+        try {
+            $this->deleteProject($client, $id);
+            return true;
+        } catch (\Exception) {
+            return false;
+        }
+    }
+
+    public function find(string $id): ?Project
+    {
+        try {
+            return $this->getProject($id);
+        } catch (\Exception) {
+            return null;
+        }
+    }
+
+    public function addFile(User $user, string $projectId, array $data): ?ProjectFile
+    {
+        $project = $user->projects()->find($projectId);
+        if (!$project) return null;
+        return $project->files()->create($data);
+    }
+
+    public function removeFile(User $user, string $projectId, string $fileId): bool
+    {
+        $project = $user->projects()->find($projectId);
+        if (!$project) return false;
+        $file = $project->files()->find($fileId);
+        if (!$file) return false;
+        return $file->delete();
+    }
+
     public function createProject(User $client, array $data): Project
     {
         $project = $client->projects()->create([
@@ -16,21 +71,15 @@ class ProjectService
             "description" => $data["description"],
             "budget_min" => $data["budget_min"] ?? null,
             "budget_max" => $data["budget_max"] ?? null,
-            "budget_type" => $data["budget_type"] ?? "fixed",
             "category_id" => $data["category_id"] ?? null,
-            "subcategory_id" => $data["subcategory_id"] ?? null,
-            "duration" => $data["duration"] ?? null,
             "experience_level" => $data["experience_level"] ?? "intermediate",
-            "skills_required" => $data["skills_required"] ?? [],
+            "duration_days" => $data["duration_days"] ?? null,
+            "required_skills" => $data["required_skills"] ?? [],
             "status" => $data["status"] ?? ProjectStatus::Open,
             "is_featured" => $data["is_featured"] ?? false,
+            "is_remote" => $data["is_remote"] ?? true,
             "location" => $data["location"] ?? null,
-            "remote_type" => $data["remote_type"] ?? "remote",
         ]);
-
-        if (!empty($data["attachments"])) {
-            $project->attachments()->createMany(array_map(fn ($url) => ["url" => $url], $data["attachments"]));
-        }
 
         return $project;
     }
@@ -88,8 +137,8 @@ class ProjectService
             $query->where("client_id", $filters["client_id"]);
         }
 
-        if (!empty($filters["remote_type"])) {
-            $query->where("remote_type", $filters["remote_type"]);
+        if (!empty($filters["is_remote"])) {
+            $query->where("is_remote", filter_var($filters["is_remote"], FILTER_VALIDATE_BOOLEAN));
         }
 
         $sortField = $filters["sort_by"] ?? "created_at";

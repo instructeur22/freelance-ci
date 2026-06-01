@@ -13,8 +13,8 @@ class Verification extends Model
     protected $table = 'verifications';
 
     protected $fillable = [
-        'freelance_id', 'type', 'document_url', 'status',
-        'reviewer_id', 'reviewed_at', 'rejection_note',
+        'user_id', 'type', 'document_url', 'status',
+        'admin_notes', 'reviewed_by', 'reviewed_at', 'expires_at',
     ];
 
     protected function casts(): array
@@ -23,16 +23,17 @@ class Verification extends Model
             'type' => VerificationType::class,
             'status' => VerificationStatus::class,
             'reviewed_at' => 'datetime',
+            'expires_at' => 'date',
         ];
     }
 
-    public function freelance(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'freelance_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function reviewer(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'reviewer_id');
+        return $this->belongsTo(User::class, 'reviewed_by');
     }
 }

@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS notification_type CASCADE");
-        DB::statement("CREATE TYPE notification_type AS ENUM ('message', 'offer', 'payment', 'project', 'review', 'system', 'alert')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS notification_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE notification_type AS ENUM ('message', 'offer', 'payment', 'project', 'review', 'system', 'alert')");
+        }
 
         Schema::create('notifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -29,6 +33,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('notifications');
-        DB::statement("DROP TYPE IF EXISTS notification_type CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS notification_type CASCADE");
+        }
     }
 };

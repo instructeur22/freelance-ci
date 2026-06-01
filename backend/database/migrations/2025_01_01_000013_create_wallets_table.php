@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS withdrawal_method CASCADE");
-        DB::statement("CREATE TYPE withdrawal_method AS ENUM ('orange_money', 'mtn_momo', 'wave', 'bank_transfer')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS withdrawal_method CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE withdrawal_method AS ENUM ('orange_money', 'mtn_momo', 'wave', 'bank_transfer')");
+        }
 
         Schema::create('wallets', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -58,6 +62,8 @@ return new class extends Migration
         Schema::dropIfExists('withdrawal_requests');
         Schema::dropIfExists('wallet_transactions');
         Schema::dropIfExists('wallets');
-        DB::statement("DROP TYPE IF EXISTS withdrawal_method CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS withdrawal_method CASCADE");
+        }
     }
 };

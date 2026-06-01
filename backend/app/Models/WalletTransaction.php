@@ -12,25 +12,22 @@ class WalletTransaction extends Model
     protected $table = 'wallet_transactions';
 
     protected $fillable = [
-        'wallet_id', 'payment_id', 'amount_xof', 'direction',
-        'balance_after_xof', 'description',
+        'wallet_id', 'type', 'amount', 'balance_before',
+        'balance_after', 'description', 'reference', 'metadata',
     ];
 
     protected function casts(): array
     {
         return [
-            'amount_xof' => 'decimal:2',
-            'balance_after_xof' => 'decimal:2',
+            'amount' => 'decimal:2',
+            'balance_before' => 'decimal:2',
+            'balance_after' => 'decimal:2',
+            'metadata' => 'array',
         ];
     }
 
     public function wallet(): BelongsTo
     {
-        return $this->belongsTo(Wallet::class, 'wallet_id', 'user_id');
-    }
-
-    public function payment(): BelongsTo
-    {
-        return $this->belongsTo(Payment::class, 'payment_id');
+        return $this->belongsTo(Wallet::class, 'wallet_id');
     }
 }

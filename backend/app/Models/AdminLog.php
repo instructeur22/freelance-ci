@@ -12,8 +12,17 @@ class AdminLog extends Model
     protected $table = 'admin_logs';
 
     protected $fillable = [
-        'admin_id', 'action', 'target_type', 'target_id', 'description', 'ip_address', 'user_agent',
+        'admin_id', 'action', 'entity_type', 'entity_id',
+        'old_values', 'new_values', 'ip_address', 'user_agent',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'old_values' => 'array',
+            'new_values' => 'array',
+        ];
+    }
 
     public function admin(): BelongsTo
     {

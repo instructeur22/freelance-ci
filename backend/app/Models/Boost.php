@@ -10,31 +10,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Boost extends Model
 {
+    use HasUuids;
     protected $table = 'boosts';
 
     protected $fillable = [
-        'user_id', 'payment_id', 'target', 'target_id',
-        'duration', 'is_active', 'started_at', 'expires_at',
+        'freelance_profile_id', 'target_type', 'target_id',
+        'duration', 'amount_paid', 'payment_reference',
+        'is_active', 'started_at', 'ends_at',
     ];
 
     protected function casts(): array
     {
         return [
-            'target' => BoostTarget::class,
+            'target_type' => BoostTarget::class,
             'duration' => BoostDuration::class,
             'is_active' => 'boolean',
             'started_at' => 'datetime',
-            'expires_at' => 'datetime',
+            'ends_at' => 'datetime',
         ];
     }
 
-    public function user(): BelongsTo
+    public function freelanceProfile(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function payment(): BelongsTo
-    {
-        return $this->belongsTo(Payment::class, 'payment_id');
+        return $this->belongsTo(FreelanceProfile::class, 'freelance_profile_id');
     }
 }

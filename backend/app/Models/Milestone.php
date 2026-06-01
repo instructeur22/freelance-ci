@@ -13,15 +13,18 @@ class Milestone extends Model
     protected $table = 'milestones';
 
     protected $fillable = [
-        'contract_id', 'title', 'description', 'amount_xof',
-        'due_date', 'delivered_at', 'validated_at', 'sort_order',
+        'contract_id', 'title', 'description', 'amount',
+        'due_date', 'is_completed', 'completed_at',
+        'sort_order', 'delivered_at', 'validated_at',
     ];
 
     protected function casts(): array
     {
         return [
-            'amount_xof' => 'decimal:2',
+            'amount' => 'decimal:2',
             'due_date' => 'date',
+            'is_completed' => 'boolean',
+            'completed_at' => 'datetime',
             'delivered_at' => 'datetime',
             'validated_at' => 'datetime',
         ];

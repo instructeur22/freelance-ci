@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PaymentSyncLog extends Model
 {
@@ -11,16 +12,20 @@ class PaymentSyncLog extends Model
     protected $table = 'payment_sync_log';
 
     protected $fillable = [
-        'payment_id', 'sync_type', 'status', 'request_payload',
-        'response_payload', 'error_message', 'synced_at',
+        'payment_id', 'action', 'status', 'request_data',
+        'response_data', 'error_message',
     ];
 
     protected function casts(): array
     {
         return [
-            'request_payload' => 'array',
-            'response_payload' => 'array',
-            'synced_at' => 'datetime',
+            'request_data' => 'array',
+            'response_data' => 'array',
         ];
+    }
+
+    public function payment(): BelongsTo
+    {
+        return $this->belongsTo(Payment::class, 'payment_id');
     }
 }

@@ -9,13 +9,14 @@ class PlatformSetting extends Model
     use HasUuids;
     protected $table = 'platform_settings';
 
-    protected $primaryKey = 'key';
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'key', 'value', 'description', 'updated_by',
+        'key', 'value', 'group', 'type', 'description', 'is_public',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_public' => 'boolean',
+        ];
+    }
 }

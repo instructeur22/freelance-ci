@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JobCategory extends Model
 {
+    use HasUuids;
     protected $table = 'job_categories';
-    public $incrementing = false;
-    protected $keyType = 'string';
 
     protected $fillable = [
-        'slug', 'name', 'description', 'icon_url',
-        'parent_id', 'sort_order', 'is_active',
+        'name', 'slug', 'description', 'icon', 'color', 'sort_order', 'is_active', 'parent_id',
     ];
 
     protected function casts(): array
@@ -37,10 +35,5 @@ class JobCategory extends Model
     public function skills(): HasMany
     {
         return $this->hasMany(Skill::class, 'category_id');
-    }
-
-    public function freelanceProfiles(): HasMany
-    {
-        return $this->hasMany(FreelanceProfile::class, 'category_id');
     }
 }

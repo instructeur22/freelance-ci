@@ -9,10 +9,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS boost_target CASCADE");
-        DB::statement("CREATE TYPE boost_target AS ENUM ('profile', 'project')");
-        DB::statement("DROP TYPE IF EXISTS boost_duration CASCADE");
-        DB::statement("CREATE TYPE boost_duration AS ENUM ('7_days', '30_days')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS boost_target CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE boost_target AS ENUM ('profile', 'project')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS boost_duration CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE boost_duration AS ENUM ('7_days', '30_days')");
+        }
 
         Schema::create('boosts', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -44,7 +52,11 @@ return new class extends Migration
     {
         Schema::dropIfExists('verified_badges');
         Schema::dropIfExists('boosts');
-        DB::statement("DROP TYPE IF EXISTS boost_duration CASCADE");
-        DB::statement("DROP TYPE IF EXISTS boost_target CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS boost_duration CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS boost_target CASCADE");
+        }
     }
 };

@@ -12,24 +12,26 @@ class VerifiedBadge extends Model
     protected $table = 'verified_badges';
 
     protected $fillable = [
-        'user_id', 'granted_by', 'granted_at', 'expires_at',
+        'freelance_profile_id', 'verification_id', 'badge_type',
+        'is_active', 'granted_at', 'expires_at',
     ];
 
     protected function casts(): array
     {
         return [
+            'is_active' => 'boolean',
             'granted_at' => 'datetime',
             'expires_at' => 'datetime',
         ];
     }
 
-    public function user(): BelongsTo
+    public function freelanceProfile(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(FreelanceProfile::class, 'freelance_profile_id');
     }
 
-    public function grantedBy(): BelongsTo
+    public function verification(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'granted_by');
+        return $this->belongsTo(Verification::class, 'verification_id');
     }
 }

@@ -13,6 +13,12 @@ class GeniusPayServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        config([
+            "geniuspay.api_key" => "pk_test_key",
+            "geniuspay.api_secret" => "sk_test_secret",
+            "geniuspay.webhook_secret" => "whsec_test",
+            "geniuspay.mode" => "test",
+        ]);
         $this->geniusPayService = new GeniusPayService();
     }
 

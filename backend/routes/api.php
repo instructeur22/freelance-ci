@@ -2,18 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\{
+    AdminController,
     AuthController,
+    BadgeController,
+    BoostController,
+    CategoryController,
+    ContractController,
+    MessageController,
+    NotificationController,
+    PaymentController,
     ProfileController,
     ProjectController,
     QuoteController,
-    ContractController,
-    PaymentController,
-    WalletController,
-    MessageController,
-    NotificationController,
+    ReferralController,
     ReviewController,
-    AdminController,
-    CategoryController,
+    SubscriptionController,
+    WalletController,
 };
 
 // Public routes
@@ -27,6 +31,9 @@ Route::get('projects/{id}', [ProjectController::class, 'show']);
 // Auth routes (proxy for Supabase)
 Route::post('auth/register', [AuthController::class, 'register']);
 Route::post('auth/social/{provider}', [AuthController::class, 'socialAuth']);
+
+// Subscriptions plans (public)
+Route::get('subscriptions/plans', [SubscriptionController::class, 'plans']);
 
 // Webhooks (no auth)
 Route::post('webhooks/genius-pay', [PaymentController::class, 'webhook']);
@@ -105,6 +112,25 @@ Route::middleware(['supabase.auth'])->group(function () {
     Route::get('freelances/{freelance}/reviews', [ReviewController::class, 'freelanceReviews']);
     Route::post('reviews/{review}/reply', [ReviewController::class, 'reply']);
 
+    // Badges
+    Route::post('badges/purchase', [BadgeController::class, 'purchase']);
+    Route::get('badges', [BadgeController::class, 'show']);
+
+    // Boosts
+    Route::post('boosts/purchase', [BoostController::class, 'purchase']);
+    Route::get('boosts', [BoostController::class, 'index']);
+
+    // Subscriptions
+    Route::post('subscriptions/purchase', [SubscriptionController::class, 'purchase']);
+    Route::get('subscriptions', [SubscriptionController::class, 'show']);
+    Route::post('subscriptions/cancel', [SubscriptionController::class, 'cancel']);
+    Route::post('subscriptions/upgrade', [SubscriptionController::class, 'upgrade']);
+
+    // Referrals
+    Route::get('referrals/code', [ReferralController::class, 'code']);
+    Route::get('referrals/stats', [ReferralController::class, 'stats']);
+    Route::get('referrals', [ReferralController::class, 'index']);
+
     // Admin
     Route::prefix('admin')->middleware(['role:admin'])->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard']);
@@ -120,5 +146,10 @@ Route::middleware(['supabase.auth'])->group(function () {
         Route::get('payments', [AdminController::class, 'payments']);
         Route::get('settings', [AdminController::class, 'settings']);
         Route::put('settings/{key}', [AdminController::class, 'updateSetting']);
+        Route::get('badges', [AdminController::class, 'badges']);
+        Route::post('badges/grant', [AdminController::class, 'grantBadge']);
+        Route::post('badges/{id}/revoke', [AdminController::class, 'revokeBadge']);
+        Route::get('boosts', [AdminController::class, 'boosts']);
+        Route::post('boosts/{id}/revoke', [AdminController::class, 'revokeBoost']);
     });
 });

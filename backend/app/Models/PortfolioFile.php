@@ -12,11 +12,11 @@ class PortfolioFile extends Model
     protected $table = 'portfolio_files';
 
     protected $fillable = [
-        'item_id', 'file_url', 'file_type', 'file_size_kb',
+        'portfolio_item_id', 'file_url', 'file_type', 'file_size',
     ];
 
     public function item(): BelongsTo
     {
-        return $this->belongsTo(PortfolioItem::class, 'item_id');
+        return $this->belongsTo(PortfolioItem::class, 'portfolio_item_id');
     }
 }

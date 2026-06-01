@@ -11,17 +11,22 @@ class SubscriptionPlanConfig extends Model
     protected $table = 'subscription_plans_config';
 
     protected $fillable = [
-        'plan', 'name_fr', 'price_xof', 'max_proposals',
-        'featured_slots', 'has_badge', 'description', 'is_active',
+        'plan', 'name', 'description', 'price_monthly', 'price_yearly',
+        'max_projects', 'max_quotes_per_month',
+        'has_verified_badge', 'has_boost_option',
+        'features', 'is_active', 'sort_order',
     ];
 
     protected function casts(): array
     {
         return [
             'plan' => SubscriptionPlan::class,
-            'has_badge' => 'boolean',
+            'has_verified_badge' => 'boolean',
+            'has_boost_option' => 'boolean',
             'is_active' => 'boolean',
-            'price_xof' => 'decimal:2',
+            'price_monthly' => 'decimal:2',
+            'price_yearly' => 'decimal:2',
+            'features' => 'array',
         ];
     }
 }

@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS quote_status CASCADE");
-        DB::statement("CREATE TYPE quote_status AS ENUM ('pending', 'accepted', 'refused', 'withdrawn')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS quote_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE quote_status AS ENUM ('pending', 'accepted', 'refused', 'withdrawn')");
+        }
 
         Schema::create('quotes', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -31,6 +35,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('quotes');
-        DB::statement("DROP TYPE IF EXISTS quote_status CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS quote_status CASCADE");
+        }
     }
 };

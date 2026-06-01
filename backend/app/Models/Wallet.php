@@ -11,20 +11,18 @@ class Wallet extends Model
     use HasUuids;
     protected $table = 'wallets';
 
-    protected $primaryKey = 'user_id';
-
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'available_xof', 'pending_xof', 'total_earned_xof',
+        'user_id', 'balance', 'pending_balance', 'total_earned', 'currency',
     ];
 
     protected function casts(): array
     {
         return [
-            'available_xof' => 'decimal:2',
-            'pending_xof' => 'decimal:2',
-            'total_earned_xof' => 'decimal:2',
+            'balance' => 'decimal:2',
+            'pending_balance' => 'decimal:2',
+            'total_earned' => 'decimal:2',
         ];
     }
 
@@ -35,6 +33,6 @@ class Wallet extends Model
 
     public function transactions(): HasMany
     {
-        return $this->hasMany(WalletTransaction::class, 'wallet_id', 'user_id');
+        return $this->hasMany(WalletTransaction::class, 'wallet_id');
     }
 }

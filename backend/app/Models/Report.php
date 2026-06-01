@@ -13,8 +13,9 @@ class Report extends Model
     protected $table = 'reports';
 
     protected $fillable = [
-        'reporter_id', 'reported_user_id', 'reported_project_id',
-        'type', 'reason', 'description', 'status', 'resolved_by', 'resolved_at',
+        'reporter_id', 'reported_user_id',
+        'type', 'description', 'evidence', 'admin_notes', 'status',
+        'reviewed_by', 'reviewed_at',
     ];
 
     protected function casts(): array
@@ -22,7 +23,8 @@ class Report extends Model
         return [
             'type' => ReportType::class,
             'status' => ReportStatus::class,
-            'resolved_at' => 'datetime',
+            'evidence' => 'array',
+            'reviewed_at' => 'datetime',
         ];
     }
 
@@ -34,10 +36,5 @@ class Report extends Model
     public function reportedUser(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reported_user_id');
-    }
-
-    public function reportedProject(): BelongsTo
-    {
-        return $this->belongsTo(Project::class, 'reported_project_id');
     }
 }

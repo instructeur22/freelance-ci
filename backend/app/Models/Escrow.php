@@ -12,17 +12,20 @@ class Escrow extends Model
     protected $table = 'escrows';
 
     protected $fillable = [
-        'contract_id', 'payment_id', 'amount_xof', 'status',
-        'held_at', 'release_requested_at', 'released_at', 'refunded_at', 'dispute_id',
+        'contract_id', 'payment_id', 'status', 'amount',
+        'held_amount', 'released_amount', 'refunded_amount',
+        'held_at', 'released_at', 'refunded_at',
     ];
 
     protected function casts(): array
     {
         return [
             'status' => EscrowStatus::class,
-            'amount_xof' => 'decimal:2',
+            'amount' => 'decimal:2',
+            'held_amount' => 'decimal:2',
+            'released_amount' => 'decimal:2',
+            'refunded_amount' => 'decimal:2',
             'held_at' => 'datetime',
-            'release_requested_at' => 'datetime',
             'released_at' => 'datetime',
             'refunded_at' => 'datetime',
         ];
@@ -36,10 +39,5 @@ class Escrow extends Model
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class, 'payment_id');
-    }
-
-    public function dispute(): BelongsTo
-    {
-        return $this->belongsTo(Dispute::class, 'dispute_id');
     }
 }

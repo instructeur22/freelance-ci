@@ -16,9 +16,11 @@ class Project extends Model
 
     protected $fillable = [
         'client_id', 'category_id', 'title', 'description',
-        'budget_min_xof', 'budget_max_xof', 'deadline', 'skills_required',
-        'status', 'is_featured', 'featured_until', 'views_count',
-        'quotes_count', 'selected_quote_id',
+        'status', 'budget_min', 'budget_max', 'currency',
+        'experience_level', 'duration_days', 'required_skills',
+        'project_type', 'is_featured', 'is_urgent', 'is_remote',
+        'location', 'quotes_count', 'views_count',
+        'published_at', 'deadline_at',
     ];
 
     protected function casts(): array
@@ -26,9 +28,11 @@ class Project extends Model
         return [
             'status' => ProjectStatus::class,
             'is_featured' => 'boolean',
-            'skills_required' => 'array',
-            'deadline' => 'date',
-            'featured_until' => 'datetime',
+            'is_urgent' => 'boolean',
+            'is_remote' => 'boolean',
+            'required_skills' => 'array',
+            'deadline_at' => 'datetime',
+            'published_at' => 'datetime',
         ];
     }
 
@@ -40,11 +44,6 @@ class Project extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(JobCategory::class, 'category_id');
-    }
-
-    public function selectedQuote(): BelongsTo
-    {
-        return $this->belongsTo(Quote::class, 'selected_quote_id');
     }
 
     public function files(): HasMany

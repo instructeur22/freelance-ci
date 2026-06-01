@@ -20,6 +20,7 @@ class RegisterRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'phone' => ['nullable', 'string'],
+            'referral_code' => ['nullable', 'string', 'max:20', 'exists:referral_codes,code'],
         ];
     }
 }

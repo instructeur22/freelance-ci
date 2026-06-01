@@ -7,33 +7,32 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contract extends Model
 {
-    use HasUuids;
+    use HasUuids, SoftDeletes;
     protected $table = 'contracts';
 
     protected $fillable = [
         'project_id', 'quote_id', 'client_id', 'freelance_id',
-        'amount_xof', 'commission_rate', 'commission_xof', 'freelance_net_xof',
-        'start_date', 'end_date', 'terms_text', 'status',
-        'client_signed_at', 'freelance_signed_at', 'completed_at', 'cancelled_at',
+        'title', 'description', 'total_amount', 'currency',
+        'platform_fee', 'freelance_amount',
+        'start_date', 'end_date', 'terms_conditions', 'status',
+        'client_signed_at', 'freelance_signed_at',
     ];
 
     protected function casts(): array
     {
         return [
             'status' => ContractStatus::class,
-            'amount_xof' => 'decimal:2',
-            'commission_rate' => 'decimal:2',
-            'commission_xof' => 'decimal:2',
-            'freelance_net_xof' => 'decimal:2',
+            'total_amount' => 'decimal:2',
+            'platform_fee' => 'decimal:2',
+            'freelance_amount' => 'decimal:2',
             'start_date' => 'date',
             'end_date' => 'date',
             'client_signed_at' => 'datetime',
             'freelance_signed_at' => 'datetime',
-            'completed_at' => 'datetime',
-            'cancelled_at' => 'datetime',
         ];
     }
 

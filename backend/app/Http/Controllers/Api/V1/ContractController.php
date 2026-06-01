@@ -20,12 +20,15 @@ class ContractController extends ApiController
         tags: ['Contracts'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'List of contracts')]
+    #[OA\Response(response: 200, description: 'List of contracts', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/Contract')),
+        new OA\Property(property: 'meta', ref: '#/components/schemas/PaginationMeta'),
+    ]))]
     public function index(Request $request): JsonResponse
     {
         $contracts = $this->contractService->listForUser($request->user());
 
-        return $this->success($contracts);
+        return $this->paginated($contracts);
     }
 
     #[OA\Get(
@@ -35,8 +38,13 @@ class ContractController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Contract ID')]
-    #[OA\Response(response: 200, description: 'Contract detail')]
-    #[OA\Response(response: 404, description: 'Contract not found')]
+    #[OA\Response(response: 200, description: 'Contract detail', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Contract'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Contract not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function show(string $id, Request $request): JsonResponse
     {
         $contract = $this->contractService->find($request->user(), $id);
@@ -55,8 +63,13 @@ class ContractController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Contract ID')]
-    #[OA\Response(response: 200, description: 'Contract signed')]
-    #[OA\Response(response: 400, description: 'Unable to sign contract')]
+    #[OA\Response(response: 200, description: 'Contract signed', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Contract'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to sign contract', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function sign(string $id, Request $request): JsonResponse
     {
         $contract = $this->contractService->sign($request->user(), $id);
@@ -75,8 +88,19 @@ class ContractController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Contract ID')]
-    #[OA\Response(response: 201, description: 'Milestone added')]
-    #[OA\Response(response: 400, description: 'Unable to add milestone')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'title', type: 'string'),
+        new OA\Property(property: 'description', type: 'string', nullable: true),
+        new OA\Property(property: 'amount', type: 'number'),
+        new OA\Property(property: 'due_date', type: 'string', format: 'date'),
+    ]))]
+    #[OA\Response(response: 201, description: 'Milestone added', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Milestone'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to add milestone', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function addMilestone(string $id, Request $request): JsonResponse
     {
         $milestone = $this->contractService->addMilestone($request->user(), $id, $request->all());
@@ -96,8 +120,19 @@ class ContractController extends ApiController
     )]
     #[OA\Parameter(name: 'contract', in: 'path', required: true, description: 'Contract ID')]
     #[OA\Parameter(name: 'milestone', in: 'path', required: true, description: 'Milestone ID')]
-    #[OA\Response(response: 200, description: 'Milestone updated')]
-    #[OA\Response(response: 400, description: 'Unable to update milestone')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'title', type: 'string'),
+        new OA\Property(property: 'description', type: 'string', nullable: true),
+        new OA\Property(property: 'amount', type: 'number'),
+        new OA\Property(property: 'due_date', type: 'string', format: 'date'),
+    ]))]
+    #[OA\Response(response: 200, description: 'Milestone updated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Milestone'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to update milestone', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function updateMilestone(string $contract, string $milestone, Request $request): JsonResponse
     {
         $result = $this->contractService->updateMilestone($request->user(), $contract, $milestone, $request->all());
@@ -117,8 +152,13 @@ class ContractController extends ApiController
     )]
     #[OA\Parameter(name: 'contract', in: 'path', required: true, description: 'Contract ID')]
     #[OA\Parameter(name: 'milestone', in: 'path', required: true, description: 'Milestone ID')]
-    #[OA\Response(response: 200, description: 'Milestone marked as delivered')]
-    #[OA\Response(response: 400, description: 'Unable to mark milestone as delivered')]
+    #[OA\Response(response: 200, description: 'Milestone marked as delivered', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Milestone'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to mark milestone as delivered', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function deliverMilestone(string $contract, string $milestone, Request $request): JsonResponse
     {
         $result = $this->contractService->deliverMilestone($request->user(), $contract, $milestone);
@@ -138,8 +178,13 @@ class ContractController extends ApiController
     )]
     #[OA\Parameter(name: 'contract', in: 'path', required: true, description: 'Contract ID')]
     #[OA\Parameter(name: 'milestone', in: 'path', required: true, description: 'Milestone ID')]
-    #[OA\Response(response: 200, description: 'Milestone validated')]
-    #[OA\Response(response: 400, description: 'Unable to validate milestone')]
+    #[OA\Response(response: 200, description: 'Milestone validated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Milestone'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to validate milestone', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function validateMilestone(string $contract, string $milestone, Request $request): JsonResponse
     {
         $result = $this->contractService->validateMilestone($request->user(), $contract, $milestone);

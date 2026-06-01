@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Enums\EscrowStatus;
-use App\Enums\PaymentStatus;
 use App\Models\Contract;
 use App\Models\Escrow;
 use App\Models\Wallet;
@@ -20,31 +19,27 @@ class EscrowService
             if (!$escrow) {
                 $escrow = Escrow::create([
                     "contract_id" => $contract->id,
-                    "amount" => $contract->amount,
-                    "currency" => $contract->currency,
+                    "payment_id" => null,
+                    "amount" => $contract->total_amount,
                     "status" => EscrowStatus::Holding,
                 ]);
             }
 
             $clientWallet = Wallet::where("user_id", $contract->client_id)->firstOrFail();
 
-            if ($clientWallet->balance < $contract->amount) {
+            if ($clientWallet->balance < $contract->total_amount) {
                 abort(400, "Solde insuffisant pour bloquer les fonds.");
             }
 
-            $clientWallet->decrement("balance", $contract->amount);
+            $clientWallet->decrement("balance", $contract->total_amount);
 
             WalletTransaction::create([
                 "wallet_id" => $clientWallet->id,
                 "type" => "debit",
-                "amount" => $contract->amount,
-                "currency" => $contract->currency,
+                "amount" => $contract->total_amount,
                 "description" => "Fonds bloqu\u00e9s pour le contrat #{$contract->id}",
-                "reference_type" => "contract",
-                "reference_id" => $contract->id,
+                "reference" => "contract:{$contract->id}",
             ]);
-
-            $contract->update(["payment_status" => PaymentStatus::Held]);
 
             return $escrow;
         });
@@ -60,20 +55,17 @@ class EscrowService
             }
 
             $freelanceWallet = Wallet::where("user_id", $contract->freelance_id)->firstOrFail();
-            $freelanceWallet->increment("balance", $contract->amount);
+            $freelanceWallet->increment("balance", $contract->total_amount);
 
             WalletTransaction::create([
                 "wallet_id" => $freelanceWallet->id,
                 "type" => "credit",
-                "amount" => $contract->amount,
-                "currency" => $contract->currency,
+                "amount" => $contract->total_amount,
                 "description" => "Fonds lib\u00e9r\u00e9s pour le contrat #{$contract->id}",
-                "reference_type" => "contract",
-                "reference_id" => $contract->id,
+                "reference" => "contract:{$contract->id}",
             ]);
 
             $escrow->update(["status" => EscrowStatus::Released, "released_at" => now()]);
-            $contract->update(["payment_status" => PaymentStatus::Released]);
 
             return $escrow;
         });
@@ -89,39 +81,41 @@ class EscrowService
             }
 
             $clientWallet = Wallet::where("user_id", $contract->client_id)->firstOrFail();
-            $clientWallet->increment("balance", $contract->amount);
+            $clientWallet->increment("balance", $contract->total_amount);
 
             WalletTransaction::create([
                 "wallet_id" => $clientWallet->id,
                 "type" => "credit",
-                "amount" => $contract->amount,
-                "currency" => $contract->currency,
+                "amount" => $contract->total_amount,
                 "description" => "Remboursement des fonds pour le contrat #{$contract->id}",
-                "reference_type" => "contract",
-                "reference_id" => $contract->id,
+                "reference" => "contract:{$contract->id}",
             ]);
 
-            $escrow->update(["status" => EscrowStatus::Refunded, "released_at" => now()]);
-            $contract->update(["payment_status" => PaymentStatus::Refunded]);
+            $escrow->update(["status" => EscrowStatus::Refunded, "refunded_at" => now()]);
 
             return $escrow;
         });
     }
 
-    public function autoReleaseSchedule(): void
+    public function autoReleaseSchedule(): int
     {
         $contracts = Contract::whereHas("escrow", function ($q) {
             $q->where("status", EscrowStatus::Holding);
         })->where("status", "completed")->get();
 
+        $count = 0;
+
         foreach ($contracts as $contract) {
             try {
                 $this->releaseFunds($contract);
+                $count++;
             } catch (\Exception $e) {
                 Log::warning("Auto-release failed for contract {$contract->id}", [
                     "error" => $e->getMessage(),
                 ]);
             }
         }
+
+        return $count;
     }
 }

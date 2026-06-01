@@ -13,7 +13,7 @@ class Notification extends Model
 
     protected $fillable = [
         'user_id', 'type', 'title', 'body', 'data',
-        'is_read', 'read_at', 'sent_email', 'sent_push',
+        'action_url', 'is_read', 'read_at',
     ];
 
     protected function casts(): array
@@ -22,8 +22,6 @@ class Notification extends Model
             'type' => NotificationType::class,
             'data' => 'array',
             'is_read' => 'boolean',
-            'sent_email' => 'boolean',
-            'sent_push' => 'boolean',
             'read_at' => 'datetime',
         ];
     }

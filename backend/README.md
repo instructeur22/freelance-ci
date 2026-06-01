@@ -103,7 +103,7 @@ Freelance CI propose une plateforme tout-en-un avec :
 │                                                               │
 │  ┌─────────┐  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
 │  │ Routes  │  │Middleware│  │Contrôl.  │  │   Services    │  │
-│  │ /api/v1 │  │· JWT     │  │(13)      │  │(15 services)  │  │
+│  │ /api/v1 │  │· JWT     │  │(13)      │  │(14 services)  │  │
 │  │  72     │  │· RBAC    │  │          │  │               │  │
 │  └─────────┘  └──────────┘  └────┬─────┘  └──────┬────────┘  │
 │                                   │               │            │
@@ -647,7 +647,7 @@ backend/
 │   │   ├── Contract.php
 │   │   ├── Payment.php
 │   │   └── ...
-│   └── Services/                  # 15 services métier
+│   └── Services/                  # 14 services métier
 │       ├── AuthService.php
 │       ├── ProfileService.php
 │       ├── ProjectService.php
@@ -677,36 +677,29 @@ backend/
 │   └── console.php                # Planification des tâches cron
 ├── storage/
 │   └── api-docs/                  # Documentation OpenAPI générée
-└── tests/                         # 16 tests PHPUnit (Unit)
+└── tests/                         # 22 tests PHPUnit (21 pass, 1 skip)
 ```
 
 ---
 
 ## Tests
 
-### Tests unitaires
-
-```bash
-php artisan test --testsuite=Unit
-```
-
-16 tests unitaires couvrent :
-- **AuthService** — inscription, auth sociale, création de comptes
-- **GeniusPayService** — création de transaction, webhook HMAC, vérification de statut (HTTP fake)
-- **WalletService** — service de portefeuille
-- **ContractService** — signature de contrat, jalons
-
-### Tests fonctionnels
-
-Les tests fonctionnels (Feature) nécessitent une base PostgreSQL dédiée. Pour les activer :
-
-1. Créer une base de test sur Supabase
-2. Modifier `phpunit.xml` : `DB_CONNECTION=pgsql`
-3. Configurer les identifiants dans `.env.testing`
+### Tests
 
 ```bash
 php artisan test
 ```
+
+22 tests (21 verts, 1 skip pré-existant) :
+
+- **Feature** — Endpoints publics : `/api/freelances`, `/api/projects`
+- **Feature** — Catégories : `GET /api/categories`, `GET /api/categories/{id}/skills` (404 inclus)
+- **Unit** — **GeniusPayService** : création transaction, webhook HMAC, statut (HTTP fake)
+- **Unit** — **AuthService** : inscriptions, auth sociale (signatures, validations)
+- **Unit** — **CategoryService** : `getSkills` (1 test skip — nécessite DB)
+- **Unit** — **ContractService** / **WalletService** : instanciation
+
+Base de test : SQLite `:memory` (aucune config PostgreSQL requise).
 
 ---
 

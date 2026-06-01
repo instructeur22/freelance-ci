@@ -7,6 +7,10 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (DB::connection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         $indexes = [
             'idx_users_email' => 'CREATE INDEX IF NOT EXISTS idx_users_email ON users USING btree (email)',
             'idx_users_role' => 'CREATE INDEX IF NOT EXISTS idx_users_role ON users USING btree (role)',
@@ -104,6 +108,10 @@ return new class extends Migration
 
     public function down(): void
     {
+        if (DB::connection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         $indexes = [
             'idx_freelance_profiles_search', 'idx_projects_search',
             'idx_platform_settings_group', 'idx_platform_settings_key',

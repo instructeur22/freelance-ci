@@ -12,7 +12,7 @@ class ReviewReply extends Model
     protected $table = 'review_replies';
 
     protected $fillable = [
-        'review_id', 'author_id', 'comment',
+        'review_id', 'user_id', 'comment',
     ];
 
     public function review(): BelongsTo
@@ -22,6 +22,6 @@ class ReviewReply extends Model
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

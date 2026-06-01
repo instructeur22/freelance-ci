@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Conversation extends Model
@@ -13,7 +14,7 @@ class Conversation extends Model
     protected $table = 'conversations';
 
     protected $fillable = [
-        'project_id', 'contract_id', 'client_id', 'freelance_id', 'last_message_at',
+        'project_id', 'contract_id', 'subject', 'last_message_at',
     ];
 
     protected function casts(): array
@@ -33,14 +34,11 @@ class Conversation extends Model
         return $this->belongsTo(Contract::class, 'contract_id');
     }
 
-    public function client(): BelongsTo
+    public function participants(): BelongsToMany
     {
-        return $this->belongsTo(User::class, 'client_id');
-    }
-
-    public function freelance(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'freelance_id');
+        return $this->belongsToMany(User::class, 'conversation_participants')
+            ->withPivot('last_read_at', 'is_muted')
+            ->withTimestamps();
     }
 
     public function messages(): HasMany

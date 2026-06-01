@@ -152,23 +152,54 @@
 - [x] Ajout accesseur `name` sur `User` (composé de `first_name` + `last_name`)
 - [x] Création `MilestoneStatus` enum (manquant)
 - [x] Création `Transaction` model (référencé par `PaymentService`/`AdminService`)
-- [x] 16 tests unitaires écrits (Auth, GeniusPay, Wallet, Contract, Category)
+- [x] 22 tests (21 verts, 1 skip)
 
-## Phase 6 : À venir (TODO)
+## Phase 6 : Audit complet & corrections masse — Juin 2026
+
+### P0 — Runtime fixes
+- [x] **QuoteController ↔ QuoteService** : Ajout de 7 méthodes manquantes (`listForProject`, `find`, `update`, `delete`, `create`, `accept`, `refuse`) — plantait au runtime
+- [x] **EscrowService::autoReleaseSchedule()** : retour `void` → `int` (command utilisait `$count`)
+- [x] **GeniusPayService::syncTransactions()** : retour `void` → `array{checked, updated, failed}` (command utilisait clés)
+
+### P1 — Modèles alignés sur migrations (28 fichiers)
+- [x] **6 modèles critiques refaits** : Invoice, VerifiedBadge, PortfolioItem, SubscriptionPlanConfig, FreelanceSubscription, AuthToken
+- [x] **4 SoftDeletes ajoutés** : Contract, Quote, Review, Message
+- [x] **4 relations manquantes** : Payment.transaction(), WithdrawalRequest.wallet(), PaymentSyncLog.payment(), FreelanceLanguage.freelanceProfile()
+- [x] **HasUuids ajouté à Boost**
+- [x] **18 modèles secondaires corrigés** : User, FreelanceProfile, Skill, FreelanceSkill, FreelanceLanguage, Verification, Report, Dispute, PortfolioFile, ProjectFile, MessageFile, AdminLog, SocialAccount, PlatformSetting, JobCategory, Review, Boost, PaymentSyncLog
+- [x] **ReviewService::updateTargetRating()** : persiste maintenant `average_rating` + `total_reviews` dans FreelanceProfile
+
+### P2 — Sécurité & tests
+- [x] `.env.testing` nettoyé (SQLite mémoire, plus de prod Supabase)
+- [x] `phpunit.pgsql.xml` nettoyé (credentials `CHANGE_ME`)
+- [x] Swagger regénéré (62 chemins, 72 opérations)
+
+## Phase 7 : À venir (TODO)
+
+### Swagger (doc uniquement)
+- [x] Ajouter `#[OA\RequestBody]` sur 40+ endpoints POST/PUT
+- [x] Ajouter `#[OA\Response]` content schemas (25 composants, 72 endpoints)
+
+### Pagination API
+- [x] Remplacer `$this->success()` par `$this->paginated()` dans les 14 méthodes `index()`/`list*()` pour retourner les métadonnées de pagination
+
+### Tests
+- [ ] Remplacer `test_that_true_is_true` par des tests réels
+- [ ] Ajouter factories pour les 40 modèles
+- [ ] Feature tests pour les 11 contrôleurs non couverts
+- [ ] Tests unitaires significatifs pour les 9 services non testés
 
 ### Fonctionnalités métier
 - [ ] ~~Génération de factures PDF~~ (reporté à v2)
-- [ ] Badge vérifié (achat annuel)
-- [ ] Abonnements freelances (Starter, Pro, Expert)
-- [ ] Boost de profil / projet
-- [ ] Paiement des abonnements via Genius Pay
-- [ ] Marketing / pages statiques (conditions, CGU, mentions légales)
-- [ ] Parrainage / programme de referral
+- [x] Badge vérifié (achat annuel via Genius Pay, endpoints API + admin)
+- [x] Abonnements freelances (Starter, Pro, Expert) — achat via Genius Pay, upgrade, cancel, endpoints API
+- [x] Boost de profil / projet (achat via Genius Pay, endpoints API + admin)
+- [x] Paiement des abonnements via Genius Pay
+- [x] Marketing / pages statiques (conditions, CGU, mentions légales — About, Terms, Privacy, Contact)
+- [x] Parrainage / programme de referral (code unique, tracking, récompense au premier paiement du filleul)
 
 ### Améliorations techniques
-- [x] Tests unitaires (PHPUnit) — 16 tests, 0 échecs
-- [ ] Tests fonctionnels sur PostgreSQL (besoin base de test dédiée)
-- [ ] Documentation Swagger / OpenAPI (`darkaonline/l5-swagger`)
+- [x] Swagger / OpenAPI (62 chemins documentés)
 - [ ] Analyse statique (PHPStan level 6)
 - [ ] Formatage automatique (Laravel Pint)
 - [ ] Déploiement Docker
@@ -204,8 +235,10 @@
 |---------|------|-------------|
 | **v0.1.0** | Mai 2026 | Initialisation Laravel, migrations, modèles, enums |
 | **v0.2.0** | Mai 2026 | Middleware auth Supabase, RBAC, base controllers |
-| **v0.3.0** | Mai 2026 | Services métier (15 services), routes API (72 endpoints) |
+| **v0.3.0** | Mai 2026 | Services métier (14 services), routes API (72 endpoints) |
 | **v0.4.0** | Mai 2026 | Commandes cron, planification, finalisation API |
-| **v0.5.0** | Mai 2026 | Supabase Cloud (DB/Auth/Storage lié), migrations seedées, OAuth configuré, buckets créés, modèles UUID corrigés (HasUuids trait), tests API GET /api/categories ✅ |
+| **v0.5.0** | Mai 2026 | Supabase Cloud lié, migrations seedées, OAuth + buckets configurés, HasUuids trait, tests API ✅ |
 | **v0.6.0** | Mai 2026 | Audit & corrections (7 bugs majeurs), 16 tests unitaires, Swagger/OpenAPI |
+| **v0.7.0** | Juin 2026 | **Audit complet** — 3 P0 runtime fixes, 28 modèles alignés migrations, SoftDeletes, relations manquantes, sécurité credentials, 21/22 tests verts |
+| **v0.8.0** | Juin 2026 | **Fonctionnalités métier** — Badge vérifié, Boost, Abonnements, Marketing pages, Parrainage — 5 endpoints Swagger, 18 nouveaux endpoints API |
 | **v1.0.0** | — | Première release stable |

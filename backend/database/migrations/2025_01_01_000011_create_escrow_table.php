@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS escrow_status CASCADE");
-        DB::statement("CREATE TYPE escrow_status AS ENUM ('holding', 'released', 'refunded', 'disputed')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS escrow_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE escrow_status AS ENUM ('holding', 'released', 'refunded', 'disputed')");
+        }
 
         Schema::create('escrows', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -31,6 +35,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('escrows');
-        DB::statement("DROP TYPE IF EXISTS escrow_status CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS escrow_status CASCADE");
+        }
     }
 };

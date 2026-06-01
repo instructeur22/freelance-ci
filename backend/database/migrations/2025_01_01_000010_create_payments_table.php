@@ -9,14 +9,30 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS payment_status CASCADE");
-        DB::statement("CREATE TYPE payment_status AS ENUM ('pending', 'held', 'released', 'refunded', 'failed', 'cancelled')");
-        DB::statement("DROP TYPE IF EXISTS payment_channel CASCADE");
-        DB::statement("CREATE TYPE payment_channel AS ENUM ('MOBILE_MONEY', 'CARD', 'BANK_TRANSFER', 'USSD')");
-        DB::statement("DROP TYPE IF EXISTS payment_operator CASCADE");
-        DB::statement("CREATE TYPE payment_operator AS ENUM ('ORANGE', 'MTN', 'MOOV', 'WAVE', 'CARD', 'UNKNOWN')");
-        DB::statement("DROP TYPE IF EXISTS transaction_type CASCADE");
-        DB::statement("CREATE TYPE transaction_type AS ENUM ('mission', 'subscription', 'boost_profile', 'boost_project', 'badge_verified', 'ad', 'refund')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS payment_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE payment_status AS ENUM ('pending', 'held', 'released', 'refunded', 'failed', 'cancelled')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS payment_channel CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE payment_channel AS ENUM ('MOBILE_MONEY', 'CARD', 'BANK_TRANSFER', 'USSD')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS payment_operator CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE payment_operator AS ENUM ('ORANGE', 'MTN', 'MOOV', 'WAVE', 'CARD', 'UNKNOWN')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS transaction_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE transaction_type AS ENUM ('mission', 'subscription', 'boost_profile', 'boost_project', 'badge_verified', 'ad', 'refund')");
+        }
 
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -66,9 +82,17 @@ return new class extends Migration
         Schema::dropIfExists('payment_sync_log');
         Schema::dropIfExists('genius_pay_webhooks');
         Schema::dropIfExists('payments');
-        DB::statement("DROP TYPE IF EXISTS transaction_type CASCADE");
-        DB::statement("DROP TYPE IF EXISTS payment_operator CASCADE");
-        DB::statement("DROP TYPE IF EXISTS payment_channel CASCADE");
-        DB::statement("DROP TYPE IF EXISTS payment_status CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS transaction_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS payment_operator CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS payment_channel CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS payment_status CASCADE");
+        }
     }
 };

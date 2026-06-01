@@ -9,10 +9,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS verification_type CASCADE");
-        DB::statement("CREATE TYPE verification_type AS ENUM ('identity', 'portfolio', 'diploma', 'professional')");
-        DB::statement("DROP TYPE IF EXISTS verification_status CASCADE");
-        DB::statement("CREATE TYPE verification_status AS ENUM ('pending', 'approved', 'rejected')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS verification_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE verification_type AS ENUM ('identity', 'portfolio', 'diploma', 'professional')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS verification_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE verification_status AS ENUM ('pending', 'approved', 'rejected')");
+        }
 
         Schema::create('verifications', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -31,7 +39,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('verifications');
-        DB::statement("DROP TYPE IF EXISTS verification_status CASCADE");
-        DB::statement("DROP TYPE IF EXISTS verification_type CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS verification_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS verification_type CASCADE");
+        }
     }
 };

@@ -12,26 +12,32 @@ class Invoice extends Model
     protected $table = 'invoices';
 
     protected $fillable = [
-        'payment_id', 'invoice_number', 'issued_to_id', 'issued_at',
-        'pdf_url', 'total_xof', 'tax_xof', 'notes',
+        'contract_id', 'payment_id', 'invoice_number',
+        'amount', 'platform_fee', 'net_amount',
+        'currency', 'status', 'issue_date', 'due_date', 'paid_date',
+        'invoice_data',
     ];
 
     protected function casts(): array
     {
         return [
-            'total_xof' => 'decimal:2',
-            'tax_xof' => 'decimal:2',
-            'issued_at' => 'datetime',
+            'amount' => 'decimal:2',
+            'platform_fee' => 'decimal:2',
+            'net_amount' => 'decimal:2',
+            'issue_date' => 'date',
+            'due_date' => 'date',
+            'paid_date' => 'date',
+            'invoice_data' => 'array',
         ];
+    }
+
+    public function contract(): BelongsTo
+    {
+        return $this->belongsTo(Contract::class, 'contract_id');
     }
 
     public function payment(): BelongsTo
     {
         return $this->belongsTo(Payment::class, 'payment_id');
-    }
-
-    public function issuedTo(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'issued_to_id');
     }
 }

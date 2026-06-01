@@ -21,7 +21,10 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'project', in: 'path', required: true, description: 'Project ID')]
-    #[OA\Response(response: 200, description: 'List of quotes')]
+    #[OA\Response(response: 200, description: 'List of quotes', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/Quote')),
+    ]))]
     public function index(string $project, Request $request): JsonResponse
     {
         $quotes = $this->quoteService->listForProject($request->user(), $project);
@@ -36,8 +39,19 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'project', in: 'path', required: true, description: 'Project ID')]
-    #[OA\Response(response: 201, description: 'Quote submitted')]
-    #[OA\Response(response: 400, description: 'Unable to create quote')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'amount', type: 'number'),
+        new OA\Property(property: 'description', type: 'string'),
+        new OA\Property(property: 'duration', type: 'integer', nullable: true),
+        new OA\Property(property: 'duration_unit', type: 'string', nullable: true),
+    ]))]
+    #[OA\Response(response: 201, description: 'Quote submitted', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Quote'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to create quote', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function store(string $project, Request $request): JsonResponse
     {
         $quote = $this->quoteService->create($request->user(), $project, $request->all());
@@ -56,8 +70,13 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Quote ID')]
-    #[OA\Response(response: 200, description: 'Quote detail')]
-    #[OA\Response(response: 404, description: 'Quote not found')]
+    #[OA\Response(response: 200, description: 'Quote detail', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Quote'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Quote not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function show(string $id, Request $request): JsonResponse
     {
         $quote = $this->quoteService->find($request->user(), $id);
@@ -76,8 +95,19 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Quote ID')]
-    #[OA\Response(response: 200, description: 'Quote updated')]
-    #[OA\Response(response: 400, description: 'Quote not found or cannot be updated')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'amount', type: 'number'),
+        new OA\Property(property: 'description', type: 'string'),
+        new OA\Property(property: 'duration', type: 'integer', nullable: true),
+        new OA\Property(property: 'duration_unit', type: 'string', nullable: true),
+    ]))]
+    #[OA\Response(response: 200, description: 'Quote updated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Quote'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Quote not found or cannot be updated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function update(string $id, Request $request): JsonResponse
     {
         $quote = $this->quoteService->update($request->user(), $id, $request->all());
@@ -96,8 +126,12 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Quote ID')]
-    #[OA\Response(response: 200, description: 'Quote withdrawn')]
-    #[OA\Response(response: 404, description: 'Quote not found or unauthorized')]
+    #[OA\Response(response: 200, description: 'Quote withdrawn', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Quote not found or unauthorized', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function destroy(string $id, Request $request): JsonResponse
     {
         $result = $this->quoteService->delete($request->user(), $id);
@@ -116,8 +150,13 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Quote ID')]
-    #[OA\Response(response: 200, description: 'Quote accepted, contract created')]
-    #[OA\Response(response: 400, description: 'Unable to accept quote')]
+    #[OA\Response(response: 200, description: 'Quote accepted, contract created', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Contract'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to accept quote', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function accept(string $id, Request $request): JsonResponse
     {
         $contract = $this->quoteService->accept($request->user(), $id);
@@ -136,8 +175,12 @@ class QuoteController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Quote ID')]
-    #[OA\Response(response: 200, description: 'Quote refused')]
-    #[OA\Response(response: 400, description: 'Unable to refuse quote')]
+    #[OA\Response(response: 200, description: 'Quote refused', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to refuse quote', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function refuse(string $id, Request $request): JsonResponse
     {
         $result = $this->quoteService->refuse($request->user(), $id);

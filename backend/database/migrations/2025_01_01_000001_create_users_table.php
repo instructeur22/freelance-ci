@@ -9,10 +9,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS user_role CASCADE");
-        DB::statement("CREATE TYPE user_role AS ENUM ('client', 'freelance', 'admin')");
-        DB::statement("DROP TYPE IF EXISTS account_status CASCADE");
-        DB::statement("CREATE TYPE account_status AS ENUM ('pending', 'active', 'suspended', 'banned')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS user_role CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE user_role AS ENUM ('client', 'freelance', 'admin')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS account_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE account_status AS ENUM ('pending', 'active', 'suspended', 'banned')");
+        }
 
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -61,7 +69,11 @@ return new class extends Migration
         Schema::dropIfExists('auth_tokens');
         Schema::dropIfExists('social_accounts');
         Schema::dropIfExists('users');
-        DB::statement("DROP TYPE IF EXISTS account_status CASCADE");
-        DB::statement("DROP TYPE IF EXISTS user_role CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS account_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS user_role CASCADE");
+        }
     }
 };

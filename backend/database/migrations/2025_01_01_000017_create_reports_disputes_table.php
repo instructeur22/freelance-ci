@@ -9,12 +9,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS report_type CASCADE");
-        DB::statement("CREATE TYPE report_type AS ENUM ('profil', 'comportement', 'contenu', 'fraude', 'autre')");
-        DB::statement("DROP TYPE IF EXISTS report_status CASCADE");
-        DB::statement("CREATE TYPE report_status AS ENUM ('open', 'under_review', 'resolved', 'dismissed')");
-        DB::statement("DROP TYPE IF EXISTS dispute_status CASCADE");
-        DB::statement("CREATE TYPE dispute_status AS ENUM ('open', 'under_review', 'resolved_client', 'resolved_freelance', 'closed')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS report_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE report_type AS ENUM ('profil', 'comportement', 'contenu', 'fraude', 'autre')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS report_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE report_status AS ENUM ('open', 'under_review', 'resolved', 'dismissed')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS dispute_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE dispute_status AS ENUM ('open', 'under_review', 'resolved_client', 'resolved_freelance', 'closed')");
+        }
 
         Schema::create('reports', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -48,8 +60,14 @@ return new class extends Migration
     {
         Schema::dropIfExists('disputes');
         Schema::dropIfExists('reports');
-        DB::statement("DROP TYPE IF EXISTS dispute_status CASCADE");
-        DB::statement("DROP TYPE IF EXISTS report_status CASCADE");
-        DB::statement("DROP TYPE IF EXISTS report_type CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS dispute_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS report_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS report_type CASCADE");
+        }
     }
 };

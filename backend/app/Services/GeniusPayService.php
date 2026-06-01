@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Log;
 class GeniusPayService
 {
     private readonly string $apiKey;
-    private readonly string $siteId;
+    private readonly string $apiSecret;
     private readonly string $mode;
     private readonly int $timeout;
 
     public function __construct()
     {
         $this->apiKey = config("geniuspay.api_key");
-        $this->siteId = config("geniuspay.site_id");
+        $this->apiSecret = config("geniuspay.api_secret");
         $this->mode = config("geniuspay.mode");
         $this->timeout = config("geniuspay.timeout");
     }
@@ -31,7 +31,7 @@ class GeniusPayService
             ->timeout($this->timeout)
             ->withHeaders([
                 "X-API-Key" => $this->apiKey,
-                "X-Site-ID" => $this->siteId,
+                "X-API-Secret" => $this->apiSecret,
                 "Content-Type" => "application/json",
             ]);
     }
@@ -73,24 +73,31 @@ class GeniusPayService
         return $response->json();
     }
 
-    public function syncTransactions(): void
+    public function syncTransactions(): array
     {
         $pendingTransactions = \App\Models\Payment::where("operator_status", GeniusPayStatus::PENDING)
             ->where("created_at", "<", now()->subHours(24))
             ->get();
 
+        $result = ["checked" => 0, "updated" => 0, "failed" => 0];
+
         foreach ($pendingTransactions as $transaction) {
+            $result["checked"]++;
             try {
                 $status = $this->checkTransactionStatus($transaction->operator_transaction_id);
                 $transaction->update([
                     "operator_status" => $status["status"],
                     "metadata" => $status,
                 ]);
+                $result["updated"]++;
             } catch (\Exception $e) {
                 Log::warning("Failed to sync transaction {$transaction->id}", [
                     "error" => $e->getMessage(),
                 ]);
+                $result["failed"]++;
             }
         }
+
+        return $result;
     }
 }

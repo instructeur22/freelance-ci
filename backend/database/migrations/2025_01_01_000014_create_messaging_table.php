@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS message_status CASCADE");
-        DB::statement("CREATE TYPE message_status AS ENUM ('sent', 'delivered', 'read')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS message_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE message_status AS ENUM ('sent', 'delivered', 'read')");
+        }
 
         Schema::create('conversations', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -59,6 +63,8 @@ return new class extends Migration
         Schema::dropIfExists('messages');
         Schema::dropIfExists('conversation_participants');
         Schema::dropIfExists('conversations');
-        DB::statement("DROP TYPE IF EXISTS message_status CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS message_status CASCADE");
+        }
     }
 };

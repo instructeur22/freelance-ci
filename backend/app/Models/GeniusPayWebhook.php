@@ -11,13 +11,15 @@ class GeniusPayWebhook extends Model
     protected $table = 'genius_pay_webhooks';
 
     protected $fillable = [
-        'event_type', 'transaction_id', 'payload', 'processed_at',
+        'event_type', 'payload', 'signature',
+        'is_processed', 'processed_at', 'error_message',
     ];
 
     protected function casts(): array
     {
         return [
             'payload' => 'array',
+            'is_processed' => 'boolean',
             'processed_at' => 'datetime',
         ];
     }

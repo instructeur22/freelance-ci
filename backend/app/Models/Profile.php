@@ -11,19 +11,20 @@ class Profile extends Model
     use HasUuids;
     protected $table = 'profiles';
 
-    protected $primaryKey = 'user_id';
-
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'first_name', 'last_name', 'display_name', 'avatar_url',
-        'gender', 'city', 'country', 'bio', 'website_url', 'linkedin_url', 'github_url',
+        'user_id', 'bio', 'title', 'country', 'city', 'address',
+        'gender', 'birth_date', 'website_url', 'linkedin_url',
+        'github_url', 'phone_secondary', 'is_visible',
     ];
 
     protected function casts(): array
     {
         return [
             'gender' => GenderType::class,
+            'birth_date' => 'date',
+            'is_visible' => 'boolean',
         ];
     }
 

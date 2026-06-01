@@ -12,16 +12,11 @@ class ProjectFile extends Model
     protected $table = 'project_files';
 
     protected $fillable = [
-        'project_id', 'uploader_id', 'file_url', 'file_name', 'file_type', 'file_size_kb',
+        'project_id', 'file_url', 'file_name', 'file_type', 'file_size',
     ];
 
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, 'project_id');
-    }
-
-    public function uploader(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'uploader_id');
     }
 }

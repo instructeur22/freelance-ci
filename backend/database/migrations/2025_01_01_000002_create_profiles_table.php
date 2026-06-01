@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS gender_type CASCADE");
-        DB::statement("CREATE TYPE gender_type AS ENUM ('homme', 'femme', 'autre', 'non_precise')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS gender_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE gender_type AS ENUM ('homme', 'femme', 'autre', 'non_precise')");
+        }
 
         Schema::create('profiles', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -70,6 +74,8 @@ return new class extends Migration
         Schema::dropIfExists('freelance_profiles');
         Schema::dropIfExists('client_profiles');
         Schema::dropIfExists('profiles');
-        DB::statement("DROP TYPE IF EXISTS gender_type CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS gender_type CASCADE");
+        }
     }
 };

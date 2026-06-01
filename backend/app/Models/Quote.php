@@ -6,25 +6,26 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quote extends Model
 {
-    use HasUuids;
+    use HasUuids, SoftDeletes;
     protected $table = 'quotes';
 
     protected $fillable = [
-        'project_id', 'freelance_id', 'amount_xof', 'duration_days',
-        'cover_letter', 'status', 'accepted_at', 'refused_at', 'withdrawn_at',
+        'project_id', 'freelance_id', 'amount', 'currency',
+        'estimated_duration', 'proposal', 'status',
+        'read_at', 'responded_at',
     ];
 
     protected function casts(): array
     {
         return [
             'status' => QuoteStatus::class,
-            'amount_xof' => 'decimal:2',
-            'accepted_at' => 'datetime',
-            'refused_at' => 'datetime',
-            'withdrawn_at' => 'datetime',
+            'amount' => 'decimal:2',
+            'read_at' => 'datetime',
+            'responded_at' => 'datetime',
         ];
     }
 

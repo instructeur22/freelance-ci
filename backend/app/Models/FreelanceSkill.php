@@ -10,6 +10,6 @@ class FreelanceSkill extends Pivot
     protected $table = 'freelance_skills';
 
     protected $fillable = [
-        'freelance_id', 'skill_id', 'level',
+        'freelance_profile_id', 'skill_id', 'proficiency_level', 'years_experience',
     ];
 }

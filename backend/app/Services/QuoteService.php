@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Enums\ContractStatus;
 use App\Enums\EscrowStatus;
-use App\Enums\PaymentStatus;
 use App\Enums\ProjectStatus;
 use App\Enums\QuoteStatus;
 use App\Enums\SubscriptionPlan;
@@ -12,6 +11,7 @@ use App\Models\Escrow;
 use App\Models\Project;
 use App\Models\Quote;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class QuoteService
@@ -20,6 +20,80 @@ class QuoteService
         private readonly ContractService $contractService,
         private readonly NotificationService $notificationService,
     ) {}
+
+    public function listForProject(User $user, string $projectId): Collection
+    {
+        return Quote::where('project_id', $projectId)
+            ->with('freelance')
+            ->orderByDesc('created_at')
+            ->get();
+    }
+
+    public function find(User $user, string $id): ?Quote
+    {
+        return Quote::with(['project', 'freelance'])->find($id);
+    }
+
+    public function update(User $user, string $id, array $data): ?Quote
+    {
+        $quote = Quote::find($id);
+        if (!$quote) return null;
+
+        if ($quote->freelance_id !== $user->id) {
+            return null;
+        }
+
+        if ($quote->status !== QuoteStatus::Pending) {
+            return null;
+        }
+
+        $quote->update([
+            'amount' => $data['amount'] ?? $quote->amount,
+            'currency' => $data['currency'] ?? $quote->currency,
+            'estimated_duration' => $data['duration'] ?? $data['estimated_duration'] ?? $quote->estimated_duration,
+            'proposal' => $data['description'] ?? $data['proposal'] ?? $quote->proposal,
+        ]);
+
+        return $quote;
+    }
+
+    public function delete(User $user, string $id): bool
+    {
+        try {
+            $this->withdrawQuote($user, $id);
+            return true;
+        } catch (\Exception) {
+            return false;
+        }
+    }
+
+    public function create(User $freelance, string $projectId, array $data): ?Quote
+    {
+        try {
+            return $this->createQuote($freelance, $projectId, $data);
+        } catch (\Exception) {
+            return null;
+        }
+    }
+
+    public function accept(User $client, string $quoteId): ?Contract
+    {
+        try {
+            return $this->acceptQuote($client, $quoteId);
+        } catch (\Exception) {
+            return null;
+        }
+    }
+
+    public function refuse(User $client, string $quoteId): bool
+    {
+        try {
+            $this->refuseQuote($client, $quoteId);
+            return true;
+        } catch (\Exception) {
+            return false;
+        }
+    }
 
     public function createQuote(User $freelance, string $projectId, array $data): Quote
     {
@@ -33,8 +107,8 @@ class QuoteService
                 "project_id" => $project->id,
                 "amount" => $data["amount"],
                 "currency" => $data["currency"] ?? "XOF",
-                "duration" => $data["duration"] ?? null,
-                "description" => $data["description"] ?? null,
+                "estimated_duration" => $data["duration"] ?? null,
+                "proposal" => $data["description"] ?? null,
                 "status" => QuoteStatus::Pending,
             ]);
 
@@ -71,15 +145,16 @@ class QuoteService
                 "client_id" => $quote->project->client_id,
                 "freelance_id" => $quote->freelance_id,
                 "quote_id" => $quote->id,
-                "amount" => $quote->amount,
+                "title" => $quote->project->title,
+                "total_amount" => $quote->amount,
                 "currency" => $quote->currency,
                 "status" => ContractStatus::Draft,
             ]);
 
             Escrow::create([
                 "contract_id" => $contract->id,
+                "payment_id" => null,
                 "amount" => $quote->amount,
-                "currency" => $quote->currency,
                 "status" => EscrowStatus::Holding,
             ]);
 

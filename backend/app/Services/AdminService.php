@@ -8,12 +8,15 @@ use App\Enums\UserRole;
 use App\Enums\VerificationStatus;
 use App\Models\Contract;
 use App\Models\Dispute;
+use App\Models\Payment;
 use App\Models\PlatformSetting;
 use App\Models\Project;
 use App\Models\Report;
 use App\Models\Review;
 use App\Models\User;
 use App\Models\Verification;
+use App\Models\VerifiedBadge;
+use App\Models\Boost;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
@@ -37,7 +40,23 @@ class AdminService
         ];
     }
 
-    public function getPendingVerifications(): LengthAwarePaginator
+    public function listUsers(): LengthAwarePaginator
+    {
+        return User::with("profile")
+            ->orderBy("created_at", "desc")
+            ->paginate(20);
+    }
+
+    public function updateUserStatus(string $id, string $status): ?User
+    {
+        $user = User::find($id);
+        if (!$user) return null;
+
+        $user->update(["status" => AccountStatus::tryFrom($status) ?? AccountStatus::Active]);
+        return $user->fresh();
+    }
+
+    public function pendingVerifications(): LengthAwarePaginator
     {
         return Verification::with("user:id,first_name,last_name,email")
             ->where("status", VerificationStatus::Pending)
@@ -45,99 +64,126 @@ class AdminService
             ->paginate(20);
     }
 
-    public function approveVerification(string $id, User $admin): Verification
+    public function approveVerification(string $id): ?Verification
     {
-        $verification = Verification::findOrFail($id);
+        $verification = Verification::find($id);
+        if (!$verification) return null;
+
         $verification->update([
             "status" => VerificationStatus::Approved,
-            "reviewed_by" => $admin->id,
             "reviewed_at" => now(),
         ]);
-        return $verification;
+        return $verification->fresh();
     }
 
-    public function rejectVerification(string $id, User $admin, ?string $note = null): Verification
+    public function rejectVerification(string $id, ?string $note = null): ?Verification
     {
-        $verification = Verification::findOrFail($id);
+        $verification = Verification::find($id);
+        if (!$verification) return null;
+
         $verification->update([
             "status" => VerificationStatus::Rejected,
-            "reviewed_by" => $admin->id,
             "reviewed_at" => now(),
             "admin_note" => $note,
         ]);
-        return $verification;
+        return $verification->fresh();
     }
 
-    public function getReports(array $filters): LengthAwarePaginator
+    public function listReports(): LengthAwarePaginator
     {
-        $query = Report::with(["reporter:id,first_name,last_name", "reported:id,first_name,last_name"]);
-
-        if (!empty($filters["status"])) {
-            $query->where("status", $filters["status"]);
-        }
-
-        if (!empty($filters["type"])) {
-            $query->where("type", $filters["type"]);
-        }
-
-        return $query->latest()->paginate($filters["per_page"] ?? 20);
+        return Report::with(["reporter:id,first_name,last_name", "reported:id,first_name,last_name"])
+            ->latest()
+            ->paginate(20);
     }
 
-    public function resolveReport(string $id, User $admin, array $data): Report
+    public function resolveReport(string $id, array $data): ?Report
     {
-        $report = Report::findOrFail($id);
+        $report = Report::find($id);
+        if (!$report) return null;
+
         $report->update([
-            "status" => $data["action"] === "dismiss" ? ReportStatus::Dismissed : ReportStatus::Resolved,
-            "resolved_by" => $admin->id,
+            "status" => ($data["action"] ?? "") === "dismiss" ? ReportStatus::Dismissed : ReportStatus::Resolved,
             "resolved_at" => now(),
             "resolution_note" => $data["note"] ?? null,
         ]);
 
-        if (!empty($data["action_taken"])) {
-            $reportedUser = User::find($report->reported_id);
-            if ($reportedUser && $data["action_taken"] === "suspend") {
-            $reportedUser->update(["status" => AccountStatus::Suspended]);
-            } elseif ($reportedUser && $data["action_taken"] === "ban") {
-                $reportedUser->update(["status" => AccountStatus::Banned]);
-            }
-        }
-
-        return $report;
+        return $report->fresh();
     }
 
-    public function getDisputes(array $filters): LengthAwarePaginator
+    public function listDisputes(): LengthAwarePaginator
     {
-        $query = Dispute::with([
+        return Dispute::with([
             "contract:id,title",
             "openedBy:id,first_name,last_name",
-        ]);
-
-        if (!empty($filters["status"])) {
-            $query->where("status", $filters["status"]);
-        }
-
-        return $query->latest()->paginate($filters["per_page"] ?? 20);
+        ])->latest()->paginate(20);
     }
 
-    public function resolveDispute(string $id, User $admin, array $data): Dispute
+    public function resolveDispute(string $id, array $data): ?Dispute
     {
-        $dispute = Dispute::findOrFail($id);
+        $dispute = Dispute::find($id);
+        if (!$dispute) return null;
+
         $dispute->update([
             "status" => DisputeStatus::Closed,
-            "resolved_by" => $admin->id,
             "resolved_at" => now(),
             "resolution" => $data["resolution"] ?? null,
             "resolution_note" => $data["note"] ?? null,
         ]);
 
-        return $dispute;
+        return $dispute->fresh();
     }
 
-    public function updatePlatformSetting(string $key, string $value, User $admin): PlatformSetting
+    public function monitorPayments(): LengthAwarePaginator
     {
+        return Payment::with("user:id,first_name,last_name")
+            ->latest()
+            ->paginate(20);
+    }
+
+    public function getSettings()
+    {
+        return PlatformSetting::all()->pluck("value", "key");
+    }
+
+    public function updateSetting(string $key, ?string $value): ?PlatformSetting
+    {
+        if (!$value) return null;
+
         return PlatformSetting::updateOrCreate(
             ["key" => $key],
-            ["value" => $value, "updated_by" => $admin->id],
+            ["value" => $value],
         );
+    }
+
+    public function listBadges(): LengthAwarePaginator
+    {
+        return VerifiedBadge::with("freelanceProfile.user:id,first_name,last_name,email")
+            ->latest()
+            ->paginate(20);
+    }
+
+    public function grantBadge(string $profileId, ?string $verificationId = null): ?VerifiedBadge
+    {
+        $profile = \App\Models\FreelanceProfile::find($profileId);
+        if (!$profile) return null;
+
+        return app(BadgeService::class)->activate($profile, $verificationId, 0);
+    }
+
+    public function revokeBadge(string $badgeId): bool
+    {
+        return app(BadgeService::class)->revoke($badgeId);
+    }
+
+    public function listBoosts(): LengthAwarePaginator
+    {
+        return Boost::with("freelanceProfile.user:id,first_name,last_name,email")
+            ->latest()
+            ->paginate(20);
+    }
+
+    public function revokeBoost(string $boostId): bool
+    {
+        return app(BoostService::class)->revoke($boostId);
     }
 }

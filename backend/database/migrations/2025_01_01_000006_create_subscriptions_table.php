@@ -9,10 +9,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS subscription_plan CASCADE");
-        DB::statement("CREATE TYPE subscription_plan AS ENUM ('starter', 'pro', 'expert')");
-        DB::statement("DROP TYPE IF EXISTS subscription_status_type CASCADE");
-        DB::statement("CREATE TYPE subscription_status_type AS ENUM ('active', 'cancelled', 'expired', 'trial')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS subscription_plan CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE subscription_plan AS ENUM ('starter', 'pro', 'expert')");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS subscription_status_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE subscription_status_type AS ENUM ('active', 'cancelled', 'expired', 'trial')");
+        }
 
         Schema::create('subscription_plans_config', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -52,7 +60,11 @@ return new class extends Migration
     {
         Schema::dropIfExists('freelance_subscriptions');
         Schema::dropIfExists('subscription_plans_config');
-        DB::statement("DROP TYPE IF EXISTS subscription_status_type CASCADE");
-        DB::statement("DROP TYPE IF EXISTS subscription_plan CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS subscription_status_type CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS subscription_plan CASCADE");
+        }
     }
 };

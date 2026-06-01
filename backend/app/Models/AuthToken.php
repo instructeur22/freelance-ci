@@ -12,14 +12,15 @@ class AuthToken extends Model
     protected $table = 'auth_tokens';
 
     protected $fillable = [
-        'user_id', 'token_hash', 'type', 'expires_at', 'used_at',
+        'user_id', 'device_name', 'device_type', 'ip_address',
+        'user_agent', 'last_used_at', 'expires_at',
     ];
 
     protected function casts(): array
     {
         return [
+            'last_used_at' => 'datetime',
             'expires_at' => 'datetime',
-            'used_at' => 'datetime',
         ];
     }
 

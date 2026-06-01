@@ -4,8 +4,11 @@ namespace App\Models;
 use App\Enums\AccountStatus;
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,9 +19,9 @@ class User extends Authenticatable
     protected $table = 'users';
 
     protected $fillable = [
-        'email', 'phone', 'password_hash', 'password', 'role', 'status',
+        'email', 'phone', 'password', 'role', 'status',
         'first_name', 'last_name', 'avatar_url', 'locale',
-        'email_verified_at', 'phone_verified_at', 'last_login_at',
+        'email_verified_at', 'last_login_at',
     ];
 
     public function getNameAttribute(): ?string
@@ -27,7 +30,7 @@ class User extends Authenticatable
     }
 
     protected $hidden = [
-        'password_hash',
+        'password',
     ];
 
     protected function casts(): array
@@ -36,9 +39,7 @@ class User extends Authenticatable
             'role' => UserRole::class,
             'status' => AccountStatus::class,
             'email_verified_at' => 'datetime',
-            'phone_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
-            'deleted_at' => 'datetime',
         ];
     }
 
@@ -87,14 +88,11 @@ class User extends Authenticatable
         return $this->hasMany(Contract::class, 'freelance_id');
     }
 
-    public function clientConversations(): HasMany
+    public function conversations(): BelongsToMany
     {
-        return $this->hasMany(Conversation::class, 'client_id');
-    }
-
-    public function freelanceConversations(): HasMany
-    {
-        return $this->hasMany(Conversation::class, 'freelance_id');
+        return $this->belongsToMany(Conversation::class, 'conversation_participants')
+            ->withPivot('last_read_at', 'is_muted')
+            ->withTimestamps();
     }
 
     public function sentMessages(): HasMany
@@ -107,14 +105,9 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class, 'user_id');
     }
 
-    public function paymentsAsPayer(): HasMany
+    public function payments(): HasMany
     {
-        return $this->hasMany(Payment::class, 'payer_id');
-    }
-
-    public function paymentsAsPayee(): HasMany
-    {
-        return $this->hasMany(Payment::class, 'payee_id');
+        return $this->hasMany(Payment::class, 'user_id');
     }
 
     public function wallet(): HasOne
@@ -129,16 +122,41 @@ class User extends Authenticatable
 
     public function reviewsReceived(): HasMany
     {
-        return $this->hasMany(Review::class, 'reviewed_id');
+        return $this->hasMany(Review::class, 'reviewee_id');
+    }
+
+    public function portfolioItems(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            PortfolioItem::class,
+            FreelanceProfile::class,
+            'user_id',
+            'freelance_profile_id',
+            'id',
+            'id'
+        );
     }
 
     public function boosts(): HasMany
     {
-        return $this->hasMany(Boost::class, 'user_id');
+        return $this->hasMany(Boost::class, 'freelance_profile_id');
     }
 
     public function adminLogs(): HasMany
     {
         return $this->hasMany(AdminLog::class, 'admin_id');
+    }
+
+    public function subscription(): HasOne
+    {
+        return $this->hasOneThrough(
+            FreelanceSubscription::class,
+            FreelanceProfile::class,
+            'user_id',
+            'freelance_profile_id',
+            'id',
+            'id'
+        )->whereIn('status', [\App\Enums\SubscriptionStatus::Active, \App\Enums\SubscriptionStatus::Trial])
+            ->latest('freelance_subscriptions.created_at');
     }
 }

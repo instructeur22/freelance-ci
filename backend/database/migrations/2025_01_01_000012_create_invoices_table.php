@@ -9,7 +9,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("CREATE SEQUENCE IF NOT EXISTS invoice_seq START WITH 1000 INCREMENT BY 1");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE SEQUENCE IF NOT EXISTS invoice_seq START WITH 1000 INCREMENT BY 1");
+        }
 
         Schema::create('invoices', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -32,6 +34,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('invoices');
-        DB::statement("DROP SEQUENCE IF EXISTS invoice_seq");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP SEQUENCE IF EXISTS invoice_seq");
+        }
     }
 };

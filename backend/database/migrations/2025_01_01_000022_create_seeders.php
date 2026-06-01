@@ -38,6 +38,7 @@ return new class extends Migration
             ['key' => 'max_file_size_mb', 'value' => '10', 'group' => 'general', 'type' => 'integer', 'description' => 'Taille max des fichiers en MB'],
             ['key' => 'allowed_file_types', 'value' => 'jpg,jpeg,png,pdf,doc,docx,xls,xlsx,zip', 'group' => 'general', 'type' => 'string', 'description' => 'Types de fichiers autorisés'],
             ['key' => 'auto_approve_profiles', 'value' => 'false', 'group' => 'general', 'type' => 'boolean', 'description' => 'Approbation automatique des profils'],
+            ['key' => 'referral_reward_amount', 'value' => '5000', 'group' => 'referral', 'type' => 'integer', 'description' => 'Montant de la récompense de parrainage (XOF)'],
         ];
 
         foreach ($settings as $setting) {

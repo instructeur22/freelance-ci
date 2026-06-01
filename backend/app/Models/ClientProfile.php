@@ -10,20 +10,19 @@ class ClientProfile extends Model
     use HasUuids;
     protected $table = 'client_profiles';
 
-    protected $primaryKey = 'user_id';
-
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'company_name', 'company_sector', 'company_size',
-        'siret', 'total_spent_xof', 'projects_count',
+        'user_id', 'company_name', 'company_website', 'company_size',
+        'industry', 'total_projects_posted', 'total_spent', 'average_rating',
     ];
 
     protected function casts(): array
     {
         return [
-            'total_spent_xof' => 'decimal:2',
-            'projects_count' => 'integer',
+            'total_spent' => 'decimal:2',
+            'total_projects_posted' => 'integer',
+            'average_rating' => 'decimal:2',
         ];
     }
 

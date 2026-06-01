@@ -1,36 +1,37 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FreelanceProfile extends Model
 {
     use HasUuids;
     protected $table = 'freelance_profiles';
 
-    protected $primaryKey = 'user_id';
-
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'tagline', 'category_id', 'experience_years',
-        'daily_rate_xof', 'hourly_rate_xof', 'is_available', 'availability_note',
-        'is_verified', 'verified_at', 'average_rating', 'total_reviews',
-        'total_earned_xof', 'missions_completed', 'response_rate',
+        'user_id', 'professional_title', 'experience_level', 'years_experience',
+        'education_level', 'hourly_rate_min', 'hourly_rate_max', 'currency',
+        'is_available', 'total_projects_completed', 'total_projects_in_progress',
+        'average_rating', 'total_reviews', 'total_earnings', 'success_rate',
+        'last_active_at',
     ];
 
     protected function casts(): array
     {
         return [
             'is_available' => 'boolean',
-            'is_verified' => 'boolean',
             'average_rating' => 'decimal:2',
-            'daily_rate_xof' => 'decimal:2',
-            'hourly_rate_xof' => 'decimal:2',
-            'total_earned_xof' => 'decimal:2',
-            'verified_at' => 'datetime',
+            'total_earnings' => 'decimal:2',
+            'success_rate' => 'decimal:2',
+            'last_active_at' => 'datetime',
         ];
     }
 
@@ -39,8 +40,28 @@ class FreelanceProfile extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function category(): BelongsTo
+    public function skills(): BelongsToMany
     {
-        return $this->belongsTo(JobCategory::class, 'category_id');
+        return $this->belongsToMany(Skill::class, 'freelance_skills', 'freelance_profile_id', 'skill_id')
+            ->withPivot('proficiency_level');
+    }
+
+    public function verifiedBadges(): HasMany
+    {
+        return $this->hasMany(VerifiedBadge::class, 'freelance_profile_id');
+    }
+
+    public function activeBadge(): HasMany
+    {
+        return $this->hasMany(VerifiedBadge::class, 'freelance_profile_id')
+            ->where('is_active', true)
+            ->where(function ($q) {
+                $q->whereNull('expires_at')->orWhere('expires_at', '>', now());
+            });
+    }
+
+    public function freelanceSubscriptions(): HasMany
+    {
+        return $this->hasMany(FreelanceSubscription::class, 'freelance_profile_id');
     }
 }

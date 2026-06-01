@@ -6,22 +6,24 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Review extends Model
 {
-    use HasUuids;
+    use HasUuids, SoftDeletes;
     protected $table = 'reviews';
 
     protected $fillable = [
-        'contract_id', 'reviewer_id', 'reviewed_id',
-        'rating', 'rating_quality', 'rating_delay', 'rating_communication',
-        'comment', 'is_public',
+        'contract_id', 'reviewer_id', 'reviewee_id',
+        'rating', 'comment', 'criteria_ratings', 'is_flagged',
     ];
 
     protected function casts(): array
     {
         return [
-            'is_public' => 'boolean',
+            'rating' => 'integer',
+            'criteria_ratings' => 'array',
+            'is_flagged' => 'boolean',
         ];
     }
 
@@ -35,9 +37,9 @@ class Review extends Model
         return $this->belongsTo(User::class, 'reviewer_id');
     }
 
-    public function reviewed(): BelongsTo
+    public function reviewee(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'reviewed_id');
+        return $this->belongsTo(User::class, 'reviewee_id');
     }
 
     public function reply(): HasOne

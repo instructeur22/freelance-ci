@@ -20,12 +20,15 @@ class NotificationController extends ApiController
         tags: ['Notifications'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'List of notifications')]
+    #[OA\Response(response: 200, description: 'List of notifications', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/Notification')),
+        new OA\Property(property: 'meta', ref: '#/components/schemas/PaginationMeta'),
+    ]))]
     public function index(Request $request): JsonResponse
     {
         $notifications = $this->notificationService->listForUser($request->user());
 
-        return $this->success($notifications);
+        return $this->paginated($notifications);
     }
 
     #[OA\Put(
@@ -35,8 +38,13 @@ class NotificationController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Notification ID')]
-    #[OA\Response(response: 200, description: 'Notification marked as read')]
-    #[OA\Response(response: 404, description: 'Notification not found')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: []))]
+    #[OA\Response(response: 200, description: 'Notification marked as read', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Notification not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function markAsRead(string $id, Request $request): JsonResponse
     {
         $result = $this->notificationService->markAsRead($request->user(), $id);
@@ -54,7 +62,9 @@ class NotificationController extends ApiController
         tags: ['Notifications'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'All notifications marked as read')]
+    #[OA\Response(response: 200, description: 'All notifications marked as read', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function markAllAsRead(Request $request): JsonResponse
     {
         $this->notificationService->markAllAsRead($request->user());
@@ -69,8 +79,12 @@ class NotificationController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Notification ID')]
-    #[OA\Response(response: 200, description: 'Notification deleted')]
-    #[OA\Response(response: 404, description: 'Notification not found')]
+    #[OA\Response(response: 200, description: 'Notification deleted', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Notification not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function destroy(string $id, Request $request): JsonResponse
     {
         $result = $this->notificationService->delete($request->user(), $id);

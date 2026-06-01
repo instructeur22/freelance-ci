@@ -13,29 +13,32 @@ class FreelanceSubscription extends Model
     protected $table = 'freelance_subscriptions';
 
     protected $fillable = [
-        'freelance_id', 'plan', 'status', 'price_xof',
-        'started_at', 'expires_at', 'cancelled_at', 'payment_id',
+        'freelance_profile_id', 'plan_id', 'status',
+        'started_at', 'ends_at', 'trial_ends_at',
+        'billing_cycle', 'amount_paid', 'payment_reference',
+        'auto_renew', 'cancelled_at',
     ];
 
     protected function casts(): array
     {
         return [
-            'plan' => SubscriptionPlan::class,
             'status' => SubscriptionStatus::class,
-            'price_xof' => 'decimal:2',
+            'amount_paid' => 'decimal:2',
             'started_at' => 'datetime',
-            'expires_at' => 'datetime',
+            'ends_at' => 'datetime',
+            'trial_ends_at' => 'datetime',
             'cancelled_at' => 'datetime',
+            'auto_renew' => 'boolean',
         ];
     }
 
-    public function freelance(): BelongsTo
+    public function freelanceProfile(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'freelance_id');
+        return $this->belongsTo(FreelanceProfile::class, 'freelance_profile_id');
     }
 
-    public function payment(): BelongsTo
+    public function planConfig(): BelongsTo
     {
-        return $this->belongsTo(Payment::class, 'payment_id');
+        return $this->belongsTo(SubscriptionPlanConfig::class, 'plan_id');
     }
 }

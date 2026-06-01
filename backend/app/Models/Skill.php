@@ -13,24 +13,17 @@ class Skill extends Model
     protected $table = 'skills';
 
     protected $fillable = [
-        'name', 'category_id', 'is_active',
+        'name', 'category_id',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'is_active' => 'boolean',
-        ];
-    }
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(JobCategory::class, 'category_id');
     }
 
-    public function freelancers(): BelongsToMany
+    public function freelanceProfiles(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'freelance_skills', 'skill_id', 'freelance_id')
-            ->withPivot('level');
+        return $this->belongsToMany(FreelanceProfile::class, 'freelance_skills', 'skill_id', 'freelance_profile_id')
+            ->withPivot('proficiency_level');
     }
 }

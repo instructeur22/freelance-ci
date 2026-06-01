@@ -20,7 +20,10 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Full profile data')]
+    #[OA\Response(response: 200, description: 'Full profile data', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/User'),
+    ]))]
     public function me(Request $request): JsonResponse
     {
         $profile = $this->profileService->getFullProfile($request->user());
@@ -34,7 +37,15 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Profile updated')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'phone', type: 'string', nullable: true),
+        new OA\Property(property: 'bio', type: 'string', nullable: true),
+        new OA\Property(property: 'avatar_url', type: 'string', nullable: true),
+    ]))]
+    #[OA\Response(response: 200, description: 'Profile updated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Profile'),
+    ]))]
     public function updateMe(Request $request): JsonResponse
     {
         $profile = $this->profileService->updateCommonProfile($request->user(), $request->all());
@@ -48,7 +59,10 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Client profile data')]
+    #[OA\Response(response: 200, description: 'Client profile data', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/ClientProfile'),
+    ]))]
     public function clientProfile(Request $request): JsonResponse
     {
         $profile = $this->profileService->getClientProfile($request->user());
@@ -62,7 +76,15 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Client profile updated')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'company_name', type: 'string', nullable: true),
+        new OA\Property(property: 'company_website', type: 'string', nullable: true),
+        new OA\Property(property: 'company_description', type: 'string', nullable: true),
+    ]))]
+    #[OA\Response(response: 200, description: 'Client profile updated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/ClientProfile'),
+    ]))]
     public function updateClientProfile(Request $request): JsonResponse
     {
         $profile = $this->profileService->updateClientProfile($request->user(), $request->all());
@@ -76,7 +98,10 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Freelance profile data')]
+    #[OA\Response(response: 200, description: 'Freelance profile data', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/FreelanceProfile'),
+    ]))]
     public function freelanceProfile(Request $request): JsonResponse
     {
         $profile = $this->profileService->getFreelanceProfile($request->user());
@@ -90,7 +115,17 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Freelance profile updated')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'title', type: 'string', nullable: true),
+        new OA\Property(property: 'description', type: 'string', nullable: true),
+        new OA\Property(property: 'hourly_rate', type: 'number', nullable: true),
+        new OA\Property(property: 'availability', type: 'string', nullable: true),
+        new OA\Property(property: 'languages', type: 'array', items: new OA\Items(type: 'string'), nullable: true),
+    ]))]
+    #[OA\Response(response: 200, description: 'Freelance profile updated', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/FreelanceProfile'),
+    ]))]
     public function updateFreelanceProfile(Request $request): JsonResponse
     {
         $profile = $this->profileService->updateFreelanceProfile($request->user(), $request->all());
@@ -104,7 +139,12 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'Skill added')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'skill_id', type: 'string', format: 'uuid'),
+    ]))]
+    #[OA\Response(response: 200, description: 'Skill added', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function addSkill(Request $request): JsonResponse
     {
         $result = $this->profileService->addSkill($request->user(), $request->all());
@@ -119,8 +159,12 @@ class ProfileController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'skill', in: 'path', required: true, description: 'Skill ID')]
-    #[OA\Response(response: 200, description: 'Skill removed')]
-    #[OA\Response(response: 404, description: 'Skill not found')]
+    #[OA\Response(response: 200, description: 'Skill removed', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Skill not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function removeSkill(string $skill, Request $request): JsonResponse
     {
         $result = $this->profileService->removeSkill($request->user(), $skill);
@@ -138,7 +182,15 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 201, description: 'Portfolio item added')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'title', type: 'string'),
+        new OA\Property(property: 'description', type: 'string', nullable: true),
+        new OA\Property(property: 'link', type: 'string', nullable: true),
+    ]))]
+    #[OA\Response(response: 201, description: 'Portfolio item added', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/PortfolioItem'),
+    ]))]
     public function addPortfolioItem(Request $request): JsonResponse
     {
         $item = $this->profileService->addPortfolioItem($request->user(), $request->all());
@@ -153,8 +205,12 @@ class ProfileController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'item', in: 'path', required: true, description: 'Portfolio item ID')]
-    #[OA\Response(response: 200, description: 'Portfolio item removed')]
-    #[OA\Response(response: 404, description: 'Portfolio item not found')]
+    #[OA\Response(response: 200, description: 'Portfolio item removed', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Portfolio item not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function removePortfolioItem(string $item, Request $request): JsonResponse
     {
         $result = $this->profileService->removePortfolioItem($request->user(), $item);
@@ -171,12 +227,15 @@ class ProfileController extends ApiController
         summary: 'List all freelances (public)',
         tags: ['Profiles'],
     )]
-    #[OA\Response(response: 200, description: 'List of freelances')]
+    #[OA\Response(response: 200, description: 'List of freelances', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/User')),
+        new OA\Property(property: 'meta', ref: '#/components/schemas/PaginationMeta'),
+    ]))]
     public function freelanceList(Request $request): JsonResponse
     {
         $freelances = $this->profileService->listFreelances($request->all());
 
-        return $this->success($freelances);
+        return $this->paginated($freelances);
     }
 
     #[OA\Get(
@@ -185,8 +244,13 @@ class ProfileController extends ApiController
         tags: ['Profiles'],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Freelance user ID')]
-    #[OA\Response(response: 200, description: 'Freelance detail')]
-    #[OA\Response(response: 404, description: 'Freelance not found')]
+    #[OA\Response(response: 200, description: 'Freelance detail', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/User'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Freelance not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function freelanceDetail(string $id): JsonResponse
     {
         $freelance = $this->profileService->getFreelanceDetail($id);

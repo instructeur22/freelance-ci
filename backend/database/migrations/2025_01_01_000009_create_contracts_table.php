@@ -9,8 +9,12 @@ return new class extends Migration
 {
     public function up(): void
     {
-        DB::statement("DROP TYPE IF EXISTS contract_status CASCADE");
-        DB::statement("CREATE TYPE contract_status AS ENUM ('draft', 'signed', 'completed', 'cancelled')");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS contract_status CASCADE");
+        }
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("CREATE TYPE contract_status AS ENUM ('draft', 'signed', 'completed', 'cancelled')");
+        }
 
         Schema::create('contracts', function (Blueprint $table) {
             $table->uuid('id')->primary();
@@ -52,6 +56,8 @@ return new class extends Migration
     {
         Schema::dropIfExists('milestones');
         Schema::dropIfExists('contracts');
-        DB::statement("DROP TYPE IF EXISTS contract_status CASCADE");
+        if (DB::connection()->getDriverName() !== 'sqlite') {
+            DB::statement("DROP TYPE IF EXISTS contract_status CASCADE");
+        }
     }
 };

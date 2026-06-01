@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-    use HasUuids;
+    use HasUuids, SoftDeletes;
     protected $table = 'messages';
 
     protected $fillable = [
         'conversation_id', 'sender_id', 'content',
-        'status', 'delivered_at', 'read_at',
+        'status', 'read_at',
     ];
 
     protected function casts(): array
     {
         return [
             'status' => MessageStatus::class,
-            'delivered_at' => 'datetime',
             'read_at' => 'datetime',
         ];
     }

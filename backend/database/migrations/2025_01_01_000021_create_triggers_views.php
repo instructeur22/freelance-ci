@@ -7,6 +7,10 @@ return new class extends Migration
 {
     public function up(): void
     {
+        if (DB::connection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         // Trigger: set_updated_at
         DB::statement("
             CREATE OR REPLACE FUNCTION set_updated_at()
@@ -270,6 +274,10 @@ return new class extends Migration
 
     public function down(): void
     {
+        if (DB::connection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         DB::statement("DROP VIEW IF EXISTS v_genius_pay_monitoring");
         DB::statement("DROP VIEW IF EXISTS v_monthly_revenue");
         DB::statement("DROP VIEW IF EXISTS v_admin_dashboard");

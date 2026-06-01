@@ -20,12 +20,15 @@ class MessageController extends ApiController
         tags: ['Messaging'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 200, description: 'List of conversations')]
+    #[OA\Response(response: 200, description: 'List of conversations', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/Conversation')),
+        new OA\Property(property: 'meta', ref: '#/components/schemas/PaginationMeta'),
+    ]))]
     public function conversations(Request $request): JsonResponse
     {
         $conversations = $this->messageService->listConversations($request->user());
 
-        return $this->success($conversations);
+        return $this->paginated($conversations);
     }
 
     #[OA\Post(
@@ -34,8 +37,16 @@ class MessageController extends ApiController
         tags: ['Messaging'],
         security: [['BearerToken' => []]],
     )]
-    #[OA\Response(response: 201, description: 'Conversation started')]
-    #[OA\Response(response: 400, description: 'Unable to start conversation')]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'participant_id', type: 'string', format: 'uuid', description: 'ID of the user to converse with'),
+    ]))]
+    #[OA\Response(response: 201, description: 'Conversation started', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Conversation'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to start conversation', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function startConversation(Request $request): JsonResponse
     {
         $conversation = $this->messageService->startConversation($request->user(), $request->all());
@@ -54,8 +65,13 @@ class MessageController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Conversation ID')]
-    #[OA\Response(response: 200, description: 'List of messages')]
-    #[OA\Response(response: 404, description: 'Conversation not found')]
+    #[OA\Response(response: 200, description: 'List of messages', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'data', type: 'array', items: new OA\Items(ref: '#/components/schemas/Message')),
+        new OA\Property(property: 'meta', ref: '#/components/schemas/PaginationMeta'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Conversation not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function messages(string $id, Request $request): JsonResponse
     {
         $messages = $this->messageService->getMessages($request->user(), $id);
@@ -64,7 +80,7 @@ class MessageController extends ApiController
             return $this->error('Conversation not found', 404);
         }
 
-        return $this->success($messages);
+        return $this->paginated($messages);
     }
 
     #[OA\Post(
@@ -74,8 +90,17 @@ class MessageController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Conversation ID')]
-    #[OA\Response(response: 201, description: 'Message sent')]
-    #[OA\Response(response: 400, description: 'Unable to send message')]
+    #[OA\RequestBody(content: new OA\MediaType(mediaType: 'multipart/form-data', schema: new OA\Schema(properties: [
+        new OA\Property(property: 'content', type: 'string'),
+        new OA\Property(property: 'file', type: 'string', format: 'binary', nullable: true),
+    ])))]
+    #[OA\Response(response: 201, description: 'Message sent', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/Message'),
+    ]))]
+    #[OA\Response(response: 400, description: 'Unable to send message', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function sendMessage(string $id, Request $request): JsonResponse
     {
         $message = $this->messageService->sendMessage($request->user(), $id, $request->all());
@@ -94,8 +119,12 @@ class MessageController extends ApiController
         security: [['BearerToken' => []]],
     )]
     #[OA\Parameter(name: 'id', in: 'path', required: true, description: 'Message ID')]
-    #[OA\Response(response: 200, description: 'Message marked as read')]
-    #[OA\Response(response: 404, description: 'Message not found')]
+    #[OA\Response(response: 200, description: 'Message marked as read', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
+    #[OA\Response(response: 404, description: 'Message not found', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+    ]))]
     public function markAsRead(string $id, Request $request): JsonResponse
     {
         $result = $this->messageService->markAsRead($request->user(), $id);

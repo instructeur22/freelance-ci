@@ -13,29 +13,25 @@ class PortfolioItem extends Model
     protected $table = 'portfolio_items';
 
     protected $fillable = [
-        'freelance_id', 'title', 'description', 'category_id',
-        'cover_url', 'project_url', 'tags', 'sort_order',
+        'freelance_profile_id', 'title', 'description', 'project_url',
+        'completed_date', 'is_featured', 'sort_order',
     ];
 
     protected function casts(): array
     {
         return [
-            'tags' => 'array',
+            'is_featured' => 'boolean',
+            'completed_date' => 'date',
         ];
     }
 
-    public function freelance(): BelongsTo
+    public function freelanceProfile(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'freelance_id');
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(JobCategory::class, 'category_id');
+        return $this->belongsTo(FreelanceProfile::class, 'freelance_profile_id');
     }
 
     public function files(): HasMany
     {
-        return $this->hasMany(PortfolioFile::class, 'item_id');
+        return $this->hasMany(PortfolioFile::class, 'portfolio_item_id');
     }
 }
