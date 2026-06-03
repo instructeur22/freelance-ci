@@ -26,13 +26,12 @@ return new class extends Migration
         });
 
         Schema::create('conversation_participants', function (Blueprint $table) {
-            $table->uuid('id')->primary();
             $table->foreignUuid('conversation_id')->constrained('conversations')->cascadeOnDelete();
             $table->foreignUuid('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamp('last_read_at')->nullable();
             $table->boolean('is_muted')->default(false);
             $table->timestamps();
-            $table->unique(['conversation_id', 'user_id']);
+            $table->primary(['conversation_id', 'user_id']);
         });
 
         Schema::create('messages', function (Blueprint $table) {

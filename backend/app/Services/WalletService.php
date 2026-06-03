@@ -12,7 +12,7 @@ class WalletService
     {
         return Wallet::firstOrCreate(
             ["user_id" => $user->id],
-            ["balance" => 0, "pending_balance" => 0, "total_earned" => 0]
+            ["available_xof" => 0, "pending_xof" => 0, "total_earned_xof" => 0]
         );
     }
 
@@ -28,17 +28,17 @@ class WalletService
     {
         $wallet = $this->getWallet($user);
         $amount = (float) ($data["amount"] ?? 0);
-        if ($amount <= 0 || $amount > $wallet->balance) {
+        if ($amount <= 0 || $amount > $wallet->available_xof) {
             return false;
         }
         return \DB::transaction(function () use ($user, $wallet, $amount, $data) {
-            $wallet->decrement("balance", $amount);
-            $wallet->increment("pending_balance", $amount);
+            $wallet->decrement("available_xof", $amount);
+            $wallet->increment("pending_xof", $amount);
             return WithdrawalRequest::create([
                 "wallet_id" => $wallet->id,
                 "user_id" => $user->id,
                 "amount" => $amount,
-                "method" => $data["method"],
+                "withdrawal_method" => $data["method"],
                 "account_identifier" => $data["account_identifier"] ?? null,
             ]);
         });

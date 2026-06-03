@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Models;
-use App\Enums\DisputeStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Enums\DisputeStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Dispute extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'disputes';
 
     protected $fillable = [
@@ -31,6 +32,11 @@ class Dispute extends Model
     }
 
     public function raisedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'raised_by');
+    }
+
+    public function openedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'raised_by');
     }

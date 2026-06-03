@@ -1,0 +1,1130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="C:\wamp64\www\freelance-ci\backend\phpunit.xml" tests="169" assertions="286" errors="15" failures="19" skipped="0" time="30.072023">
+    <testsuite name="Unit" tests="90" assertions="164" errors="11" failures="4" skipped="0" time="16.480476">
+      <testsuite name="Tests\Unit\Services\AdminServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" tests="9" assertions="20" errors="0" failures="0" skipped="0" time="3.810977">
+        <testcase name="test_updateUserStatus_changes_status" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="39" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="2.608049"/>
+        <testcase name="test_approveVerification_approves_verification" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="50" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="0.130760"/>
+        <testcase name="test_rejectVerification_rejects_verification" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="60" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="3" time="0.129966"/>
+        <testcase name="test_resolveDispute_resolves_dispute" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="71" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="0.244642"/>
+        <testcase name="test_resolveReport_resolves_report" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="85" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="0.138411"/>
+        <testcase name="test_updateSetting_updates_platform_setting" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="99" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="0.113488"/>
+        <testcase name="test_grantBadge_grants_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="113" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="3" time="0.152423"/>
+        <testcase name="test_revokeBadge_revokes_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="124" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="0.151438"/>
+        <testcase name="test_revokeBoost_revokes_boost" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AdminServiceTest.php" line="134" class="Tests\Unit\Services\AdminServiceTest" classname="Tests.Unit.Services.AdminServiceTest" assertions="2" time="0.141799"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\AuthServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" tests="6" assertions="11" errors="0" failures="0" skipped="0" time="0.851324">
+        <testcase name="test_can_instantiate" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" line="26" class="Tests\Unit\Services\AuthServiceTest" classname="Tests.Unit.Services.AuthServiceTest" assertions="1" time="0.103435"/>
+        <testcase name="test_register_creates_user" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" line="31" class="Tests\Unit\Services\AuthServiceTest" classname="Tests.Unit.Services.AuthServiceTest" assertions="5" time="0.163644"/>
+        <testcase name="test_register_creates_referral_code" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" line="48" class="Tests\Unit\Services\AuthServiceTest" classname="Tests.Unit.Services.AuthServiceTest" assertions="1" time="0.148319"/>
+        <testcase name="test_register_with_referral_code_tracks_referral" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" line="63" class="Tests\Unit\Services\AuthServiceTest" classname="Tests.Unit.Services.AuthServiceTest" assertions="1" time="0.173261"/>
+        <testcase name="test_findOrCreateFromSupabase_creates_new_user" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" line="83" class="Tests\Unit\Services\AuthServiceTest" classname="Tests.Unit.Services.AuthServiceTest" assertions="2" time="0.139244"/>
+        <testcase name="test_findOrCreateFromSupabase_returns_existing_user" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\AuthServiceTest.php" line="95" class="Tests\Unit\Services\AuthServiceTest" classname="Tests.Unit.Services.AuthServiceTest" assertions="1" time="0.123421"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\BadgeServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" tests="6" assertions="9" errors="1" failures="0" skipped="0" time="0.884506">
+        <testcase name="test_getBadgePrice_returns_price_from_settings" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" line="38" class="Tests\Unit\Services\BadgeServiceTest" classname="Tests.Unit.Services.BadgeServiceTest" assertions="1" time="0.111042"/>
+        <testcase name="test_activate_creates_active_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" line="45" class="Tests\Unit\Services\BadgeServiceTest" classname="Tests.Unit.Services.BadgeServiceTest" assertions="3" time="0.139774"/>
+        <testcase name="test_purchase_initiates_payment" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" line="57" class="Tests\Unit\Services\BadgeServiceTest" classname="Tests.Unit.Services.BadgeServiceTest" assertions="0" time="0.189767">
+          <error type="Symfony\Component\Routing\Exception\RouteNotFoundException">Tests\Unit\Services\BadgeServiceTest::test_purchase_initiates_payment&#13;
+Symfony\Component\Routing\Exception\RouteNotFoundException: Route [api.v1.payments.callback] not defined.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\UrlGenerator.php:546
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php:870
+C:\wamp64\www\freelance-ci\backend\app\Services\PaymentService.php:111
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Concerns\ManagesTransactions.php:35
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\DatabaseManager.php:496
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:363
+C:\wamp64\www\freelance-ci\backend\app\Services\PaymentService.php:89
+C:\wamp64\www\freelance-ci\backend\app\Services\BadgeService.php:44
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php:71</error>
+        </testcase>
+        <testcase name="test_revoke_deactivates_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" line="77" class="Tests\Unit\Services\BadgeServiceTest" classname="Tests.Unit.Services.BadgeServiceTest" assertions="2" time="0.157498"/>
+        <testcase name="test_getActiveBadge_returns_active_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" line="92" class="Tests\Unit\Services\BadgeServiceTest" classname="Tests.Unit.Services.BadgeServiceTest" assertions="2" time="0.142765"/>
+        <testcase name="test_getActiveBadge_returns_null_when_expired" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BadgeServiceTest.php" line="108" class="Tests\Unit\Services\BadgeServiceTest" classname="Tests.Unit.Services.BadgeServiceTest" assertions="1" time="0.143661"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\BoostServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php" tests="4" assertions="6" errors="1" failures="1" skipped="0" time="0.525210">
+        <testcase name="test_getBoostPrice_returns_correct_price" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php" line="40" class="Tests\Unit\Services\BoostServiceTest" classname="Tests.Unit.Services.BoostServiceTest" assertions="1" time="0.105717"/>
+        <testcase name="test_activate_creates_active_boost" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php" line="47" class="Tests\Unit\Services\BoostServiceTest" classname="Tests.Unit.Services.BoostServiceTest" assertions="3" time="0.145060">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Unit\Services\BoostServiceTest::test_activate_creates_active_boost&#13;
+null does not match expected type "object".
+&#13;
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php:56</failure>
+        </testcase>
+        <testcase name="test_activate_deactivates_previous_same_type_boosts" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php" line="60" class="Tests\Unit\Services\BoostServiceTest" classname="Tests.Unit.Services.BoostServiceTest" assertions="0" time="0.139371">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\Services\BoostServiceTest::test_activate_deactivates_previous_same_type_boosts&#13;
+Illuminate\Database\QueryException: SQLSTATE[HY000]: General error: 1 table boosts has no column named target_type (Connection: sqlite, Database: :memory:, SQL: insert into "boosts" ("freelance_profile_id", "target", "target_id", "duration", "amount_paid", "payment_reference", "is_active", "started_at", "ends_at", "target_type", "id", "updated_at", "created_at") values (019e8822-56f2-723e-8d40-a4f9ec258d82, profile, ?, 7_days, 9440.99, PAY-a9fe415e-2d1e-3d14-ab9e-0312cfc63696, 1, 2026-06-02 11:40:12, 2026-06-23 02:47:06, profile, 019e8822-56f7-71ad-a5b7-93856a0962df, 2026-06-02 11:40:12, 2026-06-02 11:40:12))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:797
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:576
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:540
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4158
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2271
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1587
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1380
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:379
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:275
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:374
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:330
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:324
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php:65</error>
+        </testcase>
+        <testcase name="test_revoke_deactivates_boost" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\BoostServiceTest.php" line="76" class="Tests\Unit\Services\BoostServiceTest" classname="Tests.Unit.Services.BoostServiceTest" assertions="2" time="0.135061"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\CategoryServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\CategoryServiceTest.php" tests="4" assertions="9" errors="0" failures="0" skipped="0" time="0.479159">
+        <testcase name="test_listAll_returns_all_categories" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\CategoryServiceTest.php" line="23" class="Tests\Unit\Services\CategoryServiceTest" classname="Tests.Unit.Services.CategoryServiceTest" assertions="2" time="0.136152"/>
+        <testcase name="test_getSkills_returns_skills_for_category" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\CategoryServiceTest.php" line="30" class="Tests\Unit\Services\CategoryServiceTest" classname="Tests.Unit.Services.CategoryServiceTest" assertions="4" time="0.115832"/>
+        <testcase name="test_getSkills_returns_null_for_invalid_uuid" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\CategoryServiceTest.php" line="41" class="Tests\Unit\Services\CategoryServiceTest" classname="Tests.Unit.Services.CategoryServiceTest" assertions="1" time="0.107531"/>
+        <testcase name="test_getSkills_returns_empty_collection_for_category_with_no_skills" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\CategoryServiceTest.php" line="48" class="Tests\Unit\Services\CategoryServiceTest" classname="Tests.Unit.Services.CategoryServiceTest" assertions="2" time="0.119644"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\ContractServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" tests="7" assertions="17" errors="0" failures="1" skipped="0" time="1.226971">
+        <testcase name="test_can_instantiate" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="27" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="2" time="0.110647"/>
+        <testcase name="test_createContract_creates_contract_from_data" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="33" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="3" time="0.192588">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Unit\Services\ContractServiceTest::test_createContract_creates_contract_from_data&#13;
+null does not match expected type "object".
+&#13;
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php:54</failure>
+        </testcase>
+        <testcase name="test_sign_contract_sets_signed_at" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="57" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="2" time="0.177483"/>
+        <testcase name="test_sign_contract_activates_when_both_signed" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="76" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="2" time="0.177180"/>
+        <testcase name="test_addMilestone_adds_milestone_to_contract" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="96" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="3" time="0.182792"/>
+        <testcase name="test_deliverMilestone_marks_milestone_as_delivered" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="120" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="3" time="0.193124"/>
+        <testcase name="test_validateMilestone_validates_delivered_milestone" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ContractServiceTest.php" line="142" class="Tests\Unit\Services\ContractServiceTest" classname="Tests.Unit.Services.ContractServiceTest" assertions="2" time="0.193157"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\EscrowServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php" tests="3" assertions="0" errors="3" failures="0" skipped="0" time="0.880987">
+        <testcase name="test_holdFunds_creates_escrow" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php" line="25" class="Tests\Unit\Services\EscrowServiceTest" classname="Tests.Unit.Services.EscrowServiceTest" assertions="0" time="0.217955">
+          <error type="Illuminate\Database\Eloquent\ModelNotFoundException">Tests\Unit\Services\EscrowServiceTest::test_holdFunds_creates_escrow&#13;
+Illuminate\Database\Eloquent\ModelNotFoundException: No query results for model [App\Models\Wallet].
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:786
+C:\wamp64\www\freelance-ci\backend\app\Services\EscrowService.php:28
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Concerns\ManagesTransactions.php:35
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\DatabaseManager.php:496
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:363
+C:\wamp64\www\freelance-ci\backend\app\Services\EscrowService.php:16
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php:29</error>
+        </testcase>
+        <testcase name="test_releaseFunds_releases_escrow" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php" line="37" class="Tests\Unit\Services\EscrowServiceTest" classname="Tests.Unit.Services.EscrowServiceTest" assertions="0" time="0.332547">
+          <error type="Illuminate\Database\Eloquent\ModelNotFoundException">Tests\Unit\Services\EscrowServiceTest::test_releaseFunds_releases_escrow&#13;
+Illuminate\Database\Eloquent\ModelNotFoundException: No query results for model [App\Models\Wallet].
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:786
+C:\wamp64\www\freelance-ci\backend\app\Services\EscrowService.php:57
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Concerns\ManagesTransactions.php:35
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\DatabaseManager.php:496
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:363
+C:\wamp64\www\freelance-ci\backend\app\Services\EscrowService.php:50
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php:47</error>
+        </testcase>
+        <testcase name="test_refundFunds_refunds_escrow" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php" line="54" class="Tests\Unit\Services\EscrowServiceTest" classname="Tests.Unit.Services.EscrowServiceTest" assertions="0" time="0.330486">
+          <error type="Illuminate\Database\Eloquent\ModelNotFoundException">Tests\Unit\Services\EscrowServiceTest::test_refundFunds_refunds_escrow&#13;
+Illuminate\Database\Eloquent\ModelNotFoundException: No query results for model [App\Models\Wallet].
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:786
+C:\wamp64\www\freelance-ci\backend\app\Services\EscrowService.php:83
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Concerns\ManagesTransactions.php:35
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\DatabaseManager.php:496
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:363
+C:\wamp64\www\freelance-ci\backend\app\Services\EscrowService.php:76
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\EscrowServiceTest.php:64</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\GeniusPayServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\GeniusPayServiceTest.php" tests="5" assertions="9" errors="0" failures="0" skipped="0" time="0.587590">
+        <testcase name="test_createTransaction_sends_request_and_returns_response" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\GeniusPayServiceTest.php" line="25" class="Tests\Unit\Services\GeniusPayServiceTest" classname="Tests.Unit.Services.GeniusPayServiceTest" assertions="4" time="0.149523"/>
+        <testcase name="test_createTransaction_throws_on_failure" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\GeniusPayServiceTest.php" line="50" class="Tests\Unit\Services\GeniusPayServiceTest" classname="Tests.Unit.Services.GeniusPayServiceTest" assertions="1" time="0.134416"/>
+        <testcase name="test_verifyWebhookSignature_validates_correctly" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\GeniusPayServiceTest.php" line="65" class="Tests\Unit\Services\GeniusPayServiceTest" classname="Tests.Unit.Services.GeniusPayServiceTest" assertions="1" time="0.100702"/>
+        <testcase name="test_verifyWebhookSignature_rejects_invalid" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\GeniusPayServiceTest.php" line="77" class="Tests\Unit\Services\GeniusPayServiceTest" classname="Tests.Unit.Services.GeniusPayServiceTest" assertions="1" time="0.104420"/>
+        <testcase name="test_checkTransactionStatus_returns_status" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\GeniusPayServiceTest.php" line="86" class="Tests\Unit\Services\GeniusPayServiceTest" classname="Tests.Unit.Services.GeniusPayServiceTest" assertions="2" time="0.098528"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\MessageServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\MessageServiceTest.php" tests="3" assertions="8" errors="0" failures="0" skipped="0" time="0.548323">
+        <testcase name="test_startConversation_creates_conversation" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\MessageServiceTest.php" line="26" class="Tests\Unit\Services\MessageServiceTest" classname="Tests.Unit.Services.MessageServiceTest" assertions="3" time="0.175989"/>
+        <testcase name="test_sendMessage_creates_message" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\MessageServiceTest.php" line="42" class="Tests\Unit\Services\MessageServiceTest" classname="Tests.Unit.Services.MessageServiceTest" assertions="3" time="0.200328"/>
+        <testcase name="test_markAsRead_updates_message" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\MessageServiceTest.php" line="59" class="Tests\Unit\Services\MessageServiceTest" classname="Tests.Unit.Services.MessageServiceTest" assertions="2" time="0.172006"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\NotificationServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\NotificationServiceTest.php" tests="4" assertions="8" errors="0" failures="0" skipped="0" time="0.510644">
+        <testcase name="test_createNotification_creates_notification" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\NotificationServiceTest.php" line="23" class="Tests\Unit\Services\NotificationServiceTest" classname="Tests.Unit.Services.NotificationServiceTest" assertions="3" time="0.117093"/>
+        <testcase name="test_markAsRead_sets_read_at" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\NotificationServiceTest.php" line="40" class="Tests\Unit\Services\NotificationServiceTest" classname="Tests.Unit.Services.NotificationServiceTest" assertions="2" time="0.134282"/>
+        <testcase name="test_markAllAsRead_marks_all" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\NotificationServiceTest.php" line="54" class="Tests\Unit\Services\NotificationServiceTest" classname="Tests.Unit.Services.NotificationServiceTest" assertions="1" time="0.132938"/>
+        <testcase name="test_delete_removes_notification" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\NotificationServiceTest.php" line="67" class="Tests\Unit\Services\NotificationServiceTest" classname="Tests.Unit.Services.NotificationServiceTest" assertions="2" time="0.126330"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\PaymentServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php" tests="4" assertions="7" errors="0" failures="2" skipped="0" time="0.662987">
+        <testcase name="test_initiate_creates_transaction_and_payment" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php" line="40" class="Tests\Unit\Services\PaymentServiceTest" classname="Tests.Unit.Services.PaymentServiceTest" assertions="1" time="0.143613">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Unit\Services\PaymentServiceTest::test_initiate_creates_transaction_and_payment&#13;
+Failed asserting that null is of type array.
+&#13;
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php:61</failure>
+        </testcase>
+        <testcase name="test_confirm_payment_updates_status" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php" line="73" class="Tests\Unit\Services\PaymentServiceTest" classname="Tests.Unit.Services.PaymentServiceTest" assertions="2" time="0.159597">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Unit\Services\PaymentServiceTest::test_confirm_payment_updates_status&#13;
+App\Enums\PaymentStatus Enum (Released, 'released') does not match expected type "string".
+&#13;
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php:84</failure>
+        </testcase>
+        <testcase name="test_handleWebhook_processes_successful_payment" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php" line="91" class="Tests\Unit\Services\PaymentServiceTest" classname="Tests.Unit.Services.PaymentServiceTest" assertions="3" time="0.253756"/>
+        <testcase name="test_handleWebhook_rejects_invalid_signature" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\PaymentServiceTest.php" line="139" class="Tests\Unit\Services\PaymentServiceTest" classname="Tests.Unit.Services.PaymentServiceTest" assertions="1" time="0.106020"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\ProfileServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" tests="8" assertions="13" errors="1" failures="0" skipped="0" time="1.144175">
+        <testcase name="test_getFullProfile_returns_user_with_relations" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="27" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="2" time="0.161087"/>
+        <testcase name="test_updateCommonProfile_creates_profile_if_not_exists" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="38" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="3" time="0.124920"/>
+        <testcase name="test_updateCommonProfile_updates_existing" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="52" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="1" time="0.125465"/>
+        <testcase name="test_getFreelanceProfile_returns_null_when_not_freelance" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="64" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="1" time="0.118341"/>
+        <testcase name="test_getFreelanceProfile_returns_profile_when_exists" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="73" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="1" time="0.127020"/>
+        <testcase name="test_listFreelances_returns_paginated_results" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="83" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="3" time="0.204680"/>
+        <testcase name="test_addSkill_adds_skill_to_freelance" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="94" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="0" time="0.155692">
+          <error type="Illuminate\Database\QueryException">Tests\Unit\Services\ProfileServiceTest::test_addSkill_adds_skill_to_freelance&#13;
+Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: freelance_skills.id (Connection: sqlite, Database: :memory:, SQL: insert into "freelance_skills" ("freelance_id", "proficiency_level", "skill_id") values (019e8822-6f0a-707f-b7b3-d74b33c4b0ea, avance, 019e8822-6f1d-7180-8445-a0955f87baf3))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:797
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:576
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:540
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4158
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php:345
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php:243
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php:133
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php:88
+C:\wamp64\www\freelance-ci\backend\app\Services\ProfileService.php:65
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php:100</error>
+        </testcase>
+        <testcase name="test_addPortfolioItem_creates_item" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProfileServiceTest.php" line="111" class="Tests\Unit\Services\ProfileServiceTest" classname="Tests.Unit.Services.ProfileServiceTest" assertions="2" time="0.126969"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\ProjectServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProjectServiceTest.php" tests="5" assertions="11" errors="0" failures="0" skipped="0" time="0.807316">
+        <testcase name="test_list_returns_paginated_open_projects" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProjectServiceTest.php" line="26" class="Tests\Unit\Services\ProjectServiceTest" classname="Tests.Unit.Services.ProjectServiceTest" assertions="2" time="0.224914"/>
+        <testcase name="test_create_creates_project" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProjectServiceTest.php" line="37" class="Tests\Unit\Services\ProjectServiceTest" classname="Tests.Unit.Services.ProjectServiceTest" assertions="3" time="0.136205"/>
+        <testcase name="test_update_modifies_project" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProjectServiceTest.php" line="57" class="Tests\Unit\Services\ProjectServiceTest" classname="Tests.Unit.Services.ProjectServiceTest" assertions="2" time="0.160703"/>
+        <testcase name="test_delete_removes_project" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProjectServiceTest.php" line="70" class="Tests\Unit\Services\ProjectServiceTest" classname="Tests.Unit.Services.ProjectServiceTest" assertions="2" time="0.145262"/>
+        <testcase name="test_addFile_creates_file" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ProjectServiceTest.php" line="81" class="Tests\Unit\Services\ProjectServiceTest" classname="Tests.Unit.Services.ProjectServiceTest" assertions="2" time="0.140232"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\QuoteServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\QuoteServiceTest.php" tests="3" assertions="6" errors="1" failures="0" skipped="0" time="0.506118">
+        <testcase name="test_create_creates_quote" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\QuoteServiceTest.php" line="31" class="Tests\Unit\Services\QuoteServiceTest" classname="Tests.Unit.Services.QuoteServiceTest" assertions="0" time="0.163093">
+          <error type="TypeError">Tests\Unit\Services\QuoteServiceTest::test_create_creates_quote&#13;
+TypeError: App\Models\User::subscription(): Return value must be of type Illuminate\Database\Eloquent\Relations\HasOne, Illuminate\Database\Eloquent\Relations\HasOneThrough returned
+&#13;
+C:\wamp64\www\freelance-ci\backend\app\Models\User.php:171
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php:637
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php:587
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php:506
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:2690
+C:\wamp64\www\freelance-ci\backend\app\Services\QuoteService.php:189
+C:\wamp64\www\freelance-ci\backend\app\Services\QuoteService.php:102
+C:\wamp64\www\freelance-ci\backend\app\Services\QuoteService.php:73
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\QuoteServiceTest.php:36</error>
+        </testcase>
+        <testcase name="test_accept_creates_contract" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\QuoteServiceTest.php" line="48" class="Tests\Unit\Services\QuoteServiceTest" classname="Tests.Unit.Services.QuoteServiceTest" assertions="4" time="0.182100"/>
+        <testcase name="test_refuse_rejects_quote" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\QuoteServiceTest.php" line="67" class="Tests\Unit\Services\QuoteServiceTest" classname="Tests.Unit.Services.QuoteServiceTest" assertions="2" time="0.160925"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\ReferralServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" tests="6" assertions="12" errors="0" failures="0" skipped="0" time="0.846266">
+        <testcase name="test_getOrCreateCode_creates_code" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" line="26" class="Tests\Unit\Services\ReferralServiceTest" classname="Tests.Unit.Services.ReferralServiceTest" assertions="2" time="0.118071"/>
+        <testcase name="test_getOrCreateCode_returns_existing_code" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" line="36" class="Tests\Unit\Services\ReferralServiceTest" classname="Tests.Unit.Services.ReferralServiceTest" assertions="1" time="0.133569"/>
+        <testcase name="test_trackReferral_creates_referral" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" line="46" class="Tests\Unit\Services\ReferralServiceTest" classname="Tests.Unit.Services.ReferralServiceTest" assertions="5" time="0.137126"/>
+        <testcase name="test_trackReferral_prevents_self_referral" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" line="61" class="Tests\Unit\Services\ReferralServiceTest" classname="Tests.Unit.Services.ReferralServiceTest" assertions="1" time="0.120183"/>
+        <testcase name="test_getReferralStats_returns_correct_counts" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" line="71" class="Tests\Unit\Services\ReferralServiceTest" classname="Tests.Unit.Services.ReferralServiceTest" assertions="2" time="0.233810"/>
+        <testcase name="test_getRewardAmount_returns_setting_value" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReferralServiceTest.php" line="91" class="Tests\Unit\Services\ReferralServiceTest" classname="Tests.Unit.Services.ReferralServiceTest" assertions="1" time="0.103507"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\ReviewServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReviewServiceTest.php" tests="3" assertions="2" errors="2" failures="0" skipped="0" time="0.846327">
+        <testcase name="test_createReview_creates_review" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReviewServiceTest.php" line="25" class="Tests\Unit\Services\ReviewServiceTest" classname="Tests.Unit.Services.ReviewServiceTest" assertions="0" time="0.241984">
+          <error type="Symfony\Component\HttpKernel\Exception\HttpException">Tests\Unit\Services\ReviewServiceTest::test_createReview_creates_review&#13;
+Symfony\Component\HttpKernel\Exception\HttpException: Vous n'\u00eates pas partie prenante de ce contrat.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:1440
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php:67
+C:\wamp64\www\freelance-ci\backend\app\Services\ReviewService.php:47
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReviewServiceTest.php:30</error>
+        </testcase>
+        <testcase name="test_replyToReview_creates_reply" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReviewServiceTest.php" line="41" class="Tests\Unit\Services\ReviewServiceTest" classname="Tests.Unit.Services.ReviewServiceTest" assertions="0" time="0.237018">
+          <error type="Symfony\Component\HttpKernel\Exception\HttpException">Tests\Unit\Services\ReviewServiceTest::test_replyToReview_creates_reply&#13;
+Symfony\Component\HttpKernel\Exception\HttpException: Vous ne pouvez pas r\u00e9pondre \u00e0 cet avis.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:1440
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php:67
+C:\wamp64\www\freelance-ci\backend\app\Services\ReviewService.php:79
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReviewServiceTest.php:46</error>
+        </testcase>
+        <testcase name="test_listForFreelance_returns_paginated_reviews" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\ReviewServiceTest.php" line="53" class="Tests\Unit\Services\ReviewServiceTest" classname="Tests.Unit.Services.ReviewServiceTest" assertions="2" time="0.367325"/>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\SubscriptionServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php" tests="5" assertions="7" errors="2" failures="0" skipped="0" time="0.735349">
+        <testcase name="test_getPlans_returns_active_plans" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php" line="41" class="Tests\Unit\Services\SubscriptionServiceTest" classname="Tests.Unit.Services.SubscriptionServiceTest" assertions="0" time="0.121856">
+          <error type="ValueError">Tests\Unit\Services\SubscriptionServiceTest::test_getPlans_returns_active_plans&#13;
+ValueError: "plan_sw7956" is not a valid backing value for enum App\Enums\SubscriptionPlan
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php:1317
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php:1302
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php:1101
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:689
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:321
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:945
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:522
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\GuardsAttributes.php:185
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:521
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:438
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:327
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:324
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php:43</error>
+        </testcase>
+        <testcase name="test_activate_creates_active_subscription" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php" line="50" class="Tests\Unit\Services\SubscriptionServiceTest" classname="Tests.Unit.Services.SubscriptionServiceTest" assertions="3" time="0.141565"/>
+        <testcase name="test_getCurrent_returns_active_subscription" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php" line="63" class="Tests\Unit\Services\SubscriptionServiceTest" classname="Tests.Unit.Services.SubscriptionServiceTest" assertions="2" time="0.142006"/>
+        <testcase name="test_cancel_cancels_active_subscription" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php" line="81" class="Tests\Unit\Services\SubscriptionServiceTest" classname="Tests.Unit.Services.SubscriptionServiceTest" assertions="2" time="0.155015"/>
+        <testcase name="test_upgrade_creates_new_subscription_and_cancels_old" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php" line="99" class="Tests\Unit\Services\SubscriptionServiceTest" classname="Tests.Unit.Services.SubscriptionServiceTest" assertions="0" time="0.174906">
+          <error type="Symfony\Component\Routing\Exception\RouteNotFoundException">Tests\Unit\Services\SubscriptionServiceTest::test_upgrade_creates_new_subscription_and_cancels_old&#13;
+Symfony\Component\Routing\Exception\RouteNotFoundException: Route [api.v1.payments.callback] not defined.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\UrlGenerator.php:546
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php:870
+C:\wamp64\www\freelance-ci\backend\app\Services\PaymentService.php:111
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Concerns\ManagesTransactions.php:35
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\DatabaseManager.php:496
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php:363
+C:\wamp64\www\freelance-ci\backend\app\Services\PaymentService.php:89
+C:\wamp64\www\freelance-ci\backend\app\Services\SubscriptionService.php:56
+C:\wamp64\www\freelance-ci\backend\app\Services\SubscriptionService.php:141
+C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\SubscriptionServiceTest.php:121</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Unit\Services\WalletServiceTest" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\WalletServiceTest.php" tests="5" assertions="9" errors="0" failures="0" skipped="0" time="0.626249">
+        <testcase name="test_getWallet_creates_wallet_if_not_exists" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\WalletServiceTest.php" line="24" class="Tests\Unit\Services\WalletServiceTest" classname="Tests.Unit.Services.WalletServiceTest" assertions="3" time="0.127082"/>
+        <testcase name="test_getWallet_returns_existing_wallet" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\WalletServiceTest.php" line="35" class="Tests\Unit\Services\WalletServiceTest" classname="Tests.Unit.Services.WalletServiceTest" assertions="2" time="0.115597"/>
+        <testcase name="test_getTransactions_returns_paginated_transactions" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\WalletServiceTest.php" line="46" class="Tests\Unit\Services\WalletServiceTest" classname="Tests.Unit.Services.WalletServiceTest" assertions="1" time="0.127467"/>
+        <testcase name="test_requestWithdrawal_creates_withdrawal_request" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\WalletServiceTest.php" line="56" class="Tests\Unit\Services\WalletServiceTest" classname="Tests.Unit.Services.WalletServiceTest" assertions="2" time="0.135546"/>
+        <testcase name="test_requestWithdrawal_fails_if_insufficient_balance" file="C:\wamp64\www\freelance-ci\backend\tests\Unit\Services\WalletServiceTest.php" line="71" class="Tests\Unit\Services\WalletServiceTest" classname="Tests.Unit.Services.WalletServiceTest" assertions="1" time="0.120558"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Feature" tests="79" assertions="122" errors="4" failures="15" skipped="0" time="13.591546">
+      <testsuite name="Tests\Feature\Api\AdminControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" tests="11" assertions="12" errors="0" failures="3" skipped="0" time="2.006786">
+        <testcase name="test_admin_can_get_dashboard" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="20" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="2" time="0.287817"/>
+        <testcase name="test_non_admin_cannot_access_admin_routes" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="31" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.130720"/>
+        <testcase name="test_admin_can_list_users" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="41" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.142654"/>
+        <testcase name="test_admin_can_update_user_status" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="51" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.157144"/>
+        <testcase name="test_admin_can_approve_verification" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="64" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.161272"/>
+        <testcase name="test_admin_can_reject_verification" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="75" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.158632"/>
+        <testcase name="test_admin_can_list_and_resolve_reports" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="88" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.169607"/>
+        <testcase name="test_admin_can_list_and_resolve_disputes" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="99" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.284032">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\AdminControllerTest::test_admin_can_list_and_resolve_disputes&#13;
+Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.&#13;
+&#13;
+The following exception occurred during the last request:
+
+Illuminate\Database\Eloquent\RelationNotFoundException: Call to undefined relationship [openedBy] on model [App\Models\Dispute]. in C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\RelationNotFoundException.php:35
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(975): Illuminate\Database\Eloquent\RelationNotFoundException::make(Object(App\Models\Dispute), 'openedBy')
+#1 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Relation.php(119): Illuminate\Database\Eloquent\Builder-&gt;{closure:Illuminate\Database\Eloquent\Builder::getRelation():971}()
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(971): Illuminate\Database\Eloquent\Relations\Relation::noConstraints(Object(Closure))
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(945): Illuminate\Database\Eloquent\Builder-&gt;getRelation('openedBy')
+#4 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(925): Illuminate\Database\Eloquent\Builder-&gt;eagerLoadRelation(Array, 'openedBy', Object(Closure))
+#5 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(891): Illuminate\Database\Eloquent\Builder-&gt;eagerLoadRelations(Array)
+#6 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php(1131): Illuminate\Database\Eloquent\Builder-&gt;get(Array)
+#7 C:\wamp64\www\freelance-ci\backend\app\Services\AdminService.php(118): Illuminate\Database\Eloquent\Builder-&gt;paginate(20)
+#8 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\AdminController.php(208): App\Services\AdminService-&gt;listDisputes()
+#9 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\AdminController-&gt;disputes()
+#10 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\AdminController), 'disputes')
+#11 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#13 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#14 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\CheckRole.php(19): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#15 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\CheckRole-&gt;handle(Object(Illuminate\Http\Request), Object(Closure), 'admin')
+#16 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#17 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#20 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#21 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#27 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#48 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#49 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('GET', '/api/admin/disp...', Array, Array, Array, Array, '[]')
+#50 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(381): Illuminate\Foundation\Testing\TestCase-&gt;json('GET', '/api/admin/disp...', Array, Array, 0)
+#51 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php(105): Illuminate\Foundation\Testing\TestCase-&gt;getJson('/api/admin/disp...')
+#52 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\AdminControllerTest-&gt;test_admin_can_list_and_resolve_disputes()
+#53 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_admin_can_...', Array)
+#54 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#55 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#56 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\AdminControllerTest))
+#57 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#58 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#59 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#60 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#61 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#62 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#63 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#64 {main}
+
+----------------------------------------------------------------------------------
+
+Call to undefined relationship [openedBy] on model [App\Models\Dispute].
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php:107</failure>
+        </testcase>
+        <testcase name="test_admin_can_get_and_update_settings" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="110" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.150449"/>
+        <testcase name="test_admin_can_grant_and_revoke_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="125" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.178199">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\AdminControllerTest::test_admin_can_grant_and_revoke_badge&#13;
+Expected response status code [201] but received 500.
+Failed asserting that 500 is identical to 201.&#13;
+&#13;
+The following exception occurred during the last request:
+
+TypeError: Cannot assign null to property App\Services\GeniusPayService::$apiKey of type string in C:\wamp64\www\freelance-ci\backend\app\Services\GeniusPayService.php:18
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1171): App\Services\GeniusPayService-&gt;__construct()
+#1 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(936): Illuminate\Container\Container-&gt;build('App\\Services\\Ge...')
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container-&gt;resolve('App\\Services\\Ge...', Array, true)
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application-&gt;resolve('App\\Services\\Ge...', Array)
+#4 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container-&gt;make('App\\Services\\Ge...', Array)
+#5 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1339): Illuminate\Foundation\Application-&gt;make('App\\Services\\Ge...')
+#6 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1240): Illuminate\Container\Container-&gt;resolveClass(Object(ReflectionParameter), 'App\\Services\\Ge...')
+#7 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1165): Illuminate\Container\Container-&gt;resolveDependencies(Array)
+#8 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(936): Illuminate\Container\Container-&gt;build('App\\Services\\Pa...')
+#9 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container-&gt;resolve('App\\Services\\Pa...', Array, true)
+#10 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application-&gt;resolve('App\\Services\\Pa...', Array)
+#11 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container-&gt;make('App\\Services\\Pa...', Array)
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1339): Illuminate\Foundation\Application-&gt;make('App\\Services\\Pa...')
+#13 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1240): Illuminate\Container\Container-&gt;resolveClass(Object(ReflectionParameter), 'App\\Services\\Pa...')
+#14 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1165): Illuminate\Container\Container-&gt;resolveDependencies(Array)
+#15 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(936): Illuminate\Container\Container-&gt;build('App\\Services\\Ba...')
+#16 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container-&gt;resolve('App\\Services\\Ba...', Array, true)
+#17 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application-&gt;resolve('App\\Services\\Ba...', Array)
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container-&gt;make('App\\Services\\Ba...', Array)
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php(138): Illuminate\Foundation\Application-&gt;make('App\\Services\\Ba...', Array)
+#20 C:\wamp64\www\freelance-ci\backend\app\Services\AdminService.php(170): app('App\\Services\\Ba...')
+#21 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\AdminController.php(340): App\Services\AdminService-&gt;grantBadge('019e8822-87ea-7...', NULL)
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\AdminController-&gt;grantBadge(Object(Illuminate\Http\Request))
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\AdminController), 'grantBadge')
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#27 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\CheckRole.php(19): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\CheckRole-&gt;handle(Object(Illuminate\Http\Request), Object(Closure), 'admin')
+#29 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#55 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#56 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#57 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#58 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#59 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#60 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#61 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#62 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('POST', '/api/admin/badg...', Array, Array, Array, Array, '{"freelance_pro...')
+#63 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase-&gt;json('POST', '/api/admin/badg...', Array, Array, 0)
+#64 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php(131): Illuminate\Foundation\Testing\TestCase-&gt;postJson('/api/admin/badg...', Array)
+#65 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\AdminControllerTest-&gt;test_admin_can_grant_and_revoke_badge()
+#66 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_admin_can_...', Array)
+#67 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#68 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#69 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\AdminControllerTest))
+#70 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#71 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#72 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#73 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#74 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#75 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#76 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#77 {main}
+
+----------------------------------------------------------------------------------
+
+Cannot assign null to property App\Services\GeniusPayService::$apiKey of type string
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php:135</failure>
+        </testcase>
+        <testcase name="test_admin_can_revoke_boost" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php" line="145" class="Tests\Feature\Api\AdminControllerTest" classname="Tests.Feature.Api.AdminControllerTest" assertions="1" time="0.186259">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\AdminControllerTest::test_admin_can_revoke_boost&#13;
+Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.&#13;
+&#13;
+The following exception occurred during the last request:
+
+TypeError: Cannot assign null to property App\Services\GeniusPayService::$apiKey of type string in C:\wamp64\www\freelance-ci\backend\app\Services\GeniusPayService.php:18
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1171): App\Services\GeniusPayService-&gt;__construct()
+#1 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(936): Illuminate\Container\Container-&gt;build('App\\Services\\Ge...')
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container-&gt;resolve('App\\Services\\Ge...', Array, true)
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application-&gt;resolve('App\\Services\\Ge...', Array)
+#4 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container-&gt;make('App\\Services\\Ge...', Array)
+#5 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1339): Illuminate\Foundation\Application-&gt;make('App\\Services\\Ge...')
+#6 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1240): Illuminate\Container\Container-&gt;resolveClass(Object(ReflectionParameter), 'App\\Services\\Ge...')
+#7 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1165): Illuminate\Container\Container-&gt;resolveDependencies(Array)
+#8 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(936): Illuminate\Container\Container-&gt;build('App\\Services\\Pa...')
+#9 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container-&gt;resolve('App\\Services\\Pa...', Array, true)
+#10 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application-&gt;resolve('App\\Services\\Pa...', Array)
+#11 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container-&gt;make('App\\Services\\Pa...', Array)
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1339): Illuminate\Foundation\Application-&gt;make('App\\Services\\Pa...')
+#13 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1240): Illuminate\Container\Container-&gt;resolveClass(Object(ReflectionParameter), 'App\\Services\\Pa...')
+#14 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(1165): Illuminate\Container\Container-&gt;resolveDependencies(Array)
+#15 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(936): Illuminate\Container\Container-&gt;build('App\\Services\\Bo...')
+#16 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container-&gt;resolve('App\\Services\\Bo...', Array, true)
+#17 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application-&gt;resolve('App\\Services\\Bo...', Array)
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container-&gt;make('App\\Services\\Bo...', Array)
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php(138): Illuminate\Foundation\Application-&gt;make('App\\Services\\Bo...', Array)
+#20 C:\wamp64\www\freelance-ci\backend\app\Services\AdminService.php(187): app('App\\Services\\Bo...')
+#21 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\AdminController.php(408): App\Services\AdminService-&gt;revokeBoost('019e8822-88ab-7...')
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\AdminController-&gt;revokeBoost('019e8822-88ab-7...')
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\AdminController), 'revokeBoost')
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#27 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\CheckRole.php(19): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\CheckRole-&gt;handle(Object(Illuminate\Http\Request), Object(Closure), 'admin')
+#29 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#48 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#49 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#50 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#51 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#52 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#53 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#54 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#55 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#56 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#57 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#58 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#59 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#60 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#61 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#62 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('POST', '/api/admin/boos...', Array, Array, Array, Array, '[]')
+#63 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase-&gt;json('POST', '/api/admin/boos...', Array, Array, 0)
+#64 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php(151): Illuminate\Foundation\Testing\TestCase-&gt;postJson('/api/admin/boos...')
+#65 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\AdminControllerTest-&gt;test_admin_can_revoke_boost()
+#66 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_admin_can_...', Array)
+#67 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#68 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#69 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\AdminControllerTest))
+#70 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#71 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#72 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#73 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#74 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#75 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#76 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#77 {main}
+
+----------------------------------------------------------------------------------
+
+Cannot assign null to property App\Services\GeniusPayService::$apiKey of type string
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AdminControllerTest.php:153</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\AuthControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AuthControllerTest.php" tests="4" assertions="10" errors="0" failures="1" skipped="0" time="0.601812">
+        <testcase name="test_can_register" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AuthControllerTest.php" line="14" class="Tests\Feature\Api\AuthControllerTest" classname="Tests.Feature.Api.AuthControllerTest" assertions="6" time="0.189606"/>
+        <testcase name="test_register_validates_required_fields" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AuthControllerTest.php" line="29" class="Tests\Feature\Api\AuthControllerTest" classname="Tests.Feature.Api.AuthControllerTest" assertions="1" time="0.132360"/>
+        <testcase name="test_can_login" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AuthControllerTest.php" line="36" class="Tests\Feature\Api\AuthControllerTest" classname="Tests.Feature.Api.AuthControllerTest" assertions="1" time="0.140055">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\AuthControllerTest::test_can_login&#13;
+Expected response status code [200] but received 401.
+Failed asserting that 401 is identical to 200.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AuthControllerTest.php:47</failure>
+        </testcase>
+        <testcase name="test_can_get_me" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\AuthControllerTest.php" line="51" class="Tests\Feature\Api\AuthControllerTest" classname="Tests.Feature.Api.AuthControllerTest" assertions="2" time="0.139791"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\BadgeControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php" tests="3" assertions="4" errors="0" failures="2" skipped="0" time="0.561215">
+        <testcase name="test_can_purchase_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php" line="27" class="Tests\Feature\Api\BadgeControllerTest" classname="Tests.Feature.Api.BadgeControllerTest" assertions="1" time="0.204474">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\BadgeControllerTest::test_can_purchase_badge&#13;
+Expected response status code [200] but received 500.
+Failed asserting that 500 is identical to 200.&#13;
+&#13;
+The following exception occurred during the last request:
+
+Symfony\Component\Routing\Exception\RouteNotFoundException: Route [api.v1.payments.callback] not defined. in C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\UrlGenerator.php:546
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\helpers.php(870): Illuminate\Routing\UrlGenerator-&gt;route('api.v1.payments...', Array, true)
+#1 C:\wamp64\www\freelance-ci\backend\app\Services\PaymentService.php(111): route('api.v1.payments...')
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Concerns\ManagesTransactions.php(35): App\Services\PaymentService-&gt;{closure:App\Services\PaymentService::initiatePayment():89}(Object(Illuminate\Database\SQLiteConnection))
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\DatabaseManager.php(496): Illuminate\Database\Connection-&gt;transaction(Object(Closure))
+#4 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Support\Facades\Facade.php(363): Illuminate\Database\DatabaseManager-&gt;__call('transaction', Array)
+#5 C:\wamp64\www\freelance-ci\backend\app\Services\PaymentService.php(89): Illuminate\Support\Facades\Facade::__callStatic('transaction', Array)
+#6 C:\wamp64\www\freelance-ci\backend\app\Services\BadgeService.php(44): App\Services\PaymentService-&gt;initiatePayment(Array)
+#7 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\BadgeController.php(38): App\Services\BadgeService-&gt;purchase(Object(App\Models\User))
+#8 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\BadgeController-&gt;purchase(Object(Illuminate\Http\Request))
+#9 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\BadgeController), 'purchase')
+#10 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#11 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#13 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#14 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#16 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#20 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#21 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#27 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('POST', '/api/badges/pur...', Array, Array, Array, Array, '[]')
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase-&gt;json('POST', '/api/badges/pur...', Array, Array, 0)
+#48 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php(42): Illuminate\Foundation\Testing\TestCase-&gt;postJson('/api/badges/pur...')
+#49 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\BadgeControllerTest-&gt;test_can_purchase_badge()
+#50 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_can_purcha...', Array)
+#51 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#52 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#53 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\BadgeControllerTest))
+#54 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#55 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#56 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#57 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#58 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#59 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#60 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#61 {main}
+
+----------------------------------------------------------------------------------
+
+Route [api.v1.payments.callback] not defined.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php:44</failure>
+        </testcase>
+        <testcase name="test_can_show_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php" line="48" class="Tests\Feature\Api\BadgeControllerTest" classname="Tests.Feature.Api.BadgeControllerTest" assertions="2" time="0.175135"/>
+        <testcase name="test_returns_404_if_no_badge" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php" line="64" class="Tests\Feature\Api\BadgeControllerTest" classname="Tests.Feature.Api.BadgeControllerTest" assertions="1" time="0.181606">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\BadgeControllerTest::test_returns_404_if_no_badge&#13;
+Expected response status code [404] but received 200.
+Failed asserting that 200 is identical to 404.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BadgeControllerTest.php:72</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\BoostControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BoostControllerTest.php" tests="2" assertions="3" errors="0" failures="1" skipped="0" time="0.317889">
+        <testcase name="test_can_purchase_boost" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BoostControllerTest.php" line="29" class="Tests\Feature\Api\BoostControllerTest" classname="Tests.Feature.Api.BoostControllerTest" assertions="1" time="0.147695">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\BoostControllerTest::test_can_purchase_boost&#13;
+Expected response status code [200] but received 400.
+Failed asserting that 400 is identical to 200.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BoostControllerTest.php:49</failure>
+        </testcase>
+        <testcase name="test_can_list_boosts" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\BoostControllerTest.php" line="53" class="Tests\Feature\Api\BoostControllerTest" classname="Tests.Feature.Api.BoostControllerTest" assertions="2" time="0.170193"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\CategoriesTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\CategoriesTest.php" tests="3" assertions="5" errors="0" failures="0" skipped="0" time="0.479291">
+        <testcase name="test_can_list_categories" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\CategoriesTest.php" line="14" class="Tests\Feature\Api\CategoriesTest" classname="Tests.Feature.Api.CategoriesTest" assertions="2" time="0.220503"/>
+        <testcase name="test_can_get_category_skills" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\CategoriesTest.php" line="24" class="Tests\Feature\Api\CategoriesTest" classname="Tests.Feature.Api.CategoriesTest" assertions="2" time="0.138379"/>
+        <testcase name="test_returns_404_for_invalid_category_skills" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\CategoriesTest.php" line="35" class="Tests\Feature\Api\CategoriesTest" classname="Tests.Feature.Api.CategoriesTest" assertions="1" time="0.120408"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\ContractControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ContractControllerTest.php" tests="5" assertions="8" errors="0" failures="0" skipped="0" time="1.126946">
+        <testcase name="test_can_list_contracts" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ContractControllerTest.php" line="18" class="Tests\Feature\Api\ContractControllerTest" classname="Tests.Feature.Api.ContractControllerTest" assertions="2" time="0.228450"/>
+        <testcase name="test_can_show_contract" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ContractControllerTest.php" line="36" class="Tests\Feature\Api\ContractControllerTest" classname="Tests.Feature.Api.ContractControllerTest" assertions="2" time="0.202829"/>
+        <testcase name="test_can_sign_contract" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ContractControllerTest.php" line="54" class="Tests\Feature\Api\ContractControllerTest" classname="Tests.Feature.Api.ContractControllerTest" assertions="1" time="0.205343"/>
+        <testcase name="test_can_add_milestone" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ContractControllerTest.php" line="72" class="Tests\Feature\Api\ContractControllerTest" classname="Tests.Feature.Api.ContractControllerTest" assertions="2" time="0.261193"/>
+        <testcase name="test_can_deliver_milestone" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ContractControllerTest.php" line="96" class="Tests\Feature\Api\ContractControllerTest" classname="Tests.Feature.Api.ContractControllerTest" assertions="1" time="0.229130"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\MessageControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\MessageControllerTest.php" tests="4" assertions="8" errors="0" failures="0" skipped="0" time="0.706377">
+        <testcase name="test_can_list_conversations" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\MessageControllerTest.php" line="15" class="Tests\Feature\Api\MessageControllerTest" classname="Tests.Feature.Api.MessageControllerTest" assertions="2" time="0.188599"/>
+        <testcase name="test_can_start_conversation" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\MessageControllerTest.php" line="28" class="Tests\Feature\Api\MessageControllerTest" classname="Tests.Feature.Api.MessageControllerTest" assertions="2" time="0.148079"/>
+        <testcase name="test_can_get_messages" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\MessageControllerTest.php" line="44" class="Tests\Feature\Api\MessageControllerTest" classname="Tests.Feature.Api.MessageControllerTest" assertions="2" time="0.170694"/>
+        <testcase name="test_can_send_message" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\MessageControllerTest.php" line="57" class="Tests\Feature\Api\MessageControllerTest" classname="Tests.Feature.Api.MessageControllerTest" assertions="2" time="0.199006"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\NotificationControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\NotificationControllerTest.php" tests="4" assertions="5" errors="0" failures="0" skipped="0" time="0.599391">
+        <testcase name="test_can_list_notifications" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\NotificationControllerTest.php" line="14" class="Tests\Feature\Api\NotificationControllerTest" classname="Tests.Feature.Api.NotificationControllerTest" assertions="2" time="0.163335"/>
+        <testcase name="test_can_mark_notification_as_read" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\NotificationControllerTest.php" line="26" class="Tests\Feature\Api\NotificationControllerTest" classname="Tests.Feature.Api.NotificationControllerTest" assertions="1" time="0.149125"/>
+        <testcase name="test_can_mark_all_as_read" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\NotificationControllerTest.php" line="40" class="Tests\Feature\Api\NotificationControllerTest" classname="Tests.Feature.Api.NotificationControllerTest" assertions="1" time="0.147088"/>
+        <testcase name="test_can_delete_notification" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\NotificationControllerTest.php" line="54" class="Tests\Feature\Api\NotificationControllerTest" classname="Tests.Feature.Api.NotificationControllerTest" assertions="1" time="0.139843"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\PaymentControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php" tests="4" assertions="6" errors="0" failures="2" skipped="0" time="1.029453">
+        <testcase name="test_can_initiate_payment" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php" line="30" class="Tests\Feature\Api\PaymentControllerTest" classname="Tests.Feature.Api.PaymentControllerTest" assertions="1" time="0.152030">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\PaymentControllerTest::test_can_initiate_payment&#13;
+Expected response status code [200] but received 400.
+Failed asserting that 400 is identical to 200.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php:53</failure>
+        </testcase>
+        <testcase name="test_can_confirm_payment" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php" line="57" class="Tests\Feature\Api\PaymentControllerTest" classname="Tests.Feature.Api.PaymentControllerTest" assertions="1" time="0.256035">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\PaymentControllerTest::test_can_confirm_payment&#13;
+Expected response status code [200] but received 400.
+Failed asserting that 400 is identical to 200.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php:73</failure>
+        </testcase>
+        <testcase name="test_can_list_payments" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php" line="76" class="Tests\Feature\Api\PaymentControllerTest" classname="Tests.Feature.Api.PaymentControllerTest" assertions="2" time="0.347736"/>
+        <testcase name="test_can_show_payment" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PaymentControllerTest.php" line="88" class="Tests\Feature\Api\PaymentControllerTest" classname="Tests.Feature.Api.PaymentControllerTest" assertions="2" time="0.273653"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\ProfileControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" tests="9" assertions="16" errors="0" failures="1" skipped="0" time="1.459231">
+        <testcase name="test_can_list_freelances" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="18" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.170515"/>
+        <testcase name="test_can_get_freelance_detail" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="29" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.162903"/>
+        <testcase name="test_can_get_my_profile" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="40" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.180370"/>
+        <testcase name="test_can_update_my_profile" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="52" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.152201"/>
+        <testcase name="test_can_get_freelance_profile" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="70" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.143811"/>
+        <testcase name="test_can_update_freelance_profile" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="82" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="1" time="0.146890"/>
+        <testcase name="test_can_add_skill" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="96" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="1" time="0.206496">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\ProfileControllerTest::test_can_add_skill&#13;
+Expected response status code [201] but received 500.
+Failed asserting that 500 is identical to 201.&#13;
+&#13;
+The following exception occurred during the last request:
+
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: freelance_skills.id in C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:587
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(587): PDOStatement-&gt;execute()
+#1 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(830): Illuminate\Database\Connection-&gt;{closure:Illuminate\Database\Connection::statement():576}('insert into "fr...', Array)
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(797): Illuminate\Database\Connection-&gt;runQueryCallback('insert into "fr...', Array, Object(Closure))
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(576): Illuminate\Database\Connection-&gt;run('insert into "fr...', Array, Object(Closure))
+#4 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(540): Illuminate\Database\Connection-&gt;statement('insert into "fr...', Array)
+#5 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(4158): Illuminate\Database\Connection-&gt;insert('insert into "fr...', Array)
+#6 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(345): Illuminate\Database\Query\Builder-&gt;insert(Array)
+#7 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(243): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;attach('019e8822-a2a9-7...', Array, false)
+#8 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(133): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;attachNew(Array, Array, false)
+#9 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(88): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;sync(Array, false)
+#10 C:\wamp64\www\freelance-ci\backend\app\Services\ProfileService.php(65): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;syncWithoutDetaching(Array)
+#11 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\ProfileController.php(150): App\Services\ProfileService-&gt;addSkill(Object(App\Models\User), Array)
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\ProfileController-&gt;addSkill(Object(Illuminate\Http\Request))
+#13 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\ProfileController), 'addSkill')
+#14 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#15 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#16 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#17 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#20 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#21 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#27 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#29 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#48 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#49 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#50 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('POST', '/api/profiles/f...', Array, Array, Array, Array, '{"skill_id":"01...')
+#51 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase-&gt;json('POST', '/api/profiles/f...', Array, Array, 0)
+#52 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php(103): Illuminate\Foundation\Testing\TestCase-&gt;postJson('/api/profiles/f...', Array)
+#53 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\ProfileControllerTest-&gt;test_can_add_skill()
+#54 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_can_add_sk...', Array)
+#55 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#56 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#57 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\ProfileControllerTest))
+#58 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#59 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#60 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#61 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#62 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#63 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#64 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#65 {main}
+
+Next Illuminate\Database\QueryException: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: freelance_skills.id (Connection: sqlite, Database: :memory:, SQL: insert into "freelance_skills" ("freelance_id", "proficiency_level", "skill_id") values (019e8822-a298-7207-8fae-0b87d2918f11, avance, 019e8822-a2a9-73ba-941b-8000f2384866)) in C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(797): Illuminate\Database\Connection-&gt;runQueryCallback('insert into "fr...', Array, Object(Closure))
+#1 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(576): Illuminate\Database\Connection-&gt;run('insert into "fr...', Array, Object(Closure))
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php(540): Illuminate\Database\Connection-&gt;statement('insert into "fr...', Array)
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php(4158): Illuminate\Database\Connection-&gt;insert('insert into "fr...', Array)
+#4 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(345): Illuminate\Database\Query\Builder-&gt;insert(Array)
+#5 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(243): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;attach('019e8822-a2a9-7...', Array, false)
+#6 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(133): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;attachNew(Array, Array, false)
+#7 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithPivotTable.php(88): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;sync(Array, false)
+#8 C:\wamp64\www\freelance-ci\backend\app\Services\ProfileService.php(65): Illuminate\Database\Eloquent\Relations\BelongsToMany-&gt;syncWithoutDetaching(Array)
+#9 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\ProfileController.php(150): App\Services\ProfileService-&gt;addSkill(Object(App\Models\User), Array)
+#10 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\ProfileController-&gt;addSkill(Object(Illuminate\Http\Request))
+#11 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\ProfileController), 'addSkill')
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#13 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#14 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#15 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#16 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#20 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#21 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#27 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#48 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('POST', '/api/profiles/f...', Array, Array, Array, Array, '{"skill_id":"01...')
+#49 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase-&gt;json('POST', '/api/profiles/f...', Array, Array, 0)
+#50 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php(103): Illuminate\Foundation\Testing\TestCase-&gt;postJson('/api/profiles/f...', Array)
+#51 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\ProfileControllerTest-&gt;test_can_add_skill()
+#52 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_can_add_sk...', Array)
+#53 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#54 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#55 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\ProfileControllerTest))
+#56 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#57 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#58 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#59 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#60 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#61 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#62 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#63 {main}
+
+----------------------------------------------------------------------------------
+
+SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: freelance_skills.id (Connection: sqlite, Database: :memory:, SQL: insert into "freelance_skills" ("freelance_id", "proficiency_level", "skill_id") values (019e8822-a298-7207-8fae-0b87d2918f11, avance, 019e8822-a2a9-73ba-941b-8000f2384866))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php:108</failure>
+        </testcase>
+        <testcase name="test_can_add_portfolio_item" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="111" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.148368"/>
+        <testcase name="test_can_get_client_profile" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProfileControllerTest.php" line="126" class="Tests\Feature\Api\ProfileControllerTest" classname="Tests.Feature.Api.ProfileControllerTest" assertions="2" time="0.147678"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\ProjectControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" tests="6" assertions="11" errors="0" failures="0" skipped="0" time="1.064076">
+        <testcase name="test_can_list_projects" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" line="16" class="Tests\Feature\Api\ProjectControllerTest" classname="Tests.Feature.Api.ProjectControllerTest" assertions="2" time="0.214731"/>
+        <testcase name="test_can_show_project" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" line="26" class="Tests\Feature\Api\ProjectControllerTest" classname="Tests.Feature.Api.ProjectControllerTest" assertions="2" time="0.172668"/>
+        <testcase name="test_can_create_project" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" line="36" class="Tests\Feature\Api\ProjectControllerTest" classname="Tests.Feature.Api.ProjectControllerTest" assertions="2" time="0.154864"/>
+        <testcase name="test_can_update_project" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" line="56" class="Tests\Feature\Api\ProjectControllerTest" classname="Tests.Feature.Api.ProjectControllerTest" assertions="1" time="0.191440"/>
+        <testcase name="test_can_delete_project" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" line="69" class="Tests\Feature\Api\ProjectControllerTest" classname="Tests.Feature.Api.ProjectControllerTest" assertions="2" time="0.160369"/>
+        <testcase name="test_can_add_project_file" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ProjectControllerTest.php" line="81" class="Tests\Feature\Api\ProjectControllerTest" classname="Tests.Feature.Api.ProjectControllerTest" assertions="2" time="0.170005"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\PublicEndpointsTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PublicEndpointsTest.php" tests="2" assertions="4" errors="0" failures="0" skipped="0" time="0.338704">
+        <testcase name="test_can_list_freelances" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PublicEndpointsTest.php" line="15" class="Tests\Feature\Api\PublicEndpointsTest" classname="Tests.Feature.Api.PublicEndpointsTest" assertions="2" time="0.172634"/>
+        <testcase name="test_can_list_projects" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\PublicEndpointsTest.php" line="26" class="Tests\Feature\Api\PublicEndpointsTest" classname="Tests.Feature.Api.PublicEndpointsTest" assertions="2" time="0.166070"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\QuoteControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php" tests="4" assertions="6" errors="0" failures="1" skipped="0" time="0.783026">
+        <testcase name="test_can_list_quotes" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php" line="15" class="Tests\Feature\Api\QuoteControllerTest" classname="Tests.Feature.Api.QuoteControllerTest" assertions="2" time="0.193514"/>
+        <testcase name="test_can_create_quote" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php" line="28" class="Tests\Feature\Api\QuoteControllerTest" classname="Tests.Feature.Api.QuoteControllerTest" assertions="1" time="0.204885">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\QuoteControllerTest::test_can_create_quote&#13;
+Expected response status code [201] but received 500.
+Failed asserting that 500 is identical to 201.&#13;
+&#13;
+The following exception occurred during the last request:
+
+TypeError: App\Models\User::subscription(): Return value must be of type Illuminate\Database\Eloquent\Relations\HasOne, Illuminate\Database\Eloquent\Relations\HasOneThrough returned in C:\wamp64\www\freelance-ci\backend\app\Models\User.php:171
+Stack trace:
+#0 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php(637): App\Models\User-&gt;subscription()
+#1 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php(587): Illuminate\Database\Eloquent\Model-&gt;getRelationshipFromMethod('subscription')
+#2 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Concerns\HasAttributes.php(506): Illuminate\Database\Eloquent\Model-&gt;getRelationValue('subscription')
+#3 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php(2690): Illuminate\Database\Eloquent\Model-&gt;getAttribute('subscription')
+#4 C:\wamp64\www\freelance-ci\backend\app\Services\QuoteService.php(189): Illuminate\Database\Eloquent\Model-&gt;__get('subscription')
+#5 C:\wamp64\www\freelance-ci\backend\app\Services\QuoteService.php(102): App\Services\QuoteService-&gt;checkSubscriptionLimits(Object(App\Models\User))
+#6 C:\wamp64\www\freelance-ci\backend\app\Services\QuoteService.php(73): App\Services\QuoteService-&gt;createQuote(Object(App\Models\User), '019e8822-ab02-7...', Array)
+#7 C:\wamp64\www\freelance-ci\backend\app\Http\Controllers\Api\V1\QuoteController.php(57): App\Services\QuoteService-&gt;create(Object(App\Models\User), '019e8822-ab02-7...', Array)
+#8 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\ControllerDispatcher.php(46): App\Http\Controllers\Api\V1\QuoteController-&gt;store('019e8822-ab02-7...', Object(Illuminate\Http\Request))
+#9 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(269): Illuminate\Routing\ControllerDispatcher-&gt;dispatch(Object(Illuminate\Routing\Route), Object(App\Http\Controllers\Api\V1\QuoteController), 'store')
+#10 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Route.php(215): Illuminate\Routing\Route-&gt;runController()
+#11 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(822): Illuminate\Routing\Route-&gt;run()
+#12 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Routing\Router-&gt;{closure:Illuminate\Routing\Router::runRouteWithinStack():821}(Object(Illuminate\Http\Request))
+#13 C:\wamp64\www\freelance-ci\backend\app\Http\Middleware\SupabaseJwtMiddleware.php(33): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#14 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): App\Http\Middleware\SupabaseJwtMiddleware-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#15 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Middleware\SubstituteBindings.php(52): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#16 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Routing\Middleware\SubstituteBindings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#17 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#18 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(821): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#19 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(800): Illuminate\Routing\Router-&gt;runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#20 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(764): Illuminate\Routing\Router-&gt;runRoute(Object(Illuminate\Http\Request), Object(Illuminate\Routing\Route))
+#21 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Routing\Router.php(753): Illuminate\Routing\Router-&gt;dispatchToRoute(Object(Illuminate\Http\Request))
+#22 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(200): Illuminate\Routing\Router-&gt;dispatch(Object(Illuminate\Http\Request))
+#23 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(180): Illuminate\Foundation\Http\Kernel-&gt;{closure:Illuminate\Foundation\Http\Kernel::dispatchToRouter():197}(Object(Illuminate\Http\Request))
+#24 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:Illuminate\Pipeline\Pipeline::prepareDestination():178}(Object(Illuminate\Http\Request))
+#25 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull.php(31): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#26 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#27 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TransformsRequest.php(21): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#28 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\TrimStrings.php(51): Illuminate\Foundation\Http\Middleware\TransformsRequest-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#29 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\TrimStrings-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#30 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePostSize.php(27): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#31 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePostSize-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#32 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance.php(109): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#33 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#34 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\HandleCors.php(74): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#35 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\HandleCors-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#36 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\TrustProxies.php(58): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#37 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\TrustProxies-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#38 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks.php(22): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#39 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Foundation\Http\Middleware\InvokeDeferredCallbacks-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#40 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Http\Middleware\ValidatePathEncoding.php(28): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#41 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(219): Illuminate\Http\Middleware\ValidatePathEncoding-&gt;handle(Object(Illuminate\Http\Request), Object(Closure))
+#42 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Pipeline\Pipeline.php(137): Illuminate\Pipeline\Pipeline-&gt;{closure:{closure:Illuminate\Pipeline\Pipeline::carry():194}:195}(Object(Illuminate\Http\Request))
+#43 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(175): Illuminate\Pipeline\Pipeline-&gt;then(Object(Closure))
+#44 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(144): Illuminate\Foundation\Http\Kernel-&gt;sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#45 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(607): Illuminate\Foundation\Http\Kernel-&gt;handle(Object(Illuminate\Http\Request))
+#46 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(573): Illuminate\Foundation\Testing\TestCase-&gt;call('POST', '/api/projects/0...', Array, Array, Array, Array, '{"amount":75000...')
+#47 C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Foundation\Testing\Concerns\MakesHttpRequests.php(411): Illuminate\Foundation\Testing\TestCase-&gt;json('POST', '/api/projects/0...', Array, Array, 0)
+#48 C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php(34): Illuminate\Foundation\Testing\TestCase-&gt;postJson('/api/projects/0...', Array)
+#49 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1314): Tests\Feature\Api\QuoteControllerTest-&gt;test_can_create_quote()
+#50 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(1351): PHPUnit\Framework\TestCase-&gt;invokeTestMethod('test_can_create...', Array)
+#51 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(521): PHPUnit\Framework\TestCase-&gt;runTest()
+#52 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestRunner\TestRunner.php(99): PHPUnit\Framework\TestCase-&gt;runBare()
+#53 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestCase.php(361): PHPUnit\Framework\TestRunner-&gt;run(Object(Tests\Feature\Api\QuoteControllerTest))
+#54 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestCase-&gt;run()
+#55 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#56 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\Framework\TestSuite.php(374): PHPUnit\Framework\TestSuite-&gt;run()
+#57 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\TestRunner.php(64): PHPUnit\Framework\TestSuite-&gt;run()
+#58 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\src\TextUI\Application.php(229): PHPUnit\TextUI\TestRunner-&gt;run(Object(PHPUnit\TextUI\Configuration\Configuration), Object(PHPUnit\Runner\ResultCache\DefaultResultCache), Object(PHPUnit\Framework\TestSuite))
+#59 C:\wamp64\www\freelance-ci\backend\vendor\phpunit\phpunit\phpunit(104): PHPUnit\TextUI\Application-&gt;run(Array)
+#60 C:\wamp64\www\freelance-ci\backend\vendor\bin\phpunit(122): include('C:\\wamp64\\www\\f...')
+#61 {main}
+
+----------------------------------------------------------------------------------
+
+App\Models\User::subscription(): Return value must be of type Illuminate\Database\Eloquent\Relations\HasOne, Illuminate\Database\Eloquent\Relations\HasOneThrough returned
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php:41</failure>
+        </testcase>
+        <testcase name="test_can_accept_quote" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php" line="45" class="Tests\Feature\Api\QuoteControllerTest" classname="Tests.Feature.Api.QuoteControllerTest" assertions="2" time="0.200269"/>
+        <testcase name="test_can_refuse_quote" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\QuoteControllerTest.php" line="58" class="Tests\Feature\Api\QuoteControllerTest" classname="Tests.Feature.Api.QuoteControllerTest" assertions="1" time="0.184358"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\ReferralControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReferralControllerTest.php" tests="3" assertions="8" errors="0" failures="1" skipped="0" time="0.546129">
+        <testcase name="test_can_get_referral_code" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReferralControllerTest.php" line="14" class="Tests\Feature\Api\ReferralControllerTest" classname="Tests.Feature.Api.ReferralControllerTest" assertions="3" time="0.147184"/>
+        <testcase name="test_can_get_referral_stats" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReferralControllerTest.php" line="26" class="Tests\Feature\Api\ReferralControllerTest" classname="Tests.Feature.Api.ReferralControllerTest" assertions="3" time="0.172840">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\ReferralControllerTest::test_can_get_referral_stats&#13;
+Failed asserting that an array has the key 'total'.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\AssertableJsonString.php:303
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\AssertableJsonString.php:278
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\AssertableJsonString.php:301
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:1037
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReferralControllerTest.php:35</failure>
+        </testcase>
+        <testcase name="test_can_list_referrals" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReferralControllerTest.php" line="38" class="Tests\Feature\Api\ReferralControllerTest" classname="Tests.Feature.Api.ReferralControllerTest" assertions="2" time="0.226105"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\ReviewControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php" tests="3" assertions="3" errors="0" failures="3" skipped="0" time="0.813427">
+        <testcase name="test_can_create_review" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php" line="15" class="Tests\Feature\Api\ReviewControllerTest" classname="Tests.Feature.Api.ReviewControllerTest" assertions="1" time="0.237038">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\ReviewControllerTest::test_can_create_review&#13;
+Expected response status code [201] but received 400.
+Failed asserting that 400 is identical to 201.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php:31</failure>
+        </testcase>
+        <testcase name="test_can_get_freelance_reviews" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php" line="35" class="Tests\Feature\Api\ReviewControllerTest" classname="Tests.Feature.Api.ReviewControllerTest" assertions="1" time="0.323898">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\ReviewControllerTest::test_can_get_freelance_reviews&#13;
+Expected response status code [200] but received 401.
+Failed asserting that 401 is identical to 200.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php:42</failure>
+        </testcase>
+        <testcase name="test_can_reply_to_review" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php" line="46" class="Tests\Feature\Api\ReviewControllerTest" classname="Tests.Feature.Api.ReviewControllerTest" assertions="1" time="0.252491">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\Api\ReviewControllerTest::test_can_reply_to_review&#13;
+Expected response status code [201] but received 200.
+Failed asserting that 200 is identical to 201.
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponseAssert.php:45
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Testing\TestResponse.php:176
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\ReviewControllerTest.php:56</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\SubscriptionControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php" tests="4" assertions="0" errors="4" failures="0" skipped="0" time="0.000000">
+        <testcase name="test_can_list_plans" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php" line="33" class="Tests\Feature\Api\SubscriptionControllerTest" classname="Tests.Feature.Api.SubscriptionControllerTest" assertions="0" time="0.000000">
+          <error type="Illuminate\Database\UniqueConstraintViolationException">Tests\Feature\Api\SubscriptionControllerTest::test_can_list_plans&#13;
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: subscription_plans_config.plan (Connection: sqlite, Database: :memory:, SQL: insert into "subscription_plans_config" ("plan", "name", "description", "price_monthly", "price_yearly", "max_projects", "max_quotes_per_month", "has_verified_badge", "has_boost_option", "features", "is_active", "sort_order", "id", "updated_at", "created_at") values (starter, Starter, Amet sit non qui perspiciatis quia quae., 0, 0, 3, 5, 0, 0, {"feature_1":true,"feature_2":false}, 1, 1, 019e8822-b295-715b-91b0-235fbce0af8d, 2026-06-02 11:40:35, 2026-06-02 11:40:35))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:797
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:576
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:540
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4158
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2271
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1587
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1380
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:379
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:275
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:374
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:330
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php:28</error>
+        </testcase>
+        <testcase name="test_can_purchase_subscription" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php" line="41" class="Tests\Feature\Api\SubscriptionControllerTest" classname="Tests.Feature.Api.SubscriptionControllerTest" assertions="0" time="0.000000">
+          <error type="Illuminate\Database\UniqueConstraintViolationException">Tests\Feature\Api\SubscriptionControllerTest::test_can_purchase_subscription&#13;
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: subscription_plans_config.plan (Connection: sqlite, Database: :memory:, SQL: insert into "subscription_plans_config" ("plan", "name", "description", "price_monthly", "price_yearly", "max_projects", "max_quotes_per_month", "has_verified_badge", "has_boost_option", "features", "is_active", "sort_order", "id", "updated_at", "created_at") values (starter, Starter, Quia autem molestiae a nobis ipsum dolorem aliquam rerum., 0, 0, 3, 5, 0, 0, {"feature_1":true,"feature_2":false}, 1, 1, 019e8822-b31e-7250-840e-8dc9309b0751, 2026-06-02 11:40:35, 2026-06-02 11:40:35))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:797
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:576
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:540
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4158
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2271
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1587
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1380
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:379
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:275
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:374
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:330
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php:28</error>
+        </testcase>
+        <testcase name="test_can_show_subscription" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php" line="66" class="Tests\Feature\Api\SubscriptionControllerTest" classname="Tests.Feature.Api.SubscriptionControllerTest" assertions="0" time="0.000000">
+          <error type="Illuminate\Database\UniqueConstraintViolationException">Tests\Feature\Api\SubscriptionControllerTest::test_can_show_subscription&#13;
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: subscription_plans_config.plan (Connection: sqlite, Database: :memory:, SQL: insert into "subscription_plans_config" ("plan", "name", "description", "price_monthly", "price_yearly", "max_projects", "max_quotes_per_month", "has_verified_badge", "has_boost_option", "features", "is_active", "sort_order", "id", "updated_at", "created_at") values (starter, Starter, Cumque maxime officia ad dolorem incidunt., 0, 0, 3, 5, 0, 0, {"feature_1":true,"feature_2":false}, 1, 1, 019e8822-b3a3-7231-ade3-0077ae3128ef, 2026-06-02 11:40:36, 2026-06-02 11:40:36))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:797
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:576
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:540
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4158
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2271
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1587
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1380
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:379
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:275
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:374
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:330
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php:28</error>
+        </testcase>
+        <testcase name="test_can_cancel_subscription" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php" line="83" class="Tests\Feature\Api\SubscriptionControllerTest" classname="Tests.Feature.Api.SubscriptionControllerTest" assertions="0" time="0.000000">
+          <error type="Illuminate\Database\UniqueConstraintViolationException">Tests\Feature\Api\SubscriptionControllerTest::test_can_cancel_subscription&#13;
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 19 UNIQUE constraint failed: subscription_plans_config.plan (Connection: sqlite, Database: :memory:, SQL: insert into "subscription_plans_config" ("plan", "name", "description", "price_monthly", "price_yearly", "max_projects", "max_quotes_per_month", "has_verified_badge", "has_boost_option", "features", "is_active", "sort_order", "id", "updated_at", "created_at") values (starter, Starter, Qui placeat voluptatibus eius blanditiis., 0, 0, 3, 5, 0, 0, {"feature_1":true,"feature_2":false}, 1, 1, 019e8822-b42f-7328-8f77-0bae0c7351c4, 2026-06-02 11:40:36, 2026-06-02 11:40:36))
+&#13;
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:841
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:797
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:576
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Connection.php:540
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Query\Builder.php:4158
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Builder.php:2271
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1587
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Model.php:1380
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:379
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Collections\Traits\EnumeratesValues.php:275
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:374
+C:\wamp64\www\freelance-ci\backend\vendor\laravel\framework\src\Illuminate\Database\Eloquent\Factories\Factory.php:330
+C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\SubscriptionControllerTest.php:28</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Feature\Api\WalletControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\WalletControllerTest.php" tests="4" assertions="9" errors="0" failures="0" skipped="0" time="0.621253">
+        <testcase name="test_can_show_wallet" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\WalletControllerTest.php" line="15" class="Tests\Feature\Api\WalletControllerTest" classname="Tests.Feature.Api.WalletControllerTest" assertions="4" time="0.148823"/>
+        <testcase name="test_can_list_transactions" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\WalletControllerTest.php" line="27" class="Tests\Feature\Api\WalletControllerTest" classname="Tests.Feature.Api.WalletControllerTest" assertions="2" time="0.171788"/>
+        <testcase name="test_can_request_withdrawal" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\WalletControllerTest.php" line="40" class="Tests\Feature\Api\WalletControllerTest" classname="Tests.Feature.Api.WalletControllerTest" assertions="2" time="0.161549"/>
+        <testcase name="test_withdrawal_fails_if_insufficient_balance" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Api\WalletControllerTest.php" line="56" class="Tests\Feature\Api\WalletControllerTest" classname="Tests.Feature.Api.WalletControllerTest" assertions="1" time="0.139093"/>
+      </testsuite>
+      <testsuite name="Tests\Feature\Web\PageControllerTest" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Web\PageControllerTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.536539">
+        <testcase name="test_about_page_returns_200" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Web\PageControllerTest.php" line="9" class="Tests\Feature\Web\PageControllerTest" classname="Tests.Feature.Web.PageControllerTest" assertions="1" time="0.154359"/>
+        <testcase name="test_terms_page_returns_200" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Web\PageControllerTest.php" line="16" class="Tests\Feature\Web\PageControllerTest" classname="Tests.Feature.Web.PageControllerTest" assertions="1" time="0.119559"/>
+        <testcase name="test_privacy_page_returns_200" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Web\PageControllerTest.php" line="23" class="Tests\Feature\Web\PageControllerTest" classname="Tests.Feature.Web.PageControllerTest" assertions="1" time="0.122234"/>
+        <testcase name="test_contact_page_returns_200" file="C:\wamp64\www\freelance-ci\backend\tests\Feature\Web\PageControllerTest.php" line="30" class="Tests\Feature\Web\PageControllerTest" classname="Tests.Feature.Web.PageControllerTest" assertions="1" time="0.140388"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

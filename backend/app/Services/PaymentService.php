@@ -32,7 +32,9 @@ class PaymentService
     public function confirm(User $user, string $id, array $data): ?Payment
     {
         try {
-            return $this->confirmPayment($id, $data);
+            $payment = Payment::find($id);
+            $transactionId = $payment ? $payment->transaction_id : $id;
+            return $this->confirmPayment($transactionId, $data);
         } catch (\Exception $e) {
             Log::error("Payment confirmation failed", ["error" => $e->getMessage()]);
             return null;
@@ -69,7 +71,7 @@ class PaymentService
 
             \App\Models\GeniusPayWebhook::create([
                 "event_type" => $payload["event"] ?? "unknown",
-                "payload" => $payload,
+                "raw_payload" => $payload,
                 "signature" => $signature,
                 "is_processed" => true,
                 "processed_at" => now(),
@@ -124,6 +126,7 @@ class PaymentService
 
         return [
             "transaction" => $transaction,
+            "transaction_id" => $transaction->id,
             "payment_url" => $transaction->payment_url,
             "reference" => $transaction->operator_reference,
         ];
@@ -150,13 +153,13 @@ class PaymentService
 
             $payment = Payment::create([
                 "transaction_id" => $transaction->id,
-                "user_id" => $transaction->user_id,
+                "legacy_user_id" => $transaction->user_id,
                 "amount" => $transaction->amount,
                 "currency" => $transaction->currency,
                 "status" => $operatorStatus,
                 "transaction_type" => $transaction->type,
-                "channel" => $geniusResponse["channel"] ?? null,
-                "operator" => $geniusResponse["operator"] ?? null,
+                "legacy_channel" => $geniusResponse["channel"] ?? null,
+                "legacy_operator" => $geniusResponse["operator"] ?? null,
                 "reference" => $geniusResponse["reference"] ?? null,
                 "metadata" => $geniusResponse,
             ]);
@@ -284,7 +287,7 @@ class PaymentService
             return;
         }
 
-        $completedPayments = Payment::where("user_id", $referredUser->id)
+        $completedPayments = Payment::where("legacy_user_id", $referredUser->id)
             ->where("status", PaymentStatus::Released)
             ->count();
 

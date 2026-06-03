@@ -1,20 +1,21 @@
 <?php
 
 namespace App\Models;
-use App\Enums\EscrowStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Enums\EscrowStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Escrow extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'escrows';
 
     protected $fillable = [
-        'contract_id', 'payment_id', 'status', 'amount',
+        'contract_id', 'payment_id', 'dispute_id', 'status', 'amount',
         'held_amount', 'released_amount', 'refunded_amount',
-        'held_at', 'released_at', 'refunded_at',
+        'held_at', 'released_at', 'release_requested_at', 'refunded_at',
     ];
 
     protected function casts(): array

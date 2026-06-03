@@ -89,7 +89,8 @@ class ContractService
 
     public function createContract(array $data): Contract
     {
-        return Contract::create($data);
+        $contract = Contract::create($data);
+        return $contract;
     }
 
     public function signContract(User $user, string $contractId): Contract
@@ -128,7 +129,7 @@ class ContractService
         }
 
         $milestone->update([
-            "status" => MilestoneStatus::Delivered,
+            "is_completed" => true,
             "delivered_at" => now(),
         ]);
 
@@ -142,7 +143,7 @@ class ContractService
         }
 
         $milestone->update([
-            "status" => MilestoneStatus::Validated,
+            "is_completed" => true,
             "validated_at" => now(),
         ]);
 

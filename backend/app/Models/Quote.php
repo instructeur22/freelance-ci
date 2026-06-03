@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Models;
-use App\Enums\QuoteStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Enums\QuoteStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -10,13 +11,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quote extends Model
 {
-    use HasUuids, SoftDeletes;
+    use HasFactory, HasUuids, SoftDeletes;
     protected $table = 'quotes';
 
     protected $fillable = [
         'project_id', 'freelance_id', 'amount', 'currency',
-        'estimated_duration', 'proposal', 'status',
-        'read_at', 'responded_at',
+        'estimated_duration', 'proposal', 'cover_letter', 'status',
+        'read_at', 'responded_at', 'accepted_at', 'refused_at', 'withdrawn_at',
     ];
 
     protected function casts(): array
@@ -26,6 +27,9 @@ class Quote extends Model
             'amount' => 'decimal:2',
             'read_at' => 'datetime',
             'responded_at' => 'datetime',
+            'accepted_at' => 'datetime',
+            'refused_at' => 'datetime',
+            'withdrawn_at' => 'datetime',
         ];
     }
 

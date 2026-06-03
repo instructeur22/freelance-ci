@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Models;
-use App\Enums\SubscriptionPlan;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Enums\SubscriptionPlan;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SubscriptionPlanConfig extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'subscription_plans_config';
 
     protected $fillable = [

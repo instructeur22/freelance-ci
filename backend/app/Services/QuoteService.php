@@ -193,12 +193,12 @@ class QuoteService
             ->count();
 
         $limits = [
-            SubscriptionPlan::Starter => 5,
-            SubscriptionPlan::Pro => 20,
-            SubscriptionPlan::Expert => -1,
+            SubscriptionPlan::Starter->value => 5,
+            SubscriptionPlan::Pro->value => 20,
+            SubscriptionPlan::Expert->value => -1,
         ];
 
-        $limit = $limits[$subscription?->plan ?? SubscriptionPlan::Starter] ?? 5;
+        $limit = $limits[$subscription?->plan?->value ?? SubscriptionPlan::Starter->value] ?? 5;
 
         if ($limit !== -1 && $monthlyQuotes >= $limit) {
             abort(429, "Vous avez atteint votre limite mensuelle d'offres.");

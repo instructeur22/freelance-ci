@@ -84,7 +84,7 @@ class AdminService
         $verification->update([
             "status" => VerificationStatus::Rejected,
             "reviewed_at" => now(),
-            "admin_note" => $note,
+            "admin_notes" => $note,
         ]);
         return $verification->fresh();
     }

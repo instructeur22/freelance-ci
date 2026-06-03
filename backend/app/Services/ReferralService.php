@@ -64,15 +64,15 @@ class ReferralService
 
         $referrer = $referral->referrer;
         if ($referrer && $rewardAmount > 0) {
-            $referrer->wallet()->increment("balance", $rewardAmount);
-            $referrer->wallet()->increment("total_earned", $rewardAmount);
+            $referrer->wallet()->increment("available_xof", $rewardAmount);
+            $referrer->wallet()->increment("total_earned_xof", $rewardAmount);
 
             $wallet = $referrer->wallet;
             $wallet->transactions()->create([
-                "type" => "credit",
-                "amount" => $rewardAmount,
-                "balance_before" => $wallet->balance - $rewardAmount,
-                "balance_after" => $wallet->balance,
+                "direction" => "credit",
+                "amount_xof" => $rewardAmount,
+                "balance_before_xof" => $wallet->available_xof - $rewardAmount,
+                "balance_after_xof" => $wallet->available_xof,
                 "description" => "Récompense parrainage",
             ]);
         }

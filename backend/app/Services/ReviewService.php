@@ -2,7 +2,9 @@
 namespace App\Services;
 
 use App\Models\Contract;
+use App\Models\FreelanceProfile;
 use App\Models\Review;
+use App\Models\ReviewReply;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -79,8 +81,13 @@ class ReviewService
             abort(403, "Vous ne pouvez pas r\u00e9pondre \u00e0 cet avis.");
         }
 
-        $review->update(["comment" => $review->comment . "\n\n[R\u00e9ponse] " . $content]);
-        return $review->fresh();
+        ReviewReply::create([
+            'review_id' => $review->id,
+            'user_id' => $author->id,
+            'comment' => $content,
+        ]);
+
+        return $review->fresh()->load('reply');
     }
 
     private function updateTargetRating(string $userId): void

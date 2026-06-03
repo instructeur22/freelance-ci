@@ -2,27 +2,29 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Wallet extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'wallets';
 
     public $incrementing = false;
 
     protected $fillable = [
-        'user_id', 'balance', 'pending_balance', 'total_earned', 'currency',
+        'user_id', 'available_xof', 'pending_xof', 'total_earned_xof', 'total_withdrawn_xof', 'currency',
     ];
 
     protected function casts(): array
     {
         return [
-            'balance' => 'decimal:2',
-            'pending_balance' => 'decimal:2',
-            'total_earned' => 'decimal:2',
+            'available_xof' => 'decimal:2',
+            'pending_xof' => 'decimal:2',
+            'total_earned_xof' => 'decimal:2',
+            'total_withdrawn_xof' => 'decimal:2',
         ];
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Enums\PaymentChannel;
 use App\Enums\SubscriptionPlan;
 use App\Enums\SubscriptionStatus;
 use App\Enums\TransactionType;
@@ -57,7 +58,7 @@ class SubscriptionService
             "type" => TransactionType::Subscription,
             "amount" => (float) $amount,
             "currency" => "XOF",
-            "payment_channel" => "mobile_money",
+            "payment_channel" => PaymentChannel::MOBILE_MONEY->value,
             "payment_operator" => null,
             "description" => "Abonnement {$plan->name} - " . ($user->name ?? $user->email),
             "metadata" => [

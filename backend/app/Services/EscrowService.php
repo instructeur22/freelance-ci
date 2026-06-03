@@ -27,16 +27,21 @@ class EscrowService
 
             $clientWallet = Wallet::where("user_id", $contract->client_id)->firstOrFail();
 
-            if ($clientWallet->balance < $contract->total_amount) {
+            if ($clientWallet->available_xof < $contract->total_amount) {
                 abort(400, "Solde insuffisant pour bloquer les fonds.");
             }
 
-            $clientWallet->decrement("balance", $contract->total_amount);
+            $balanceBefore = $clientWallet->available_xof;
+            $clientWallet->decrement("available_xof", $contract->total_amount);
+            $balanceAfter = $clientWallet->fresh()->available_xof;
 
             WalletTransaction::create([
                 "wallet_id" => $clientWallet->id,
-                "type" => "debit",
-                "amount" => $contract->total_amount,
+                "type" => "hold",
+                "direction" => "debit",
+                "amount_xof" => $contract->total_amount,
+                "balance_before_xof" => $balanceBefore,
+                "balance_after_xof" => $balanceAfter,
                 "description" => "Fonds bloqu\u00e9s pour le contrat #{$contract->id}",
                 "reference" => "contract:{$contract->id}",
             ]);
@@ -55,17 +60,22 @@ class EscrowService
             }
 
             $freelanceWallet = Wallet::where("user_id", $contract->freelance_id)->firstOrFail();
-            $freelanceWallet->increment("balance", $contract->total_amount);
+            $balanceBefore = $freelanceWallet->available_xof;
+            $freelanceWallet->increment("available_xof", $contract->total_amount);
+            $balanceAfter = $freelanceWallet->fresh()->available_xof;
 
             WalletTransaction::create([
                 "wallet_id" => $freelanceWallet->id,
-                "type" => "credit",
-                "amount" => $contract->total_amount,
+                "type" => "release",
+                "direction" => "credit",
+                "amount_xof" => $contract->total_amount,
+                "balance_before_xof" => $balanceBefore,
+                "balance_after_xof" => $balanceAfter,
                 "description" => "Fonds lib\u00e9r\u00e9s pour le contrat #{$contract->id}",
                 "reference" => "contract:{$contract->id}",
             ]);
 
-            $escrow->update(["status" => EscrowStatus::Released, "released_at" => now()]);
+            $escrow->update(["status" => EscrowStatus::Released, "released_amount" => $contract->total_amount, "released_at" => now()]);
 
             return $escrow;
         });
@@ -81,17 +91,22 @@ class EscrowService
             }
 
             $clientWallet = Wallet::where("user_id", $contract->client_id)->firstOrFail();
-            $clientWallet->increment("balance", $contract->total_amount);
+            $balanceBefore = $clientWallet->available_xof;
+            $clientWallet->increment("available_xof", $contract->total_amount);
+            $balanceAfter = $clientWallet->fresh()->available_xof;
 
             WalletTransaction::create([
                 "wallet_id" => $clientWallet->id,
-                "type" => "credit",
-                "amount" => $contract->total_amount,
+                "type" => "refund",
+                "direction" => "credit",
+                "amount_xof" => $contract->total_amount,
+                "balance_before_xof" => $balanceBefore,
+                "balance_after_xof" => $balanceAfter,
                 "description" => "Remboursement des fonds pour le contrat #{$contract->id}",
                 "reference" => "contract:{$contract->id}",
             ]);
 
-            $escrow->update(["status" => EscrowStatus::Refunded, "refunded_at" => now()]);
+            $escrow->update(["status" => EscrowStatus::Refunded, "refunded_amount" => $contract->total_amount, "refunded_at" => now()]);
 
             return $escrow;
         });

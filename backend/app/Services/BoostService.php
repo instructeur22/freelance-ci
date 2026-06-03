@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Enums\BoostDuration;
 use App\Enums\BoostTarget;
+use App\Enums\PaymentChannel;
 use App\Enums\TransactionType;
 use App\Models\Boost;
 use App\Models\FreelanceProfile;
@@ -25,25 +26,25 @@ class BoostService
             return null;
         }
 
-        $targetType = $data["target_type"] ?? null;
+        $target = $data["target"] ?? $data["target_type"] ?? null;
         $duration = $data["duration"] ?? null;
         $targetId = $data["target_id"] ?? null;
 
-        if (!in_array($targetType, ["profile", "project"])) {
+        if (!in_array($target, ["profile", "project"])) {
             return null;
         }
         if (!in_array($duration, ["7_days", "30_days"])) {
             return null;
         }
 
-        if ($targetType === "project" && $targetId) {
+        if ($target === "project" && $targetId) {
             $project = Project::find($targetId);
             if (!$project || $project->client_id !== $user->id) {
                 return null;
             }
         }
 
-        $this->deactivateExistingForTarget($profile, $targetType, $targetId);
+        $this->deactivateExistingForTarget($profile, $target, $targetId);
 
         $activeCount = $profile->boosts()->where("is_active", true)->count();
         $maxBoosts = $this->getMaxBoostsPerProfile();
@@ -51,21 +52,21 @@ class BoostService
             return null;
         }
 
-        $amount = $this->getBoostPrice($targetType, $duration);
+        $amount = $this->getBoostPrice($target, $duration);
         if (!$amount) {
             return null;
         }
 
         return $this->paymentService->initiatePayment([
             "user_id" => $user->id,
-            "type" => $targetType === "profile" ? TransactionType::BoostProfile : TransactionType::BoostProject,
+            "type" => $target === "profile" ? TransactionType::BoostProfile : TransactionType::BoostProject,
             "amount" => $amount,
             "currency" => "XOF",
-            "payment_channel" => "mobile_money",
+            "payment_channel" => PaymentChannel::MOBILE_MONEY->value,
             "payment_operator" => null,
-            "description" => "Boost " . ($targetType === "profile" ? "profil" : "projet") . " - " . ($user->name ?? $user->email),
+            "description" => "Boost " . ($target === "profile" ? "profil" : "projet") . " - " . ($user->name ?? $user->email),
             "metadata" => [
-                "target_type" => $targetType,
+                "target" => $target,
                 "target_id" => $targetId,
                 "duration" => $duration,
                 "freelance_profile_id" => $profile->id,
@@ -73,16 +74,16 @@ class BoostService
         ]);
     }
 
-    public function activate(FreelanceProfile $profile, string $targetType, ?string $targetId, string $duration, int $amount): Boost
+    public function activate(FreelanceProfile $profile, string $target, ?string $targetId, string $duration, int $amount): Boost
     {
-        $this->deactivateExistingForTarget($profile, $targetType, $targetId);
+        $this->deactivateExistingForTarget($profile, $target, $targetId);
 
         $days = $duration === "30_days" ? 30 : 7;
 
         $boost = Boost::create([
             "freelance_profile_id" => $profile->id,
-            "target_type" => $targetType,
-            "target_id" => $targetType === "profile" ? null : $targetId,
+            "target" => $target,
+            "target_id" => $target === "profile" ? null : $targetId,
             "duration" => $duration,
             "amount_paid" => $amount,
             "is_active" => true,
@@ -114,9 +115,9 @@ class BoostService
             ->all();
     }
 
-    public function getBoostPrice(string $targetType, string $duration): ?float
+    public function getBoostPrice(string $target, string $duration): ?float
     {
-        $key = "boost_{$targetType}_price_{$duration}";
+        $key = "boost_{$target}_price_{$duration}";
         $setting = PlatformSetting::where("key", $key)->first();
         return $setting ? (float) $setting->value : null;
     }
@@ -137,14 +138,14 @@ class BoostService
         return $setting ? (int) $setting->value : 3;
     }
 
-    private function deactivateExistingForTarget(FreelanceProfile $profile, string $targetType, ?string $targetId): void
+    private function deactivateExistingForTarget(FreelanceProfile $profile, string $target, ?string $targetId): void
     {
         $query = Boost::where("freelance_profile_id", $profile->id)->where("is_active", true);
 
-        if ($targetType === "profile") {
-            $query->where("target_type", BoostTarget::Profile);
-        } elseif ($targetType === "project" && $targetId) {
-            $query->where("target_type", BoostTarget::Project)->where("target_id", $targetId);
+        if ($target === "profile") {
+            $query->where("target", BoostTarget::Profile);
+        } elseif ($target === "project" && $targetId) {
+            $query->where("target", BoostTarget::Project)->where("target_id", $targetId);
         }
 
         $query->update(["is_active" => false]);

@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PaymentSyncLog extends Model
 {
-    use HasUuids;
-    protected $table = 'payment_sync_log';
+    use HasFactory, HasUuids;
+    protected $table = 'payment_action_log';
 
     protected $fillable = [
         'payment_id', 'action', 'status', 'request_data',

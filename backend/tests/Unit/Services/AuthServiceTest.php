@@ -4,70 +4,104 @@ namespace Tests\Unit\Services;
 
 use App\Enums\AccountStatus;
 use App\Enums\UserRole;
-use App\Models\SocialAccount;
+use App\Models\ReferralCode;
 use App\Models\User;
-use App\Models\Wallet;
 use App\Services\AuthService;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Mockery;
 use Tests\TestCase;
 
 class AuthServiceTest extends TestCase
 {
-    public function test_service_can_be_instantiated(): void
+    use RefreshDatabase;
+
+    private AuthService $authService;
+
+    protected function setUp(): void
     {
-        $service = new AuthService();
-        $this->assertInstanceOf(AuthService::class, $service);
+        parent::setUp();
+        $this->authService = new AuthService();
     }
 
-    public function test_register_returns_user_instance(): void
+    public function test_can_instantiate(): void
     {
-        $userMock = $this->createMock(User::class);
-        $userMock->method('__call')->willReturnSelf();
-
-        $service = new AuthService();
-        $this->assertInstanceOf(AuthService::class, $service);
+        $this->assertInstanceOf(AuthService::class, $this->authService);
     }
 
-    public function test_register_method_signature(): void
+    public function test_register_creates_user(): void
     {
-        $method = new \ReflectionMethod(AuthService::class, 'register');
-        $this->assertEquals('array', $method->getParameters()[0]->getType()->getName());
-        $this->assertEquals(User::class, $method->getReturnType()->getName());
-    }
-
-    public function test_findOrCreateFromSupabase_method_signature(): void
-    {
-        $method = new \ReflectionMethod(AuthService::class, 'findOrCreateFromSupabase');
-        $params = $method->getParameters();
-        $this->assertEquals('string', $params[0]->getType()->getName());
-        $this->assertEquals('array', $params[1]->getType()->getName());
-        $this->assertEquals(User::class, $method->getReturnType()->getName());
-    }
-
-    public function test_createSocialAccount_method_signature(): void
-    {
-        $method = new \ReflectionMethod(AuthService::class, 'createSocialAccount');
-        $params = $method->getParameters();
-        $this->assertEquals(User::class, $params[0]->getType()->getName());
-        $this->assertEquals('string', $params[1]->getType()->getName());
-        $this->assertEquals('string', $params[2]->getType()->getName());
-        $this->assertEquals(SocialAccount::class, $method->getReturnType()->getName());
-    }
-
-    public function test_register_accepts_valid_data_shape(): void
-    {
-        $data = [
+        $user = $this->authService->register([
             'first_name' => 'Jean',
             'last_name' => 'Dupont',
             'email' => 'jean@example.com',
             'password' => 'secret123',
             'role' => 'client',
-        ];
+        ]);
 
-        $this->assertArrayHasKey('email', $data);
-        $this->assertArrayHasKey('password', $data);
-        $this->assertArrayHasKey('role', $data);
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertEquals('jean@example.com', $user->email);
+        $this->assertEquals(UserRole::Client, $user->role);
+        $this->assertEquals(AccountStatus::Active, $user->status);
+        $this->assertTrue(Hash::check('secret123', $user->password));
+    }
+
+    public function test_register_creates_referral_code(): void
+    {
+        $user = $this->authService->register([
+            'first_name' => 'Marie',
+            'last_name' => 'Curie',
+            'email' => 'marie@example.com',
+            'password' => 'secret123',
+            'role' => 'freelance',
+        ]);
+
+        $this->assertDatabaseHas('referral_codes', [
+            'user_id' => $user->id,
+        ]);
+    }
+
+    public function test_register_with_referral_code_tracks_referral(): void
+    {
+        $referrer = User::factory()->create();
+        $referralCode = ReferralCode::factory()->create(['user_id' => $referrer->id]);
+
+        $user = $this->authService->register([
+            'first_name' => 'Paul',
+            'last_name' => 'Martin',
+            'email' => 'paul@example.com',
+            'password' => 'secret123',
+            'role' => 'freelance',
+            'referral_code' => $referralCode->code,
+        ]);
+
+        $this->assertDatabaseHas('referrals', [
+            'referrer_id' => $referrer->id,
+            'referred_id' => $user->id,
+        ]);
+    }
+
+    public function test_findOrCreateFromSupabase_creates_new_user(): void
+    {
+        $user = $this->authService->findOrCreateFromSupabase('sb-user-123', [
+            'email' => 'supabase@example.com',
+            'first_name' => 'Test',
+            'role' => 'freelance',
+        ]);
+
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertEquals('supabase@example.com', $user->email);
+    }
+
+    public function test_findOrCreateFromSupabase_returns_existing_user(): void
+    {
+        $existing = User::factory()->create(['email' => 'existing@example.com']);
+
+        $user = $this->authService->findOrCreateFromSupabase('sb-user-456', [
+            'email' => 'existing@example.com',
+            'first_name' => 'Existing',
+            'role' => 'freelance',
+        ]);
+
+        $this->assertEquals($existing->id, $user->id);
     }
 }

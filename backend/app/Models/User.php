@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Enums\AccountStatus;
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -14,14 +15,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, HasUuids;
-
+    use HasFactory, HasUuids;
     protected $table = 'users';
 
     protected $fillable = [
         'email', 'phone', 'password', 'role', 'status',
         'first_name', 'last_name', 'avatar_url', 'locale',
-        'email_verified_at', 'last_login_at',
+        'email_verified_at', 'phone_verified_at', 'last_login_at',
     ];
 
     public function getNameAttribute(): ?string
@@ -39,6 +39,7 @@ class User extends Authenticatable
             'role' => UserRole::class,
             'status' => AccountStatus::class,
             'email_verified_at' => 'datetime',
+            'phone_verified_at' => 'datetime',
             'last_login_at' => 'datetime',
         ];
     }
@@ -105,9 +106,19 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class, 'user_id');
     }
 
+    public function paymentsAsPayer(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'payer_id');
+    }
+
+    public function paymentsAsPayee(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'payee_id');
+    }
+
     public function payments(): HasMany
     {
-        return $this->hasMany(Payment::class, 'user_id');
+        return $this->hasMany(Payment::class, 'legacy_user_id');
     }
 
     public function wallet(): HasOne
@@ -147,7 +158,7 @@ class User extends Authenticatable
         return $this->hasMany(AdminLog::class, 'admin_id');
     }
 
-    public function subscription(): HasOne
+    public function subscription(): HasOneThrough
     {
         return $this->hasOneThrough(
             FreelanceSubscription::class,

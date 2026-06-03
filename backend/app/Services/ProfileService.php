@@ -60,10 +60,11 @@ class ProfileService
         if (!$profile) return;
 
         $skillId = $data["skill_id"] ?? $data["id"] ?? null;
-        $level = $data["level"] ?? null;
-        if ($skillId) {
-            $profile->skills()->syncWithoutDetaching([
-                $skillId => ["level" => $level],
+        $level = $data["proficiency_level"] ?? $data["level"] ?? null;
+        if ($skillId && !$profile->skills()->where('skill_id', $skillId)->exists()) {
+            $profile->skills()->attach($skillId, [
+                'id' => (string) \Illuminate\Support\Str::orderedUuid(),
+                'proficiency_level' => $level,
             ]);
         }
     }
@@ -78,7 +79,11 @@ class ProfileService
 
     public function addPortfolioItem(User $user, array $data): PortfolioItem
     {
-        return $user->portfolioItems()->create($data);
+        $profile = $user->freelanceProfile;
+        if (!$profile) {
+            throw new \RuntimeException("Aucun profil freelance trouvé");
+        }
+        return $profile->portfolioItems()->create($data);
     }
 
     public function removePortfolioItem(User $user, string $itemId): void

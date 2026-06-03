@@ -36,7 +36,8 @@ Route::post('auth/social/{provider}', [AuthController::class, 'socialAuth']);
 Route::get('subscriptions/plans', [SubscriptionController::class, 'plans']);
 
 // Webhooks (no auth)
-Route::post('webhooks/genius-pay', [PaymentController::class, 'webhook']);
+Route::post('webhooks/genius-pay', [PaymentController::class, 'webhook'])->name('api.v1.payments.webhook');
+Route::any('payments/callback', [PaymentController::class, 'webhook'])->name('api.v1.payments.callback');
 
 // Authenticated routes
 Route::middleware(['supabase.auth'])->group(function () {

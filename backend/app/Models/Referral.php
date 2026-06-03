@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 use App\Enums\ReferralStatus;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Referral extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'referrals';
 
     protected $fillable = [

@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Enums\PaymentChannel;
 use App\Enums\TransactionType;
 use App\Models\FreelanceProfile;
 use App\Models\PlatformSetting;
@@ -31,7 +32,7 @@ class BadgeService
             "type" => TransactionType::BadgeVerified,
             "amount" => $price,
             "currency" => "XOF",
-            "payment_channel" => "mobile_money",
+            "payment_channel" => PaymentChannel::MOBILE_MONEY->value,
             "payment_operator" => null,
             "description" => "Achat badge vérifié - " . ($user->name ?? $user->email),
             "metadata" => [

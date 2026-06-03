@@ -1,19 +1,21 @@
 <?php
 
 namespace App\Models;
-use App\Enums\WithdrawalMethod;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Enums\WithdrawalMethod;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WithdrawalRequest extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'withdrawal_requests';
 
     protected $fillable = [
         'wallet_id', 'user_id', 'amount', 'fee', 'net_amount',
-        'method', 'account_identifier', 'status',
+        'genius_pay_transfer_id', 'bank_account', 'phone_number',
+        'withdrawal_method', 'account_identifier', 'status',
         'admin_notes', 'processed_by', 'processed_at',
     ];
 
@@ -23,7 +25,8 @@ class WithdrawalRequest extends Model
             'amount' => 'decimal:2',
             'fee' => 'decimal:2',
             'net_amount' => 'decimal:2',
-            'method' => WithdrawalMethod::class,
+            'bank_account' => 'array',
+            'withdrawal_method' => WithdrawalMethod::class,
             'processed_at' => 'datetime',
         ];
     }

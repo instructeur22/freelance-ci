@@ -26,7 +26,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('email', 191)->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('role')->comment('user_role');
             $table->string('status', 20)->default('pending')->comment('account_status');
             $table->string('first_name', 100)->nullable();
