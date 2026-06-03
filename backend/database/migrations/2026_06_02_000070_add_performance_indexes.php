@@ -66,8 +66,9 @@ return new class extends Migration
 
         // Full-text search
         DB::statement("CREATE EXTENSION IF NOT EXISTS unaccent");
-        DB::statement("CREATE INDEX IF NOT EXISTS idx_freelance_fts ON profiles USING GIN (to_tsvector('french', unaccent(coalesce(first_name, '') || ' ' || coalesce(last_name, '') || ' ' || coalesce(bio, ''))))");
-        DB::statement("CREATE INDEX IF NOT EXISTS idx_projects_fts ON projects USING GIN (to_tsvector('french', unaccent(title || ' ' || coalesce(description, ''))))");
+        DB::statement("CREATE OR REPLACE FUNCTION public.immutable_unaccent(text) RETURNS text AS \$\$ SELECT public.unaccent(\$1) \$\$ LANGUAGE sql IMMUTABLE PARALLEL SAFE");
+        DB::statement("CREATE INDEX IF NOT EXISTS idx_freelance_fts ON profiles USING GIN (to_tsvector('french', immutable_unaccent(coalesce(first_name, '') || ' ' || coalesce(last_name, '') || ' ' || coalesce(bio, ''))))");
+        DB::statement("CREATE INDEX IF NOT EXISTS idx_projects_fts ON projects USING GIN (to_tsvector('french', immutable_unaccent(title || ' ' || coalesce(description, ''))))");
     }
 
     public function down(): void

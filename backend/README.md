@@ -669,7 +669,7 @@ backend/
 │   ├── geniuspay.php              # Configuration Genius Pay
 │   └── database.php               # Connexions base de données
 ├── database/
-│   └── migrations/                # 22 migrations (40+ tables)
+│   └── migrations/                # 60 migrations (40+ tables)
 ├── resources/
 │   └── views/vendor/l5-swagger/   # Interface Swagger UI
 ├── routes/
@@ -677,7 +677,7 @@ backend/
 │   └── console.php                # Planification des tâches cron
 ├── storage/
 │   └── api-docs/                  # Documentation OpenAPI générée
-└── tests/                         # 22 tests PHPUnit (21 pass, 1 skip)
+└── tests/                         # 169 tests PHPUnit (tout vert)
 ```
 
 ---
@@ -690,16 +690,25 @@ backend/
 php artisan test
 ```
 
-22 tests (21 verts, 1 skip pré-existant) :
+**169 tests, 347 assertions — tout vert.**
 
-- **Feature** — Endpoints publics : `/api/freelances`, `/api/projects`
-- **Feature** — Catégories : `GET /api/categories`, `GET /api/categories/{id}/skills` (404 inclus)
-- **Unit** — **GeniusPayService** : création transaction, webhook HMAC, statut (HTTP fake)
-- **Unit** — **AuthService** : inscriptions, auth sociale (signatures, validations)
-- **Unit** — **CategoryService** : `getSkills` (1 test skip — nécessite DB)
-- **Unit** — **ContractService** / **WalletService** : instanciation
+```bash
+php artisan test
+```
+
+Couverture :
+- **Unit/Services** (90 tests) — PaymentService, EscrowService, AuthService, GeniusPayService,
+  ReviewService, ProfileService, ContractService, QuoteService, SubscriptionService,
+  BoostService, BadgeService, WalletService, MessageService, NotificationService,
+  ReferralService, CategoryService, AdminService
+- **Feature/Api** (75 tests) — Auth, Profile, Project, Payment, Subscription, Boost, Badge,
+  Admin, Review, Referral, Wallet, Message, Notification
+- **Feature/Web** (4 tests) — Pages statiques (About, Terms, Privacy, Contact)
 
 Base de test : SQLite `:memory` (aucune config PostgreSQL requise).
+
+Base de production : PostgreSQL 17 (Supabase Cloud) — les triggers, vues et contraintes PostgreSQL
+sont automatiquement ignorés par les migrations en environnement SQLite.
 
 ---
 

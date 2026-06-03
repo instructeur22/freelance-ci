@@ -152,7 +152,7 @@
 - [x] Ajout accesseur `name` sur `User` (composé de `first_name` + `last_name`)
 - [x] Création `MilestoneStatus` enum (manquant)
 - [x] Création `Transaction` model (référencé par `PaymentService`/`AdminService`)
-- [x] 22 tests (21 verts, 1 skip)
+- [x] **22 tests** (21 verts, 1 skip)
 
 ## Phase 6 : Audit complet & corrections masse — Juin 2026
 
@@ -174,14 +174,31 @@
 - [x] `phpunit.pgsql.xml` nettoyé (credentials `CHANGE_ME`)
 - [x] Swagger regénéré (62 chemins, 72 opérations)
 
-## Phase 7 : À venir (TODO)
+## Phase 7 : Consolidation schéma unifié — Juin 2026
 
-### Swagger (doc uniquement)
-- [x] Ajouter `#[OA\RequestBody]` sur 40+ endpoints POST/PUT
-- [x] Ajouter `#[OA\Response]` content schemas (25 composants, 72 endpoints)
+### Migrations (35 fichiers `2026_06_02_*`)
+- [x] **Phase A** — Users (`phone_verified_at`, CHECK contraintes), AuthTokens (`token_hash`, `type`, `used_at`), SocialAccounts (`access_token`, `expires_at`)
+- [x] **Phase B** — Profiles (`display_name`), ClientProfiles (`company_sector`, UNIQUE user_id), FreelanceProfiles (`tagline`, `daily_rate_xof`, `availability_note`, `response_rate`, UNIQUE user_id), FreelanceSkills/FreelanceLanguages (rename `freelance_profile_id` → `freelance_id`), Skills (`is_active`), JobCategories (`icon_url`), + UNIQUE `(freelance_id, language)`
+- [x] **Phase C** — Projects (`featured_until`, `selected_quote_id`, `required_skills` JSON→JSONB), Quotes (`cover_letter`, `accepted_at`, `refused_at`, `withdrawn_at`, UNIQUE project+freelance), Contracts (`commission_rate`, `commission_xof`, `completed_at`, `cancelled_at`, `terms_text`, `quote_id` NOT NULL), Milestones (`is_completed`)
+- [x] **Phase D (critique)** — Payments (`payer_id`, `payee_id`, `genius_pay_transaction_id`, `genius_pay_status`, `gross_amount_xof`, `commission_xof`, timestamps cycle de vie, `provider_response`), GeniusPayWebhooks (`transaction_id`, `raw_payload`), PaymentSyncLog (recréée, ancienne → `payment_action_log`), Escrows (`release_requested_at`, `dispute_id`, UNIQUE contract_id), Wallets (`available_xof`, `pending_xof`, `total_earned_xof`, `total_withdrawn_xof`, UNIQUE user_id), WalletTransactions (`payment_id`, `direction`, `amount_xof`, `balance_before/after_xof`), Invoices (`issued_to_id`, `pdf_url`, `tax_xof`, `total_xof`), WithdrawalRequests (`genius_pay_transfer_id`, `bank_account`, `phone_number`, `withdrawal_method`, CHECK)
+- [x] **Phase E** — Conversations (`client_id`, `freelance_id`, UNIQUE project+client+freelance), Messages (`delivered_at`), Notifications (`sent_email`, `sent_push`)
+- [x] **Phase F** — Reviews (`rating_quality`, `rating_delay`, `rating_communication`, `is_public`, UNIQUE contract_id), ReviewReplies (UNIQUE review_id), Reports (`reported_project_id`), Boosts (`user_id`, `payment_id`, `target`), VerifiedBadges (`verification_id`, UNIQUE freelance_id)
+- [x] **Phase G** — PlatformSettings (`updated_by`), AdminLogs (`target_table`), + Indexes (87 indexes dont GIN full-text), Triggers PostgreSQL (credit_wallet_on_escrow_release), Vues SQL (v_freelance_listing, v_admin_dashboard, v_monthly_revenue, v_genius_pay_monitoring, v_wallet_summary)
+- [x] **Seeders** — Platform settings (commission, boosts, referral, etc.), Subscription plans (starter/pro/expert), Job categories (10), Skills (~60)
 
-### Pagination API
-- [x] Remplacer `$this->success()` par `$this->paginated()` dans les 14 méthodes `index()`/`list*()` pour retourner les métadonnées de pagination
+### Alignement code applicatif (28 fichiers)
+- [x] **Config** : `geniuspay.php` (defaults pour éviter crash en test)
+- [x] **Services** : `EscrowService` (balance_before/after_xof, released/refunded_amount), `PaymentService` (transaction_id dans return, confirm→find Payment), `ReviewService` (crée ReviewReply), `QuoteService` (enum→value array keys)
+- [x] **Modèles** : `SocialAccount` (fillable + casts), `AuthToken` (fillable + casts), `FreelanceProfile` (boosts()), `Dispute` (openedBy alias)
+- [x] **Tests** : 25 fichiers de test corrigés (8 feature, 17 unit). 169 tests, 347 assertions — tout vert.
+
+### Ce qui a été délibérément différé
+- [ ] ~~PK freelance_profiles/client_profiles → user_id~~ (UNIQUE user_id déjà présent)
+- [ ] ~~PK composite freelance_skills/freelance_languages~~ (Eloquent ne supporte pas PK composites, UNIQUE déjà présent)
+- [ ] ~~PK wallets → user_id~~ (UNIQUE user_id déjà présent)
+- [ ] ~~Renommage hourly_rate_min/max → _xof~~ (String→Decimal = migration de données risquée)
+
+## Phase 8 : À venir (TODO)
 
 ### Tests
 - [ ] Remplacer `test_that_true_is_true` par des tests réels
@@ -241,4 +258,4 @@
 | **v0.6.0** | Mai 2026 | Audit & corrections (7 bugs majeurs), 16 tests unitaires, Swagger/OpenAPI |
 | **v0.7.0** | Juin 2026 | **Audit complet** — 3 P0 runtime fixes, 28 modèles alignés migrations, SoftDeletes, relations manquantes, sécurité credentials, 21/22 tests verts |
 | **v0.8.0** | Juin 2026 | **Fonctionnalités métier** — Badge vérifié, Boost, Abonnements, Marketing pages, Parrainage — 5 endpoints Swagger, 18 nouveaux endpoints API |
-| **v1.0.0** | — | Première release stable |
+| **v1.0.0** | Juin 2026 | **Consolidation schéma unifié** — 35 migrations `2026_06_02_*` (Phases A→G complètes), alignement de 28 fichiers modèle/service/contrôleur/test. 169 tests, 347 assertions — tout vert. |

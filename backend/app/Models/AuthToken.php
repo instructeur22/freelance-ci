@@ -15,6 +15,7 @@ class AuthToken extends Model
     protected $fillable = [
         'user_id', 'device_name', 'device_type', 'ip_address',
         'user_agent', 'last_used_at', 'expires_at',
+        'token_hash', 'type', 'used_at',
     ];
 
     protected function casts(): array
@@ -22,6 +23,7 @@ class AuthToken extends Model
         return [
             'last_used_at' => 'datetime',
             'expires_at' => 'datetime',
+            'used_at' => 'datetime',
         ];
     }
 

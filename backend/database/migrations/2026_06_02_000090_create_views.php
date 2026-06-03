@@ -12,14 +12,15 @@ return new class extends Migration
         }
 
         // v_freelance_listing — updated with new column names
+        DB::statement("DROP VIEW IF EXISTS v_freelance_listing CASCADE");
         DB::statement("
-            CREATE OR REPLACE VIEW v_freelance_listing AS
+            CREATE VIEW v_freelance_listing AS
             SELECT
                 u.id,
                 p.display_name,
                 p.first_name,
                 p.last_name,
-                p.avatar_url,
+                u.avatar_url,
                 p.city,
                 p.country,
                 fp.tagline,
@@ -47,8 +48,9 @@ return new class extends Migration
         ");
 
         // v_admin_dashboard — updated with new schema
+        DB::statement("DROP VIEW IF EXISTS v_admin_dashboard CASCADE");
         DB::statement("
-            CREATE OR REPLACE VIEW v_admin_dashboard AS
+            CREATE VIEW v_admin_dashboard AS
             SELECT
                 (SELECT COUNT(*) FROM users WHERE role = 'freelance' AND status = 'active')   AS active_freelances,
                 (SELECT COUNT(*) FROM users WHERE role = 'client'    AND status = 'active')   AS active_clients,
@@ -63,8 +65,9 @@ return new class extends Migration
         ");
 
         // v_monthly_revenue — updated with new column names
+        DB::statement("DROP VIEW IF EXISTS v_monthly_revenue CASCADE");
         DB::statement("
-            CREATE OR REPLACE VIEW v_monthly_revenue AS
+            CREATE VIEW v_monthly_revenue AS
             SELECT
                 DATE_TRUNC('month', initiated_at) AS month,
                 COUNT(*)                          AS nb_transactions,
@@ -79,8 +82,9 @@ return new class extends Migration
         ");
 
         // v_genius_pay_monitoring — updated with new schema
+        DB::statement("DROP VIEW IF EXISTS v_genius_pay_monitoring CASCADE");
         DB::statement("
-            CREATE OR REPLACE VIEW v_genius_pay_monitoring AS
+            CREATE VIEW v_genius_pay_monitoring AS
             SELECT
                 p.id,
                 p.genius_pay_transaction_id,
@@ -101,8 +105,9 @@ return new class extends Migration
         ");
 
         // v_wallet_summary — new view
+        DB::statement("DROP VIEW IF EXISTS v_wallet_summary CASCADE");
         DB::statement("
-            CREATE OR REPLACE VIEW v_wallet_summary AS
+            CREATE VIEW v_wallet_summary AS
             SELECT
                 u.id AS user_id,
                 p.first_name,

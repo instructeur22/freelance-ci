@@ -14,7 +14,15 @@ class SocialAccount extends Model
 
     protected $fillable = [
         'user_id', 'provider', 'provider_id', 'provider_token', 'provider_refresh_token',
+        'access_token',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'expires_at' => 'datetime',
+        ];
+    }
 
     public function user(): BelongsTo
     {
