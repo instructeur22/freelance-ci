@@ -30,7 +30,9 @@ Route::get('projects/{id}', [ProjectController::class, 'show']);
 
 // Auth routes (proxy for Supabase)
 Route::post('auth/register', [AuthController::class, 'register']);
+Route::post('auth/login', [AuthController::class, 'login']);
 Route::post('auth/social/{provider}', [AuthController::class, 'socialAuth']);
+Route::post('auth/sync', [AuthController::class, 'sync']);
 
 // Subscriptions plans (public)
 Route::get('subscriptions/plans', [SubscriptionController::class, 'plans']);
@@ -43,7 +45,7 @@ Route::any('payments/callback', [PaymentController::class, 'webhook'])->name('ap
 Route::middleware(['supabase.auth'])->group(function () {
     // Auth
     Route::get('auth/me', [AuthController::class, 'me']);
-    Route::post('auth/login', [AuthController::class, 'login']);
+    Route::post('auth/onboarding', [AuthController::class, 'onboarding']);
 
     // Profiles
     Route::prefix('profiles')->group(function () {

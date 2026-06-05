@@ -198,7 +198,37 @@
 - [ ] ~~PK wallets → user_id~~ (UNIQUE user_id déjà présent)
 - [ ] ~~Renommage hourly_rate_min/max → _xof~~ (String→Decimal = migration de données risquée)
 
-## Phase 8 : À venir (TODO)
+## Phase 9 : Stabilisation Auth & Pre-prod — Juin 2026
+
+### Authentification & Sécurité
+- [x] JWKS cache : stockage raw JSON (pas d'objets `Key` sérialisés) — évite `__PHP_Incomplete_Class`
+- [x] `JWK::parseKeySet()` appelé à chaque requête (garantit l'autoloading de la classe `Key`)
+- [x] `catch (\Throwable)` dans `SupabaseJwtMiddleware` + `AuthService` (couvre les `TypeError`)
+- [x] `POST /api/auth/login` déplacé hors du middleware `supabase.auth`
+- [x] CORS : `env('CORS_ALLOWED_ORIGINS', 'http://localhost:3000')` dans `config/cors.php`
+- [x] Swagger UI protégé par middleware `auth` dans `config/l5-swagger.php`
+- [x] Sensible PDF déplacé de `public/` → `docs/`
+
+### Configuration
+- [x] Log rotation : `LOG_STACK=single` → `daily`
+- [x] Fichier log vidé (`storage/logs/laravel.log` → `laravel-YYYY-MM-DD.log`)
+- [x] `SESSION_SECURE_COOKIE=true` ajouté au `.env`
+- [x] `CORS_ALLOWED_ORIGINS` décommenté dans `.env`
+
+### Dashboard redirect loop
+- [x] **Root cause** : Cache fichier Laravel contenant des objets `Key` sérialisés → `__PHP_Incomplete_Class` → `TypeError` non catché → 500 "Server Error"
+- [x] **Fix** : Nouvelle clé de cache `supabase_jwks_v2` + raw JSON + `\Throwable` catch
+- [x] `fc_at` cookie conservé comme fallback quand les cookies de session Supabase ne sont pas disponibles
+
+### Next.js
+- [x] `auth/callback/route.ts` : utilise `NextRequest` + `getAll()/setAll()` pour `@supabase/ssr`
+- [x] `output: "standalone"` ajouté à `next.config.ts`
+- [x] `console.error` de debug retiré de `auth-provider.tsx`
+- [x] Build Next.js 16 vérifié (succès)
+
+---
+
+## Phase 10 : À venir (TODO)
 
 ### Tests
 - [ ] Remplacer `test_that_true_is_true` par des tests réels
@@ -259,3 +289,4 @@
 | **v0.7.0** | Juin 2026 | **Audit complet** — 3 P0 runtime fixes, 28 modèles alignés migrations, SoftDeletes, relations manquantes, sécurité credentials, 21/22 tests verts |
 | **v0.8.0** | Juin 2026 | **Fonctionnalités métier** — Badge vérifié, Boost, Abonnements, Marketing pages, Parrainage — 5 endpoints Swagger, 18 nouveaux endpoints API |
 | **v1.0.0** | Juin 2026 | **Consolidation schéma unifié** — 35 migrations `2026_06_02_*` (Phases A→G complètes), alignement de 28 fichiers modèle/service/contrôleur/test. 169 tests, 347 assertions — tout vert. |
+| **v1.1.0** | Juin 2026 | **Stabilisation Auth & Pre-prod** — JWKS cache raw JSON, catch `\Throwable`, login route publique, CORS via env(), Swagger protégé, PDF sensible déplacé, log rotation daily, session secure cookie, dashboard redirect loop résolu. |

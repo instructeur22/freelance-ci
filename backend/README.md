@@ -61,7 +61,8 @@ Freelance CI propose une plateforme tout-en-un avec :
 | **PostgreSQL** | 17 (Supabase Cloud) | Base de données |
 | **Supabase** | — | Auth, Storage, DB managée |
 | **Genius Pay** | — | Agrégateur de paiements |
-| **Firebase PHP-JWT** | ^7.0 | Validation des JWT Supabase |
+| **Firebase PHP-JWT** | ^7.0 | Validation des JWT Supabase via JWKS |
+| **Laravel File Cache** | — | Cache des clés JWKS (raw JSON, pas d'objets sérialisés) |
 
 ### Pourquoi ces choix ?
 
@@ -73,7 +74,8 @@ Freelance CI propose une plateforme tout-en-un avec :
 | **PostgreSQL** | Base de données relationnelle robuste. Support natif des UUID, JSONB, Full-Text Search, transactions, triggers. |
 | **Genius Pay** | Agrégateur de paiements adapté au marché ivoirien : Orange Money, MTN MoMo, Wave, cartes bancaires, USSD. |
 | **PHP 8.4** | Enums natifs, typed properties, readonly classes, performant. |
-| **JWT (sans Sanctum)** | Puisque Supabase gère l'auth, Laravel valide simplement les tokens JWT émis par Supabase. Pas besoin de Sanctum. |
+| **JWT (sans Sanctum)** | Puisque Supabase gère l'auth, Laravel valide simplement les tokens JWT émis par Supabase via leur JWKS (clés publiques). Pas besoin de Sanctum. |
+| **catch (\Throwable)** | Les erreurs PHP (TypeError) sont catchées au même titre que les Exceptions, évitant les 500 silencieux. |
 
 ### Architecture des décisions (ADR)
 
@@ -238,7 +240,10 @@ L'API utilise les **JWT Supabase** pour l'authentification.
 Authorization: Bearer <supabase-access-token>
 ```
 
-Le middleware `SupabaseJwtMiddleware` décode et valide le token, puis associe l'utilisateur dans la session Laravel.
+Le middleware `SupabaseJwtMiddleware` décode et valide le token JWT via les **JWKS** (JSON Web Key Sets) de Supabase.
+Les clés publiques sont récupérées depuis `https://<project>.supabase.co/auth/v1/.well-known/jwks.json`
+et stockées en cache fichier (raw JSON, pas d'objets sérialisés, pour éviter les `__PHP_Incomplete_Class`).
+En environnement `local`, la vérification SSL est désactivée (`Http::withoutVerifying()`).
 
 ### En-têtes communs
 
@@ -535,6 +540,11 @@ php artisan key:generate
 Configurez votre fichier `.env` :
 
 ```env
+# Environnement
+APP_ENV=local              # local → Http::withoutVerifying() pour JWKS
+APP_DEBUG=false
+APP_URL=http://localhost:8000
+
 # Base de données (Supabase PostgreSQL 17.6, Frankfurt)
 DB_CONNECTION=pgsql
 DB_HOST=db.mtwfiovvhusawlxlvskj.supabase.co
@@ -549,6 +559,15 @@ SUPABASE_URL=https://mtwfiovvhusawlxlvskj.supabase.co
 SUPABASE_ANON_KEY=<clé-anonyme>
 SUPABASE_SERVICE_KEY=<clé-service>
 SUPABASE_JWT_SECRET=<secret-jwt-supabase>
+
+# Logs
+LOG_STACK=daily
+
+# Session
+SESSION_SECURE_COOKIE=true
+
+# CORS
+CORS_ALLOWED_ORIGINS=http://localhost:3000
 
 # Genius Pay
 GENIUS_PAY_API_KEY=<clé-api>
@@ -635,7 +654,7 @@ backend/
 │   │   │       ├── AdminController.php
 │   │   │       └── CategoryController.php
 │   │   ├── Middleware/
-│   │   │   ├── SupabaseJwtMiddleware.php   # Validation JWT Supabase
+│   │   │   ├── SupabaseJwtMiddleware.php   # Validation JWT Supabase via JWKS
 │   │   │   └── CheckRole.php               # RBAC par rôle
 │   │   └── Requests/
 │   │       └── Auth/

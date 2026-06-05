@@ -7,12 +7,14 @@ use App\Models\SocialAccount;
 use App\Models\User;
 use App\Models\Wallet;
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+use Firebase\JWT\JWK;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class AuthService
 {
@@ -23,7 +25,7 @@ class AuthService
                 "first_name" => $data["first_name"] ?? $data["name"] ?? null,
                 "last_name" => $data["last_name"] ?? null,
                 "email" => $data["email"],
-                "password" => isset($data["password"]) ? Hash::make($data["password"]) : null,
+                "password" => isset($data["password"]) ? Hash::make($data["password"]) : Hash::make(Str::random(40)),
                 "role" => $data["role"] ?? UserRole::Client,
                 "status" => AccountStatus::Active,
             ]);
@@ -83,8 +85,8 @@ class AuthService
         }
 
         try {
-            $secret = config("services.supabase.jwt_secret");
-            $decoded = JWT::decode($token, new Key($secret, "HS256"));
+            JWT::$leeway = 120;
+            $decoded = JWT::decode($token, $this->getJwksKeys());
 
             $supabaseId = $decoded->sub ?? null;
             $email = $decoded->email ?? null;
@@ -101,10 +103,26 @@ class AuthService
                     ?? explode("@", $email ?? "")[0]
                     ?? "User",
             ]);
-        } catch (\Exception $e) {
-            Log::error("Supabase JWT validation failed", ["error" => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            Log::error("Supabase JWT validation failed", [
+                "error" => $e->getMessage(),
+                "file" => $e->getFile(),
+                "line" => $e->getLine(),
+            ]);
             return null;
         }
+    }
+
+    private function getJwksKeys(): array
+    {
+        $url = config('services.supabase.url') . '/auth/v1/.well-known/jwks.json';
+
+        $jwks = Cache::store('file')->remember('supabase_jwks_keys', 3600, function () use ($url) {
+            $http = config('app.env') === 'local' ? Http::withoutVerifying() : Http::timeout(5);
+            return $http->get($url)->json();
+        });
+
+        return JWK::parseKeySet($jwks);
     }
 
     public function handleSocialAuth(string $provider, Request $request): ?User
@@ -114,9 +132,12 @@ class AuthService
             return null;
         }
 
-        try {
-            if ($provider === "google" || $provider === "github") {
-                $response = Http::withToken($token)
+        $supabaseToken = $request->input("supabase_token") ?? $token;
+
+        if ($provider === "google" || $provider === "github") {
+            try {
+                $http = config('app.env') === 'local' ? Http::withoutVerifying() : Http::timeout(5);
+                $response = $http->withToken($token)
                     ->get("https://www.googleapis.com/oauth2/v3/userinfo");
 
                 if ($response->successful()) {
@@ -149,16 +170,45 @@ class AuthService
                         return $user;
                     });
                 }
+            } catch (\Exception $e) {
+                Log::warning("Provider API call failed, falling back to Supabase JWT", [
+                    "provider" => $provider,
+                    "error" => $e->getMessage(),
+                ]);
             }
+        }
 
-            $supabaseToken = $request->input("supabase_token") ?? $token;
+        try {
             return $this->validateSupabaseToken(
                 Request::create("", "GET", [], [], [], ["HTTP_AUTHORIZATION" => "Bearer $supabaseToken"])
             );
         } catch (\Exception $e) {
-            Log::error("Social auth failed for $provider", ["error" => $e->getMessage()]);
+            Log::error("Supabase JWT validation failed for $provider", ["error" => $e->getMessage()]);
             return null;
         }
+    }
+
+    public function completeOnboarding(User $user, string $role): User
+    {
+        return DB::transaction(function () use ($user, $role) {
+            $user->update(['role' => $role]);
+
+            if (!$user->profile) {
+                $user->profile()->create([]);
+            }
+
+            if ($role === UserRole::Freelance->value && !$user->freelanceProfile) {
+                $user->freelanceProfile()->create([]);
+            } elseif ($role === UserRole::Client->value && !$user->clientProfile) {
+                $user->clientProfile()->create([]);
+            }
+
+            if (!$user->wallet) {
+                $user->wallet()->create(['balance' => 0]);
+            }
+
+            return $user->fresh()->load('profile');
+        });
     }
 
     public function createSocialAccount(User $user, string $provider, string $providerId): SocialAccount

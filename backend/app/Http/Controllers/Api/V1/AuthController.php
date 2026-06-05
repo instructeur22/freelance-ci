@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\Auth\OnboardingRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AuthService;
 use Illuminate\Http\JsonResponse;
@@ -116,5 +117,53 @@ class AuthController extends ApiController
         $user = $request->user()->load('profile');
 
         return $this->success($user);
+    }
+
+    #[OA\Post(
+        path: '/auth/sync',
+        summary: 'Sync user from Supabase JWT (find or create)',
+        tags: ['Auth'],
+    )]
+    #[OA\Response(response: 200, description: 'User synced')]
+    public function sync(Request $request): JsonResponse
+    {
+        $token = $request->bearerToken();
+
+        if (!$token) {
+            return $this->error('Token not provided', 401);
+        }
+
+        try {
+            $user = $this->authService->validateSupabaseToken($request);
+
+            if (!$user) {
+                return $this->error('User sync failed', 401);
+            }
+
+            return $this->success($user, 'User synced');
+        } catch (\Exception $e) {
+            return $this->error('Auth sync error: ' . $e->getMessage(), 500);
+        }
+    }
+
+    #[OA\Post(
+        path: '/auth/onboarding',
+        summary: 'Complete onboarding with role selection',
+        tags: ['Auth'],
+        security: [['BearerToken' => []]],
+    )]
+    #[OA\RequestBody(content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'role', type: 'string', enum: ['client', 'freelance']),
+    ]))]
+    #[OA\Response(response: 200, description: 'Onboarding completed', content: new OA\JsonContent(properties: [
+        new OA\Property(property: 'message', type: 'string'),
+        new OA\Property(property: 'data', ref: '#/components/schemas/User'),
+    ]))]
+    public function onboarding(OnboardingRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $result = $this->authService->completeOnboarding($user, $request->input('role'));
+
+        return $this->success($result, 'Onboarding completed');
     }
 }
