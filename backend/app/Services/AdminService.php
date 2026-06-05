@@ -142,7 +142,7 @@ class AdminService
 
     public function getSettings()
     {
-        return PlatformSetting::all()->pluck("value", "key");
+        return PlatformSetting::all();
     }
 
     public function updateSetting(string $key, ?string $value): ?PlatformSetting
